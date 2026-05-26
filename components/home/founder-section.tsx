@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { GoldButton } from "@/components/ui/gold-button";
+import { CtaButton } from "@/components/lead/cta-button";
 import {
   FOUNDER_FEARS,
   FOUNDER_MISSION,
@@ -174,9 +175,12 @@ export function FounderSection() {
               {FOUNDER_STORY_CLOSING_LINE}
             </p>
 
-            <GoldButton href="/about" variant="outline">
-              Learn more about BHAW Namrata
-            </GoldButton>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <CtaButton intent="book">Book Now</CtaButton>
+              <GoldButton href="/about" variant="outline">
+                Learn more about BHAW Namrata
+              </GoldButton>
+            </div>
           </motion.div>
 
           <div className="lg:col-start-1 lg:row-start-2">

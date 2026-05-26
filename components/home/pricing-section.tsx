@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { CtaButton } from "@/components/lead/cta-button";
 import { PaymentTrustBadges } from "@/components/payment/payment-trust-badges";
 import type { PackagePublic } from "@/components/booking/booking-experience";
 import { cn } from "@/lib/utils";
@@ -95,7 +96,7 @@ export function PricingSection() {
             <div className="glass-panel xl:col-span-3 rounded-4xl border border-dashed border-brand-gold/40 p-12 text-center text-luxury-body">
               Packages will appear here once published in the admin panel.
               <div className="mt-6">
-                <Button href="/book">Go to booking</Button>
+                <CtaButton intent="book">Book Now</CtaButton>
               </div>
             </div>
           ) : (
@@ -147,8 +148,11 @@ export function PricingSection() {
                         {formatInrPaise(pay)}
                       </span>
                     </div>
-                    <Button href={`/book#packages`} className="mt-5 w-full">
-                      Select &amp; book
+                    <CtaButton intent="book" className="mt-5 w-full">
+                      Book Now
+                    </CtaButton>
+                    <Button href="/book" variant="ghost" size="sm" className="mt-2 w-full">
+                      Pay with Razorpay →
                     </Button>
                   </div>
                 </article>

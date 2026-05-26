@@ -1,4 +1,6 @@
-import { HeroCinematic } from "@/components/home/hero-cinematic";
+import type { Metadata } from "next";
+import { HomeHero } from "@/components/hero/home-hero";
+import { SITE } from "@/lib/site";
 import { LatestConversations } from "@/components/home/latest-conversations";
 import { FounderSection } from "@/components/home/founder-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
@@ -7,29 +9,42 @@ import { PricingSection } from "@/components/home/pricing-section";
 import { CtaSection } from "@/components/home/cta-section";
 import { NewsletterCta } from "@/components/home/newsletter-cta";
 import { WhyBookSection } from "@/components/home/why-book-section";
+import { CredibilitySection } from "@/components/home/credibility-section";
+import { RoiSection } from "@/components/home/roi-section";
+import { SeoBenefitsSection } from "@/components/home/seo-benefits-section";
 import { MediaJournalSpotlight } from "@/components/home/media-journal-spotlight";
 import { getLatestPodcastEpisodesForHome } from "@/lib/podcast-episodes";
-import { fetchYouTubeChannelStats } from "@/lib/youtube-data-api";
-import { clipsFromEpisodes } from "@/lib/youtube-ambient";
+
+export const metadata: Metadata = {
+  title: `${SITE.name} | Founder Podcast Booking & Personal Branding`,
+  description:
+    "Book a premium founder podcast with BHAW Namrata. Studio production, SEO-friendly episode assets, credibility-building interviews, and social-ready clips for entrepreneurs and women leaders in India.",
+  keywords: [
+    "founder podcast India",
+    "book podcast guest slot",
+    "business podcast booking",
+    "personal branding podcast",
+    "podcast SEO visibility",
+    "BHAW Namrata",
+  ],
+};
 
 /** Aligns with YouTube RSS/API fetch revalidation — fresh uploads surface without redeploys. */
 export const revalidate = 300;
 
 export default async function HomePage() {
   const episodes = await getLatestPodcastEpisodesForHome(12);
-  const clips = clipsFromEpisodes(episodes);
-  const apiKey = process.env.YOUTUBE_API_KEY?.trim();
-  const handle = process.env.YOUTUBE_CHANNEL_HANDLE?.trim() || "bhawnamrata";
-  const channel =
-    apiKey ? await fetchYouTubeChannelStats(apiKey, handle) : null;
 
   return (
     <>
-      <HeroCinematic episodes={episodes} channel={channel} clips={clips} />
+      <HomeHero />
       <LatestConversations episodes={episodes} />
       <WhyBookSection syncedEpisodeCount={episodes.length} />
-      <FounderSection />
       <TestimonialsSection />
+      <CredibilitySection />
+      <RoiSection />
+      <SeoBenefitsSection />
+      <FounderSection />
       <MediaJournalSpotlight />
       <SocialProof />
       <PricingSection />

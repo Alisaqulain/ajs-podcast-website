@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
+import { CtaButton } from "@/components/lead/cta-button";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site";
 
@@ -30,9 +31,12 @@ export function CtaSection() {
               both are invitations to practice powerful expression.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Button href="/book" size="lg">
-                Book a Session
-              </Button>
+              <CtaButton intent="book" size="lg">
+                Book Now
+              </CtaButton>
+              <CtaButton intent="schedule" variant="outline" size="lg">
+                Schedule Podcast
+              </CtaButton>
               <Button
                 href={SITE.social.youtube}
                 variant="secondary"

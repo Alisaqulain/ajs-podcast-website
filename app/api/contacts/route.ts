@@ -8,7 +8,10 @@ export const dynamic = "force-dynamic";
 const contactSchema = z.object({
   name: z.string().min(1).max(200),
   email: z.string().email(),
+  phone: z.string().min(8).max(20).optional(),
   message: z.string().min(1).max(5000),
+  preferredDateTime: z.string().max(200).optional(),
+  source: z.string().max(120).optional(),
 });
 
 export async function GET() {
@@ -51,7 +54,10 @@ export async function POST(req: NextRequest) {
   const doc = {
     name: parsed.data.name.trim(),
     email: parsed.data.email.trim().toLowerCase(),
+    phone: parsed.data.phone?.trim(),
     message: parsed.data.message.trim(),
+    preferredDateTime: parsed.data.preferredDateTime?.trim(),
+    source: parsed.data.source?.trim(),
     createdAt: new Date(),
     read: false,
   };

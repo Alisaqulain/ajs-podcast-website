@@ -37,3 +37,22 @@ export function clipsFromEpisodes(
     title: e.title,
   }));
 }
+
+/** Build ambient clips from arbitrary YouTube watch URLs (e.g. MongoDB podcast rows). */
+export function clipsFromYoutubeLinks(
+  rows: { title: string; youtubeLink: string }[]
+): AmbientClip[] {
+  const seen = new Set<string>();
+  const out: AmbientClip[] = [];
+  for (const row of rows) {
+    const m = row.youtubeLink.match(
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/
+    );
+    const videoId = m?.[1];
+    if (!videoId || seen.has(videoId)) continue;
+    seen.add(videoId);
+    out.push({ videoId, title: row.title });
+    if (out.length >= 12) break;
+  }
+  return out;
+}

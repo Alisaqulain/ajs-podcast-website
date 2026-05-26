@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { PageHero } from "@/components/hero/page-hero";
+import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { listTestimonials } from "@/lib/data";
 import { TestimonialSlider } from "@/components/testimonials/testimonial-slider";
 import type { TestimonialItem } from "@/components/testimonials/testimonial-slider";
@@ -30,15 +31,13 @@ export default async function TestimonialsPage() {
 
   return (
     <div className="pb-24">
-      <section className="border-b border-luxury-border bg-luxury-section py-14 md:py-20">
-        <Container>
-          <SectionHeading
-            eyebrow="Love letters"
-            title="What women say after they choose themselves"
-            subtitle="A living gallery of courage, softness, and the kind of confidence that doesn’t need to shout."
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Testimonials"
+        title="What founders say after they choose themselves"
+        subtitle="A living gallery of courage, clarity, and the kind of confidence that compounds on camera."
+      >
+        <CTAButton intent="book">Book Podcast Now</CTAButton>
+      </PageHero>
 
       <Container className="mt-14">
         {items.length === 0 ? (

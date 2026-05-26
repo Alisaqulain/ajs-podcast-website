@@ -5,7 +5,6 @@ import { Navbar } from "@/components/layout/navbar";
 import { Main } from "@/components/layout/main";
 import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/providers";
-import { ThemeScript } from "@/components/theme/theme-script";
 import { OrganizationJsonLd, PodcastSeriesJsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/site";
 
@@ -49,10 +48,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
-    { color: "#ffffff" },
-  ],
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -63,13 +59,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${poppins.variable}`}
-      suppressHydrationWarning
+      className={`light ${playfair.variable} ${poppins.variable}`}
+      style={{ colorScheme: "light" }}
     >
-      <head>
-        <ThemeScript />
-      </head>
-      <body className="min-h-screen bg-luxury-bg font-sans antialiased text-luxury-body transition-colors duration-theme selection:bg-brand-gold/25 selection:text-luxury-heading">
+      <body className="min-h-screen bg-luxury-bg font-sans antialiased text-luxury-body selection:bg-brand-gold/25 selection:text-luxury-heading">
         <OrganizationJsonLd />
         <PodcastSeriesJsonLd />
         <Providers>

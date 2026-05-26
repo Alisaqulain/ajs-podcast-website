@@ -5,6 +5,7 @@ import { Star } from "lucide-react";
 import type { TestimonialItem } from "./testimonial-slider";
 import { ImageCard } from "@/components/ui/image-card";
 import { cn } from "@/lib/utils";
+import { CtaButton } from "@/components/lead/cta-button";
 
 export function TestimonialGridCard({
   item,
@@ -20,7 +21,7 @@ export function TestimonialGridCard({
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.45, delay: index * 0.05 }}
       whileHover={{ y: -3 }}
-      className="glass-panel rounded-3xl border border-luxury-border p-6 shadow-luxury-card transition-shadow hover:border-brand-gold/35 hover:shadow-gold-glow"
+      className="glass-panel flex h-full flex-col rounded-3xl border border-luxury-border p-6 shadow-luxury-card transition-shadow hover:border-brand-gold/35 hover:shadow-gold-glow"
     >
       <div className="flex items-center gap-3">
         <div className="relative h-12 w-12 shrink-0">
@@ -60,9 +61,12 @@ export function TestimonialGridCard({
           ) : null}
         </div>
       </div>
-      <p className="mt-4 text-sm leading-relaxed text-luxury-body line-clamp-4">
+      <p className="mt-4 flex-1 text-sm leading-relaxed text-luxury-body line-clamp-4">
         {item.message}
       </p>
+      <CtaButton intent="schedule" variant="outline" size="sm" className="mt-5 w-full">
+        Schedule Podcast
+      </CtaButton>
     </motion.div>
   );
 }

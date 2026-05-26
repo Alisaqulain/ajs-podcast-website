@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { PageHero } from "@/components/hero/page-hero";
+import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { listBlogs } from "@/lib/data";
 import { BlogCard } from "@/components/blog/blog-card";
 import { SITE } from "@/lib/site";
@@ -31,17 +32,14 @@ export default async function BlogPage() {
 
   return (
     <div className="pb-24">
-      <section className="border-b border-luxury-border bg-luxury-section py-14 md:py-20">
-        <Container>
-          <SectionHeading
-            align="left"
-            eyebrow="Journal"
-            title="Ideas for a braver, clearer you"
-            subtitle="Long-form notes on self-image, voice, and the psychology of being seen."
-            className="mb-0"
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Journal"
+        title="Ideas for a braver, clearer you"
+        subtitle="Long-form notes on self-image, voice, and the psychology of being seen."
+        align="left"
+      >
+        <CTAButton intent="book">Book Podcast Now</CTAButton>
+      </PageHero>
 
       <Container className="mt-14">
         {cards.length === 0 ? (

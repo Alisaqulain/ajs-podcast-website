@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHero } from "@/components/hero/page-hero";
 import { Container } from "@/components/ui/container";
 import { LegalProse } from "@/components/legal/legal-prose";
 import { SITE } from "@/lib/site";
@@ -16,26 +17,24 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RefundPolicyPage() {
+export default async function RefundPolicyPage() {
   return (
     <div className="pb-24">
-      <section className="border-b border-luxury-border bg-luxury-section py-14 md:py-20">
-        <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold-deep">
-            Legal
-          </p>
-          <h1 className="mt-4 font-display text-4xl font-semibold text-luxury-heading md:text-5xl">
-            Refund &amp; Cancellation Policy
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm text-luxury-body">
+      <PageHero
+        compact
+        eyebrow="Legal"
+        title="Refund & Cancellation Policy"
+        subtitle={
+          <>
             Last updated: May 4, 2026. Please read this alongside our{" "}
-            <Link href="/terms" className="text-brand-gold-deep underline hover:text-brand-gold">
+            <Link href="/terms" className="font-medium text-brand-gold-deep underline hover:text-brand-gold">
               Terms &amp; Conditions
             </Link>
             .
-          </p>
-        </Container>
-      </section>
+          </>
+        }
+        align="left"
+      />
 
       <Container className="mt-12 max-w-3xl">
         <LegalProse>

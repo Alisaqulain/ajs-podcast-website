@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHero } from "@/components/hero/page-hero";
 import { Container } from "@/components/ui/container";
 import { LegalProse } from "@/components/legal/legal-prose";
 import { SITE } from "@/lib/site";
@@ -16,23 +17,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function TermsPage() {
+export default async function TermsPage() {
   return (
     <div className="pb-24">
-      <section className="border-b border-luxury-border bg-luxury-section py-14 md:py-20">
-        <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold-deep">
-            Legal
-          </p>
-          <h1 className="mt-4 font-display text-4xl font-semibold text-luxury-heading md:text-5xl">
-            Terms &amp; Conditions
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm text-luxury-body">
-            Last updated: May 4, 2026. By using this website or purchasing
-            services, you agree to these terms.
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        compact
+        eyebrow="Legal"
+        title="Terms & Conditions"
+        subtitle="Last updated: May 4, 2026. By using this website or purchasing services, you agree to these terms."
+        align="left"
+      />
 
       <Container className="mt-12 max-w-3xl">
         <LegalProse>

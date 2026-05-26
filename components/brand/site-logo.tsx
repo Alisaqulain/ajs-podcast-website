@@ -11,7 +11,7 @@ type SiteLogoProps = {
 };
 
 const circularFrameClass: Record<"nav" | "footer" | "auth", string> = {
-  nav: "h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14",
+  nav: "h-14 w-14 sm:h-16 sm:w-16 md:h-[4.75rem] md:w-[4.75rem]",
   footer: "h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem] md:h-20 md:w-20",
   auth: "h-20 w-20 sm:h-24 sm:w-24",
 };
@@ -37,7 +37,7 @@ function CircularLogo({
         src={SITE.logoSrc}
         alt={`${SITE.name} — ${SITE.tagline}`}
         fill
-        sizes="(max-width: 768px) 80px, 96px"
+        sizes="(max-width: 768px) 56px, 72px"
         priority={priority}
         className="object-cover object-center"
       />

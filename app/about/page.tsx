@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { AboutHero } from "@/components/about/about-hero";
-import { GoldButton } from "@/components/ui/gold-button";
+import { PageHero } from "@/components/hero/page-hero";
+import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
-import { getLatestPodcastEpisodesForHome } from "@/lib/podcast-episodes";
 import {
   FOUNDER_FEARS,
   FOUNDER_MISSION,
@@ -14,7 +13,6 @@ import {
   FOUNDER_VISION,
 } from "@/lib/founder-content";
 import { SITE } from "@/lib/site";
-import { clipsFromEpisodes } from "@/lib/youtube-ambient";
 
 export const metadata: Metadata = {
   title: "About Namrata",
@@ -28,12 +26,25 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const episodes = await getLatestPodcastEpisodesForHome(8);
-  const clips = clipsFromEpisodes(episodes);
-
   return (
     <div className="pb-24">
-      <AboutHero clips={clips} />
+      <PageHero
+        eyebrow="About"
+        title={SITE.name}
+        subtitle={
+          <>
+            <span className="font-display text-lg text-brand-gold-deep md:text-xl">
+              {FOUNDER_TAGLINE}
+            </span>
+            <span className="mt-4 block text-base text-luxury-body">
+              Mission, vision, and the story behind visibility, podcasting, and
+              personal branding with Namrata.
+            </span>
+          </>
+        }
+      >
+        <CTAButton intent="book">Book Podcast Now</CTAButton>
+      </PageHero>
 
       <Container className="mt-16 space-y-16 md:mt-24 md:space-y-24">
         <section className="text-center">
@@ -117,13 +128,13 @@ export default async function AboutPage() {
         </section>
 
         <section className="flex flex-wrap gap-4">
-          <GoldButton href="/book">Book &amp; pay</GoldButton>
-          <GoldButton href="/contact" variant="outline">
+          <CTAButton intent="book">Book Podcast Now</CTAButton>
+          <CTAButton intent="enquire" variant="outline">
             Send a message
-          </GoldButton>
-          <GoldButton href="/podcast" variant="outline">
+          </CTAButton>
+          <CTAButton intent="enquire" variant="ghost">
             Explore the podcast
-          </GoldButton>
+          </CTAButton>
         </section>
       </Container>
     </div>

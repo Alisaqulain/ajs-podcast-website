@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { GoldButton } from "@/components/ui/gold-button";
+import { TestimonialsSectionCta } from "@/components/home/testimonials-section-cta";
 import { listTestimonials } from "@/lib/data";
 import {
   TestimonialSlider,
@@ -28,9 +28,9 @@ export async function TestimonialsSection() {
     <section className="border-t border-luxury-border bg-luxury-section py-20 md:py-28">
       <Container>
         <SectionHeading
-          eyebrow="Proof"
-          title="Women who felt the shift"
-          subtitle="Real words from clients and listeners who chose expression over hesitation."
+          eyebrow="Testimonials"
+          title="Founders who trusted BN with their story"
+          subtitle="Real words from guests and clients who turned one conversation into lasting credibility."
         />
 
         {items.length === 0 ? (
@@ -55,11 +55,7 @@ export async function TestimonialsSection() {
           </>
         )}
 
-        <div className="mt-12 flex justify-center">
-          <GoldButton href="/testimonials" variant="outline">
-            View all testimonials
-          </GoldButton>
-        </div>
+        <TestimonialsSectionCta />
       </Container>
     </section>
   );

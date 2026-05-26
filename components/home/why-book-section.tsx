@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { CtaButton } from "@/components/lead/cta-button";
 import {
   BadgeCheck,
   Clapperboard,
@@ -13,7 +14,6 @@ import {
   Video,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { GoldButton } from "@/components/ui/gold-button";
 
 const valueCards = [
   {
@@ -93,17 +93,13 @@ export function WhyBookSection({
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold-deep">
-            Why book a slot
+            Why BN
           </p>
           <h2
             id="why-book-heading"
             className="mt-4 font-display text-3xl font-semibold leading-tight text-luxury-heading sm:text-4xl md:text-[2.65rem]"
           >
-            This isn’t exposure for exposure’s sake—
-            <span className="bg-gold-gradient bg-clip-text text-transparent">
-              {" "}
-              it’s a credibility engine
-            </span>
+            Why Book Podcast with BN?
           </h2>
           <p className="mt-6 text-base leading-relaxed text-luxury-body md:text-lg">
             Booking a slot means professionally featuring your story, business, or
@@ -161,6 +157,14 @@ export function WhyBookSection({
               <p className="mt-2 text-sm leading-relaxed text-luxury-body">
                 {c.copy}
               </p>
+              <CtaButton
+                intent="book"
+                variant="outline"
+                size="sm"
+                className="mt-5 w-full"
+              >
+                Book Now
+              </CtaButton>
             </motion.article>
           ))}
         </div>
@@ -216,12 +220,12 @@ export function WhyBookSection({
               itself.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <GoldButton href="/book" className="w-full sm:w-auto">
-                Book your slot
-              </GoldButton>
-              <GoldButton href="/contact" variant="outline" className="w-full sm:w-auto">
-                Ask a question
-              </GoldButton>
+              <CtaButton intent="book" className="w-full sm:w-auto">
+                Book Now
+              </CtaButton>
+              <CtaButton intent="enquire" variant="outline" className="w-full sm:w-auto">
+                Enquire Now
+              </CtaButton>
               <Link
                 href="/podcast"
                 className="inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-brand-gold-deep underline-offset-4 hover:underline sm:w-auto"

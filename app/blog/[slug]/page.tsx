@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { PageHero } from "@/components/hero/page-hero";
 import { Container } from "@/components/ui/container";
 import { ImageCard } from "@/components/ui/image-card";
 import { getBlogBySlug } from "@/lib/data";
@@ -80,27 +81,21 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <header className="border-b border-luxury-border bg-luxury-section py-14 md:py-20">
-        <Container className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold-deep">
-            {post.createdAt
-              ? new Date(post.createdAt as Date).toLocaleDateString(undefined, {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-              : "Article"}
-          </p>
-          <h1 className="mt-4 font-display text-4xl font-semibold text-luxury-heading md:text-5xl">
-            {String(post.title)}
-          </h1>
-          {post.seoDescription ? (
-            <p className="mt-6 text-lg text-luxury-body">
-              {String(post.seoDescription)}
-            </p>
-          ) : null}
-        </Container>
-      </header>
+      <PageHero
+        compact
+        eyebrow={
+          post.createdAt
+            ? new Date(post.createdAt as Date).toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            : "Article"
+        }
+        title={String(post.title)}
+        subtitle={post.seoDescription ? String(post.seoDescription) : undefined}
+        align="left"
+      />
 
       {cover ? (
         <Container className="mt-10 max-w-4xl">

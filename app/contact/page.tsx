@@ -5,6 +5,8 @@ import {
   IconInstagram,
   IconFacebook,
 } from "@/components/icons/social-icons";
+import { PageHero } from "@/components/hero/page-hero";
+import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SITE } from "@/lib/site";
@@ -27,23 +29,17 @@ const social = [
   { href: SITE.social.facebook, label: "Facebook", Icon: IconFacebook },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
   return (
     <div className="pb-24">
-      <section className="border-b border-luxury-border bg-luxury-section py-14 md:py-20">
-        <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
-            Contact
-          </p>
-          <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold text-luxury-heading md:text-5xl">
-            Let’s design your next level of expression
-          </h1>
-          <p className="mt-6 max-w-2xl text-luxury-body">
-            Coaching inquiries, podcast collaborations, and speaking requests are
-            welcome. Share a few details and the right conversation will follow.
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Contact"
+        title="Let’s design your next level of expression"
+        subtitle="Coaching inquiries, podcast collaborations, and speaking requests are welcome. Share a few details and the right conversation will follow."
+        align="left"
+      >
+        <CTAButton intent="book">Book Podcast Now</CTAButton>
+      </PageHero>
 
       <Container className="mt-14 grid gap-12 lg:grid-cols-[1fr_380px] lg:items-start">
         <ContactForm />

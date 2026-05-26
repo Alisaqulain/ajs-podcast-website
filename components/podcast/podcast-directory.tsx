@@ -4,9 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useDebounce } from "@/hooks/use-debounce";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
+import { PageHeroVideo } from "@/components/hero/page-hero-video";
+import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { getYoutubeEmbedUrl } from "@/lib/youtube";
+import type { AmbientClip } from "@/lib/youtube-ambient";
 
 export type PodcastApi = {
   _id: string;
@@ -19,7 +21,13 @@ export type PodcastApi = {
   createdAt?: string;
 };
 
-export function PodcastDirectory({ initial }: { initial: PodcastApi[] }) {
+export function PodcastDirectory({
+  initial,
+  ambientClips = [],
+}: {
+  initial: PodcastApi[];
+  ambientClips?: AmbientClip[];
+}) {
   const [items, setItems] = useState<PodcastApi[]>(initial);
   const [q, setQ] = useState("");
   const debouncedQ = useDebounce(q, 300);
@@ -64,35 +72,34 @@ export function PodcastDirectory({ initial }: { initial: PodcastApi[] }) {
 
   return (
     <div className="pb-20 md:pb-28">
-      <section className="border-b border-luxury-border bg-luxury-section pb-12 pt-6 md:pb-16 md:pt-8">
-        <Container className="flex flex-col items-center text-center">
-          <SectionHeading
-            align="center"
-            eyebrow="BHAW Namrata Podcast"
-            title="Conversations that return you to yourself"
-            subtitle="Watch episodes on YouTube—search below to find a topic or title."
-            className="mb-0"
+      <PageHeroVideo
+        eyebrow="BHAW Namrata Podcast"
+        title="Conversations that return you to yourself"
+        subtitle="Watch episodes on YouTube—search below to find a topic or title."
+        ambientClips={ambientClips}
+      >
+        <div className="relative w-full max-w-xl">
+          <Search
+            className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-luxury-muted"
+            aria-hidden
           />
-          <div className="relative mt-8 w-full max-w-xl md:mt-10">
-            <Search
-              className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-luxury-muted"
-              aria-hidden
-            />
-            <input
-              type="search"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search episodes..."
-              className="field-input w-full py-3.5 !pl-12 pr-4 shadow-sm"
-            />
-            {loading ? (
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-luxury-muted">
-                Updating…
-              </span>
-            ) : null}
-          </div>
-        </Container>
-      </section>
+          <input
+            type="search"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search episodes..."
+            className="field-input w-full bg-white/95 py-3.5 !pl-12 pr-4 shadow-sm"
+          />
+          {loading ? (
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-luxury-muted">
+              Updating…
+            </span>
+          ) : null}
+        </div>
+        <CTAButton intent="book" className="mt-4">
+          Book Podcast Now
+        </CTAButton>
+      </PageHeroVideo>
 
       <Container className="mt-10 md:mt-14">
         {sorted.length === 0 ? (

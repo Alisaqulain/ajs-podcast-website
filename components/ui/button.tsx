@@ -22,6 +22,25 @@ const sizes = {
 type Variant = keyof typeof variants;
 type Size = keyof typeof sizes;
 
+export function buttonStyles({
+  variant = "primary",
+  size = "md",
+  className,
+}: {
+  variant?: Variant;
+  size?: Size;
+  className?: string;
+}) {
+  return cn(
+    "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-300",
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold",
+    "touch-manipulation disabled:pointer-events-none disabled:opacity-55",
+    variants[variant],
+    sizes[size],
+    className
+  );
+}
+
 type BaseProps = {
   children: ReactNode;
   className?: string;
@@ -42,14 +61,7 @@ export function Button({
   size = "md",
   ...rest
 }: Props) {
-  const base = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-300",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold",
-    "touch-manipulation disabled:pointer-events-none disabled:opacity-55",
-    variants[variant],
-    sizes[size],
-    className
-  );
+  const base = buttonStyles({ variant, size, className });
 
   if ("href" in rest && rest.href) {
     const { href, ...linkProps } = rest;

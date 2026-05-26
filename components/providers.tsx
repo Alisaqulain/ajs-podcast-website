@@ -2,12 +2,12 @@
 
 import { SessionProvider } from "next-auth/react";
 import type { ReactNode } from "react";
-import { ThemeProvider } from "@/components/theme/theme-provider";
+import { LeadCaptureProvider } from "@/components/lead/lead-capture-context";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <SessionProvider>
-      <ThemeProvider>{children}</ThemeProvider>
+      <LeadCaptureProvider>{children}</LeadCaptureProvider>
     </SessionProvider>
   );
 }

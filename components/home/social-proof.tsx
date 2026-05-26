@@ -3,6 +3,7 @@
 import { IconVideo, IconInstagram } from "@/components/icons/social-icons";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { CtaButton } from "@/components/lead/cta-button";
 import { SITE } from "@/lib/site";
 
 export function SocialProof() {
@@ -22,7 +23,8 @@ export function SocialProof() {
               to keep your confidence on track.
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
+            <CtaButton intent="get-started">Get Started</CtaButton>
             <Button
               href={SITE.social.youtube}
               target="_blank"

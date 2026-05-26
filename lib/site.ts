@@ -8,9 +8,23 @@ export const SITE = {
   url: process.env.NEXTAUTH_URL || "http://localhost:3000",
   /** Optional full-screen hero video (mp4 URL or path like /hero.mp4). Leave empty for gradient-only hero. */
   heroVideoUrl: (process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "").trim(),
+  /**
+   * Homepage hero media (mp4 or path like /hero-home.mp4).
+   * TODO: Replace with final hero video link
+   */
+  homeHeroVideoUrl: (process.env.NEXT_PUBLIC_HOME_HERO_VIDEO_URL || "").trim(),
+  /**
+   * Viral-style background video for inner page heroes.
+   * TODO: Replace with viral background video URL
+   */
+  pageHeroVideoUrl: (process.env.NEXT_PUBLIC_PAGE_HERO_VIDEO_URL || "").trim(),
   /** Poster shown before video loads or if video errors */
   heroPosterUrl:
     (process.env.NEXT_PUBLIC_HERO_POSTER_URL || "").trim() || "/newlogo.jpeg",
+  /** Homepage hero card poster — unused while CSS placeholder is active */
+  homeHeroPosterUrl:
+    (process.env.NEXT_PUBLIC_HOME_HERO_POSTER_URL || "").trim() ||
+    "/newlogo.jpeg",
   /**
    * Extra zoom on hero YouTube embed so the frame **covers** the viewport (true landscape crop).
    * Long-form landscape uploads need less aggressive scale than Shorts — default ~1.1; override via env.

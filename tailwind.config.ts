@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -52,7 +51,7 @@ const config: Config = {
         "gold-shine":
           "linear-gradient(120deg, rgba(201,161,74,0.35) 0%, rgba(245,210,122,0.95) 50%, rgba(201,161,74,0.9) 100%)",
         "section-mesh":
-          "radial-gradient(1200px 600px at 10% 0%, rgba(201,161,74,0.08), transparent 55%), radial-gradient(900px 500px at 90% 20%, rgba(37,99,235,0.04), transparent 50%), linear-gradient(180deg, var(--surface) 0%, var(--luxury-bg) 100%)",
+          "radial-gradient(1200px 600px at 10% 0%, rgba(201,161,74,0.1), transparent 55%), radial-gradient(900px 500px at 90% 20%, rgba(15,23,42,0.04), transparent 50%), linear-gradient(180deg, var(--surface) 0%, var(--luxury-bg) 100%)",
       },
       boxShadow: {
         glass: "var(--glass-shadow)",

@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { GoldButton } from "@/components/ui/gold-button";
+import { LatestConversationsCta } from "@/components/home/latest-conversations-cta";
 import { LatestConversationsGrid } from "@/components/podcast/latest-conversations-grid";
 import type { PodcastEpisodeCard } from "@/lib/podcast-episodes";
 import {
@@ -46,15 +46,7 @@ export async function LatestConversations(props?: {
           />
         </div>
         <LatestConversationsGrid episodes={episodes} />
-        <div className="mt-8 flex justify-center sm:mt-12">
-          <GoldButton
-            href="/podcast"
-            variant="outline"
-            className="w-full max-w-sm sm:w-auto"
-          >
-            View all episodes
-          </GoldButton>
-        </div>
+        <LatestConversationsCta />
       </Container>
     </section>
   );
