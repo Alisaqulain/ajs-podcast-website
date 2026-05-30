@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import type { BookingWorkflowStatus } from "@/lib/cms";
 
 export type BookingPaymentStatus = "pending" | "paid" | "failed";
 
@@ -8,15 +9,18 @@ export interface Booking {
   email: string;
   phone: string;
   businessName: string;
+  /** Guest notes / message */
+  message: string;
+  /** @deprecated Alias for message */
   topic: string;
   packageId: ObjectId;
-  /** Denormalized for admin exports */
   packageTitle: string;
   /** YYYY-MM-DD */
   date: string;
   /** HH:mm 24h */
   time: string;
-  /** Amount charged in INR (rupees) after payment */
+  /** Admin workflow status */
+  status: BookingWorkflowStatus;
   amount: number;
   paymentStatus: BookingPaymentStatus;
   razorpay_order_id?: string;

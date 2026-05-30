@@ -68,6 +68,8 @@ export async function POST(req: NextRequest) {
         : null,
     features,
     badge: body.badge?.trim() || "",
+    buttonText: (body.buttonText ?? "Select package").trim() || "Select package",
+    isDefault: Boolean(body.isDefault),
     active: body.active !== false,
     sortOrder: Number.isFinite(Number(body.sortOrder))
       ? Math.round(Number(body.sortOrder))
@@ -75,6 +77,10 @@ export async function POST(req: NextRequest) {
     createdAt: new Date(),
     updatedAt: new Date(),
   };
+
+  if (doc.isDefault) {
+    await db.collection("packages").updateMany({}, { $set: { isDefault: false } });
+  }
 
   const result = await db.collection("packages").insertOne(doc);
   return NextResponse.json({ ...doc, _id: result.insertedId.toString() });

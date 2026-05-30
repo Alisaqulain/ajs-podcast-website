@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { CtaButton } from "@/components/lead/cta-button";
-import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/site";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
+import { HOME_FINAL_CTA } from "@/lib/site-content";
 
 export function CtaSection() {
   return (
@@ -21,31 +21,20 @@ export function CtaSection() {
           <div className="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-brand-gold-light/20 blur-3xl" />
           <div className="relative mx-auto max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
-              Ready when you are
+              {HOME_FINAL_CTA.eyebrow}
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-luxury-heading md:text-4xl">
-              Let your next chapter sound like you
+              {HOME_FINAL_CTA.title}
             </h2>
-            <p className="mt-4 text-luxury-body">
-              Book a private coaching conversation or start with the podcast—
-              both are invitations to practice powerful expression.
-            </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <div className="mt-4 space-y-3 text-luxury-body">
+              {HOME_FINAL_CTA.body.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
+            <div className="mt-10 flex justify-center">
               <CtaButton intent="book" size="lg">
-                Book Now
+                {BOOK_NOW_LABEL}
               </CtaButton>
-              <CtaButton intent="schedule" variant="outline" size="lg">
-                Schedule Podcast
-              </CtaButton>
-              <Button
-                href={SITE.social.youtube}
-                variant="secondary"
-                size="lg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Watch the Podcast
-              </Button>
             </div>
           </div>
         </motion.div>

@@ -46,7 +46,9 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const html = sanitizeBlogHtml(String(post.content));
-  const cover = post.coverImage ? String(post.coverImage) : null;
+  const coverRaw = post.featuredImage || post.coverImage;
+  const cover = coverRaw ? String(coverRaw) : null;
+  const videoUrl = post.videoUrl ? String(post.videoUrl) : null;
 
   const coverAlt = cover
     ? `Cover image for article: ${String(post.title)}`
@@ -93,7 +95,13 @@ export default async function BlogPostPage({ params }: Props) {
             : "Article"
         }
         title={String(post.title)}
-        subtitle={post.seoDescription ? String(post.seoDescription) : undefined}
+        subtitle={
+          post.shortDescription
+            ? String(post.shortDescription)
+            : post.seoDescription
+              ? String(post.seoDescription)
+              : undefined
+        }
         align="left"
       />
 
@@ -107,6 +115,17 @@ export default async function BlogPostPage({ params }: Props) {
             priority
             className="ring-1 ring-luxury-border"
             sizes="(max-width:1024px) 100vw, 896px"
+          />
+        </Container>
+      ) : null}
+
+      {videoUrl ? (
+        <Container className="mt-8 max-w-4xl">
+          <video
+            src={optimizeMediaSrc(videoUrl)}
+            controls
+            playsInline
+            className="w-full rounded-3xl shadow-luxury-card"
           />
         </Container>
       ) : null}

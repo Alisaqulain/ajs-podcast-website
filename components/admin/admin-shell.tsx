@@ -5,24 +5,24 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
   LayoutDashboard,
-  Mic2,
+  Newspaper,
   FileText,
   Heart,
-  Inbox,
   LogOut,
   PackageOpen,
   CalendarRange,
+  Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const nav = [
-  { href: "/admin", label: "Overview", icon: LayoutDashboard },
-  { href: "/admin/packages", label: "Packages", icon: PackageOpen },
-  { href: "/admin/bookings", label: "Bookings", icon: CalendarRange },
-  { href: "/admin/podcasts", label: "Podcasts", icon: Mic2 },
+  { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/articles", label: "Articles", icon: Newspaper },
   { href: "/admin/blogs", label: "Blogs", icon: FileText },
   { href: "/admin/testimonials", label: "Testimonials", icon: Heart },
-  { href: "/admin/contacts", label: "Contacts", icon: Inbox },
+  { href: "/admin/packages", label: "Packages", icon: PackageOpen },
+  { href: "/admin/bookings", label: "Bookings", icon: CalendarRange },
+  { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
@@ -47,10 +47,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           </div>
           <nav className="flex-1 space-y-1 p-4">
             {nav.map(({ href, label, icon: Icon }) => {
-              const active =
-                href === "/admin"
-                  ? pathname === "/admin"
-                  : pathname.startsWith(href);
+              const active = pathname === href || pathname.startsWith(`${href}/`);
               return (
                 <Link
                   key={href}

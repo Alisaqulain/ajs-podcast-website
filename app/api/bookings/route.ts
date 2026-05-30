@@ -8,6 +8,7 @@ import {
   isValidBookingTime,
   parseYmd,
 } from "@/lib/booking-rules";
+import { BOOKING_WORKFLOW_STATUSES } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
@@ -16,8 +17,9 @@ const createSchema = z.object({
   name: z.string().min(1).max(200),
   email: z.string().email(),
   phone: z.string().min(8).max(24),
-  businessName: z.string().min(1).max(200),
-  topic: z.string().min(1).max(3000),
+  businessName: z.string().min(1).max(200).optional(),
+  topic: z.string().min(1).max(3000).optional(),
+  message: z.string().min(1).max(3000).optional(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   time: z.string().min(1).max(10),
 });
@@ -38,11 +40,27 @@ export async function POST(req: NextRequest) {
       { error: "Invalid input", details: parsed.error.flatten() },
       { status: 400 }
     );
-
   }
 
-  const { packageId, name, email, phone, businessName, topic, date, time } =
-    parsed.data;
+  const {
+    packageId,
+    name,
+    email,
+    phone,
+    businessName,
+    topic,
+    message,
+    date,
+    time,
+  } = parsed.data;
+
+  const note = (message ?? topic ?? "").trim();
+  if (!note) {
+    return NextResponse.json(
+      { error: "Message is required." },
+      { status: 400 }
+    );
+  }
 
   if (!ObjectId.isValid(packageId)) {
     return NextResponse.json({ error: "Invalid package." }, { status: 400 });
@@ -84,12 +102,14 @@ export async function POST(req: NextRequest) {
     name: name.trim(),
     email: email.trim().toLowerCase(),
     phone: phone.trim(),
-    businessName: businessName.trim(),
-    topic: topic.trim(),
+    businessName: (businessName ?? "").trim(),
+    message: note,
+    topic: note,
     packageId: new ObjectId(packageId),
     packageTitle: String(pkg.title),
     date,
     time,
+    status: "new" as const,
     amount: 0,
     paymentStatus: "pending" as const,
     createdAt: new Date(),
@@ -113,7 +133,9 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const from = searchParams.get("from")?.trim();
   const to = searchParams.get("to")?.trim();
+  const paymentStatus = searchParams.get("paymentStatus")?.trim();
   const status = searchParams.get("status")?.trim();
+  const q = searchParams.get("q")?.trim();
 
   const filter: Record<string, unknown> = {};
   if (from || to) {
@@ -121,14 +143,30 @@ export async function GET(req: NextRequest) {
     if (from) (filter.date as Record<string, string>).$gte = from;
     if (to) (filter.date as Record<string, string>).$lte = to;
   }
-  if (status && ["pending", "paid", "failed"].includes(status)) {
-    filter.paymentStatus = status;
+  if (
+    paymentStatus &&
+    ["pending", "paid", "failed"].includes(paymentStatus)
+  ) {
+    filter.paymentStatus = paymentStatus;
+  }
+  if (status && BOOKING_WORKFLOW_STATUSES.includes(status as never)) {
+    filter.status = status;
+  }
+  if (q) {
+    filter.$or = [
+      { name: { $regex: q, $options: "i" } },
+      { email: { $regex: q, $options: "i" } },
+      { phone: { $regex: q, $options: "i" } },
+      { packageTitle: { $regex: q, $options: "i" } },
+      { message: { $regex: q, $options: "i" } },
+      { topic: { $regex: q, $options: "i" } },
+    ];
   }
 
   const docs = await db
     .collection("bookings")
     .find(filter)
-    .sort({ date: -1, time: -1, createdAt: -1 })
+    .sort({ createdAt: -1, date: -1, time: -1 })
     .toArray();
 
   return NextResponse.json(
@@ -136,6 +174,7 @@ export async function GET(req: NextRequest) {
       ...d,
       _id: d._id.toString(),
       packageId: d.packageId?.toString?.() ?? d.packageId,
+      message: d.message ?? d.topic ?? "",
     }))
   );
 }

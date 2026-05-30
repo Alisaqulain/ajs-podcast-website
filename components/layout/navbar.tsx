@@ -8,11 +8,13 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
 import { SiteLogo } from "@/components/brand/site-logo";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { CtaButton } from "@/components/lead/cta-button";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/#services", label: "Services" },
   { href: "/podcast", label: "Podcast" },
   { href: "/blog", label: "Blog" },
   { href: "/testimonials", label: "Testimonials" },
@@ -136,7 +138,7 @@ export function Navbar() {
             whileTap={{ scale: 0.98 }}
           >
             <CtaButton intent="book" size="md" className="shadow-gold-glow-lg">
-              Book Now
+              {BOOK_NOW_LABEL}
             </CtaButton>
           </motion.div>
 
@@ -196,7 +198,7 @@ export function Navbar() {
                   className="mt-3 w-full"
                   onClick={closeMenu}
                 >
-                  Book Now
+                  {BOOK_NOW_LABEL}
                 </CtaButton>
               </Container>
             </motion.nav>

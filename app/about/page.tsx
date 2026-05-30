@@ -12,16 +12,17 @@ import {
   FOUNDER_TAGLINE,
   FOUNDER_VISION,
 } from "@/lib/founder-content";
+import { HOME_FOUNDER, HOME_INTRO } from "@/lib/site-content";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Namrata",
   description:
-    "Mission, vision, and the story behind BHAW Namrata — visibility, podcasting, and personal branding.",
+    "Meet Namrata — visibility mentor, podcast strategist, and self-image coach behind BHAW Namrata.",
   openGraph: {
     title: `About | ${SITE.name}`,
-    description:
-      "Discover Namrata’s story, mission, and approach to expression, visibility, and personal branding.",
+    description: HOME_INTRO.mission,
   },
 };
 
@@ -30,29 +31,33 @@ export default async function AboutPage() {
     <div className="pb-24">
       <PageHero
         eyebrow="About"
-        title={SITE.name}
+        title={HOME_FOUNDER.title}
         subtitle={
           <>
             <span className="font-display text-lg text-brand-gold-deep md:text-xl">
-              {FOUNDER_TAGLINE}
+              {HOME_FOUNDER.roles}
             </span>
             <span className="mt-4 block text-base text-luxury-body">
-              Mission, vision, and the story behind visibility, podcasting, and
-              personal branding with Namrata.
+              {HOME_FOUNDER.belief}
             </span>
           </>
         }
       >
-        <CTAButton intent="book">Book Podcast Now</CTAButton>
+        <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
       </PageHero>
 
       <Container className="mt-16 space-y-16 md:mt-24 md:space-y-24">
-        <section className="text-center">
+        <section className="mx-auto max-w-3xl space-y-5 text-center leading-relaxed text-luxury-body">
           <h2 className="font-display text-3xl font-semibold text-luxury-heading md:text-4xl">
-            {SITE.name}
+            {HOME_INTRO.title}
           </h2>
-          <p className="mt-2 font-display text-lg text-brand-gold-deep md:text-xl">
-            {FOUNDER_TAGLINE}
+          <p className="font-display text-lg text-brand-gold-deep">{FOUNDER_TAGLINE}</p>
+          <p className="text-lg font-medium text-luxury-heading">{HOME_INTRO.lead}</p>
+          <p>{HOME_INTRO.mission}</p>
+          <p className="font-medium text-luxury-heading">{HOME_INTRO.attention}</p>
+          <p>{HOME_INTRO.podcastTrust}</p>
+          <p className="font-display text-lg font-medium text-luxury-heading">
+            {HOME_INTRO.closing}
           </p>
         </section>
 
@@ -128,13 +133,7 @@ export default async function AboutPage() {
         </section>
 
         <section className="flex flex-wrap gap-4">
-          <CTAButton intent="book">Book Podcast Now</CTAButton>
-          <CTAButton intent="enquire" variant="outline">
-            Send a message
-          </CTAButton>
-          <CTAButton intent="enquire" variant="ghost">
-            Explore the podcast
-          </CTAButton>
+          <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
         </section>
       </Container>
     </div>

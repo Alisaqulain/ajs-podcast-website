@@ -7,12 +7,17 @@ export function OrganizationJsonLd() {
     name: "Namrata Tiwary Singh",
     alternateName: ["BhawnaMrata", "BHAW Namrata"],
     url: siteUrl,
-    jobTitle: ["Podcaster", "Self Image Coach", "Speaker", "Founder"],
+    jobTitle: [
+      "Visibility Mentor",
+      "Podcast Strategist",
+      "Self-Image Coach",
+      "Founder",
+    ],
     sameAs: [
       "https://youtube.com/@bhawnamrata",
       "https://www.linkedin.com/in/namrata-tiwary-singh-47a29487",
       "https://www.instagram.com/bhawnamrata",
-      "https://www.facebook.com/share/1G1NX29pou/",
+      "https://www.facebook.com/BHAWNamrata/",
     ],
     knowsAbout: ["Self-image coaching", "Women's empowerment", "Podcasting"],
   };

@@ -1,6 +1,17 @@
 import { MongoClient, Db } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
+const rawUri = process.env.MONGODB_URI?.trim();
+const uri =
+  rawUri &&
+  (rawUri.startsWith("mongodb://") || rawUri.startsWith("mongodb+srv://"))
+    ? rawUri
+    : undefined;
+
+if (rawUri && !uri && process.env.NODE_ENV !== "test") {
+  console.warn(
+    "[mongodb] MONGODB_URI must start with mongodb:// or mongodb+srv:// — database features disabled."
+  );
+}
 
 if (!uri && process.env.NODE_ENV !== "test") {
   console.warn(

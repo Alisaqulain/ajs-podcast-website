@@ -6,7 +6,9 @@ import { listTestimonials } from "@/lib/data";
 import { TestimonialSlider } from "@/components/testimonials/testimonial-slider";
 import type { TestimonialItem } from "@/components/testimonials/testimonial-slider";
 import { TestimonialGridCard } from "@/components/testimonials/testimonial-grid-card";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { SITE } from "@/lib/site";
+import { stripHtml } from "@/lib/strip-html";
 
 export const metadata: Metadata = {
   title: "Testimonials",
@@ -25,8 +27,18 @@ export default async function TestimonialsPage() {
   const items: TestimonialItem[] = raw.map((t) => ({
     id: t.id,
     name: String(t.name),
-    message: String(t.message),
-    image: t.image ? String(t.image) : undefined,
+    message: String(
+      t.shortDescription ||
+        stripHtml(String(t.content || t.message || ""))
+    ),
+    image:
+      t.featuredImage || t.image
+        ? String(t.featuredImage || t.image)
+        : undefined,
+    rating:
+      typeof t.rating === "number" && t.rating >= 1 && t.rating <= 5
+        ? t.rating
+        : undefined,
   }));
 
   return (
@@ -36,7 +48,7 @@ export default async function TestimonialsPage() {
         title="What founders say after they choose themselves"
         subtitle="A living gallery of courage, clarity, and the kind of confidence that compounds on camera."
       >
-        <CTAButton intent="book">Book Podcast Now</CTAButton>
+        <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
       </PageHero>
 
       <Container className="mt-14">

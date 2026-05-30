@@ -2,16 +2,18 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/hero/page-hero";
 import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { SITE } from "@/lib/site";
 import { getDb } from "@/lib/mongodb";
 import { BookingExperience, type PackagePublic } from "@/components/booking/booking-experience";
 import { getSeedPackagesPublic } from "@/lib/packages-seed";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Book a Guest Slot",
+  title: "Book Now",
   description:
-    "Book a cinematic podcast guest appearance—packages, availability, Razorpay checkout, and optional Calendly scheduling.",
+    "Book podcast production, visibility mentorship, or personal branding with BHAW Namrata—packages, availability, and secure checkout.",
   openGraph: {
     title: `Book a Guest Slot | ${SITE.name}`,
     description:
@@ -42,6 +44,8 @@ async function loadPackages(): Promise<PackagePublic[]> {
       ? d.features.map((x) => String(x))
       : [],
     badge: d.badge ? String(d.badge) : undefined,
+    buttonText: d.buttonText ? String(d.buttonText) : "Select package",
+    isDefault: Boolean(d.isDefault),
     active: Boolean(d.active),
   }));
 }
@@ -86,7 +90,7 @@ export default async function BookPage() {
           </li>
         </ul>
         <CTAButton intent="book" className="mt-4">
-          Book Podcast Now
+          {BOOK_NOW_LABEL}
         </CTAButton>
       </PageHero>
 
@@ -106,7 +110,13 @@ export default async function BookPage() {
       ) : null}
 
       <div className="mt-14 md:mt-20">
-        <BookingExperience initialPackages={initialPackages} />
+        <Suspense
+          fallback={
+            <p className="text-center text-sm text-luxury-muted">Loading booking…</p>
+          }
+        >
+          <BookingExperience initialPackages={initialPackages} />
+        </Suspense>
       </div>
 
       {SITE.calendlyUrl ? (

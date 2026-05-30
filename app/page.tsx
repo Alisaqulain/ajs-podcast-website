@@ -1,35 +1,34 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/hero/home-hero";
 import { SITE } from "@/lib/site";
+import { IntroductionSection } from "@/components/home/introduction-section";
+import { WhyPodcastSection } from "@/components/home/why-podcast-section";
+import { WhyUsSection } from "@/components/home/why-us-section";
+import { ServicesSection } from "@/components/home/services-section";
+import { IdealClientSection } from "@/components/home/ideal-client-section";
+import { ProcessSection } from "@/components/home/process-section";
 import { LatestConversations } from "@/components/home/latest-conversations";
 import { FounderSection } from "@/components/home/founder-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
-import { SocialProof } from "@/components/home/social-proof";
 import { PricingSection } from "@/components/home/pricing-section";
+import { FaqSection } from "@/components/home/faq-section";
 import { CtaSection } from "@/components/home/cta-section";
-import { NewsletterCta } from "@/components/home/newsletter-cta";
-import { WhyBookSection } from "@/components/home/why-book-section";
-import { CredibilitySection } from "@/components/home/credibility-section";
-import { RoiSection } from "@/components/home/roi-section";
-import { SeoBenefitsSection } from "@/components/home/seo-benefits-section";
-import { MediaJournalSpotlight } from "@/components/home/media-journal-spotlight";
 import { getLatestPodcastEpisodesForHome } from "@/lib/podcast-episodes";
 
 export const metadata: Metadata = {
-  title: `${SITE.name} | Founder Podcast Booking & Personal Branding`,
+  title: `${SITE.name} | Podcast, Personal Branding & Visibility`,
   description:
-    "Book a premium founder podcast with BHAW Namrata. Studio production, SEO-friendly episode assets, credibility-building interviews, and social-ready clips for entrepreneurs and women leaders in India.",
+    "BHAW Namrata helps coaches, founders, experts, and creators turn their story into influence through premium podcasts, strategic visibility, and personal branding.",
   keywords: [
-    "founder podcast India",
-    "book podcast guest slot",
-    "business podcast booking",
-    "personal branding podcast",
-    "podcast SEO visibility",
+    "podcast production India",
+    "personal branding coach",
+    "visibility mentorship",
+    "founder podcast",
     "BHAW Namrata",
+    "Namrata podcast strategist",
   ],
 };
 
-/** Aligns with YouTube RSS/API fetch revalidation — fresh uploads surface without redeploys. */
 export const revalidate = 300;
 
 export default async function HomePage() {
@@ -38,18 +37,18 @@ export default async function HomePage() {
   return (
     <>
       <HomeHero />
+      <IntroductionSection />
+      <WhyPodcastSection />
+      <WhyUsSection />
+      <ServicesSection />
+      <IdealClientSection />
+      <ProcessSection />
       <LatestConversations episodes={episodes} />
-      <WhyBookSection syncedEpisodeCount={episodes.length} />
-      <TestimonialsSection />
-      <CredibilitySection />
-      <RoiSection />
-      <SeoBenefitsSection />
       <FounderSection />
-      <MediaJournalSpotlight />
-      <SocialProof />
+      <TestimonialsSection />
       <PricingSection />
+      <FaqSection />
       <CtaSection />
-      <NewsletterCta />
     </>
   );
 }

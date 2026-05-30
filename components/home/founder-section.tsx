@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { GoldButton } from "@/components/ui/gold-button";
 import { CtaButton } from "@/components/lead/cta-button";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import {
   FOUNDER_FEARS,
   FOUNDER_MISSION,
@@ -12,9 +13,9 @@ import {
   FOUNDER_STORY_CLOSING,
   FOUNDER_STORY_CLOSING_LINE,
   FOUNDER_STORY_INTRO,
-  FOUNDER_TAGLINE,
   FOUNDER_VISION,
 } from "@/lib/founder-content";
+import { HOME_FOUNDER } from "@/lib/site-content";
 
 function FounderSidebar() {
   return (
@@ -79,16 +80,19 @@ export function FounderSection() {
           className="mb-12 text-center md:mb-16"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
-            Founder
+            {HOME_FOUNDER.eyebrow}
           </p>
           <h2
             id="founder-heading"
             className="mt-3 font-display text-3xl font-semibold text-luxury-heading md:text-4xl"
           >
-            BHAW Namrata
+            {HOME_FOUNDER.title}
           </h2>
           <p className="mt-2 font-display text-lg text-brand-gold-deep md:text-xl">
-            {FOUNDER_TAGLINE}
+            {HOME_FOUNDER.roles}
+          </p>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-luxury-body">
+            {HOME_FOUNDER.belief}
           </p>
         </motion.div>
 
@@ -134,6 +138,23 @@ export function FounderSection() {
             transition={{ duration: 0.55 }}
             className="space-y-8 lg:col-start-2 lg:row-start-1 lg:row-span-2"
           >
+            <div className="rounded-3xl border border-luxury-border bg-luxury-bg/80 p-6 md:p-8">
+              <p className="text-sm leading-relaxed text-luxury-body">
+                {HOME_FOUNDER.transformIntro}
+              </p>
+              <ul className="mt-3 space-y-1 text-sm text-luxury-heading">
+                {HOME_FOUNDER.transforms.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+              <p className="mt-5 text-sm font-semibold text-brand-gold-deep">
+                {HOME_FOUNDER.approachIntro}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-luxury-body">
+                {HOME_FOUNDER.approach.join(" ")}
+              </p>
+            </div>
+
             <div>
               <h3 className="font-display text-2xl font-semibold text-luxury-heading">
                 My Story
@@ -176,7 +197,7 @@ export function FounderSection() {
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <CtaButton intent="book">Book Now</CtaButton>
+              <CtaButton intent="book">{BOOK_NOW_LABEL}</CtaButton>
               <GoldButton href="/about" variant="outline">
                 Learn more about BHAW Namrata
               </GoldButton>

@@ -11,9 +11,12 @@ export type BlogCardData = {
   coverImage?: string;
   seoDescription?: string;
   createdAt?: string | Date;
+  /** Defaults to /blog */
+  hrefPrefix?: "/blog" | "/articles";
 };
 
 export function BlogCard({ blog, index }: { blog: BlogCardData; index: number }) {
+  const base = blog.hrefPrefix ?? "/blog";
   return (
     <motion.article
       initial={{ opacity: 0, y: 18 }}
@@ -23,7 +26,7 @@ export function BlogCard({ blog, index }: { blog: BlogCardData; index: number })
       transition={{ duration: 0.45, delay: index * 0.05 }}
       className="group flex h-full flex-col overflow-hidden rounded-3xl border border-luxury-border glass-panel shadow-luxury-card"
     >
-      <Link href={`/blog/${blog.slug}`} className="relative block p-2">
+      <Link href={`${base}/${blog.slug}`} className="relative block p-2">
         <ImageCard
           type="blog"
           src={blog.coverImage}
@@ -43,7 +46,7 @@ export function BlogCard({ blog, index }: { blog: BlogCardData; index: number })
             : "Journal"}
         </p>
         <h2 className="mt-2 font-display text-xl font-semibold text-luxury-heading transition-colors group-hover:text-brand-gold-deep">
-          <Link href={`/blog/${blog.slug}`}>{blog.title}</Link>
+          <Link href={`${base}/${blog.slug}`}>{blog.title}</Link>
         </h2>
         {blog.seoDescription ? (
           <p className="mt-3 line-clamp-3 text-sm text-luxury-muted">
@@ -51,7 +54,7 @@ export function BlogCard({ blog, index }: { blog: BlogCardData; index: number })
           </p>
         ) : null}
         <Link
-          href={`/blog/${blog.slug}`}
+          href={`${base}/${blog.slug}`}
           className="mt-auto pt-6 text-sm font-semibold text-brand-gold-deep hover:text-brand-gold hover:underline"
         >
           Read article

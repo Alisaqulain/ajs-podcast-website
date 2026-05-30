@@ -5,9 +5,9 @@ import Link from "next/link";
 import { Check, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { CtaButton } from "@/components/lead/cta-button";
 import { PaymentTrustBadges } from "@/components/payment/payment-trust-badges";
 import type { PackagePublic } from "@/components/booking/booking-experience";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
 function formatInrPaise(paise: number) {
@@ -47,15 +47,14 @@ export function PricingSection() {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
-              Booking &amp; packages
+              Book your session
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-luxury-heading md:text-4xl">
-              A premium pathway to becoming a featured guest—with calm checkout
+              {BOOK_NOW_LABEL}
             </h2>
             <p className="mt-4 text-base text-luxury-body">
-              Packages update live from our studio CMS. Booking a slot means
-              professionally featuring your story through cinematic podcast
-              production and promotion.{" "}
+              Choose a package for podcast production, visibility mentorship, or
+              personal branding support. Secure checkout and calm scheduling.{" "}
               <Link
                 href="/refund-policy"
                 className="font-medium text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold"
@@ -96,7 +95,7 @@ export function PricingSection() {
             <div className="glass-panel xl:col-span-3 rounded-4xl border border-dashed border-brand-gold/40 p-12 text-center text-luxury-body">
               Packages will appear here once published in the admin panel.
               <div className="mt-6">
-                <CtaButton intent="book">Book Now</CtaButton>
+                <Button href="/book">{BOOK_NOW_LABEL}</Button>
               </div>
             </div>
           ) : (
@@ -148,11 +147,19 @@ export function PricingSection() {
                         {formatInrPaise(pay)}
                       </span>
                     </div>
-                    <CtaButton intent="book" className="mt-5 w-full">
-                      Book Now
-                    </CtaButton>
-                    <Button href="/book" variant="ghost" size="sm" className="mt-2 w-full">
-                      Pay with Razorpay →
+                    <Button
+                      href={`/book?package=${pkg._id}`}
+                      className="mt-5 w-full"
+                    >
+                      {pkg.buttonText || BOOK_NOW_LABEL}
+                    </Button>
+                    <Button
+                      href={`/book?package=${pkg._id}`}
+                      variant="ghost"
+                      size="sm"
+                      className="mt-2 w-full"
+                    >
+                      {pkg.buttonText || "Select package"} →
                     </Button>
                   </div>
                 </article>

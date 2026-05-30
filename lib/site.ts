@@ -2,9 +2,9 @@ export const SITE = {
   name: "BHAW Namrata",
   /** Primary brand mark (navbar, footer, auth, payments). */
   logoSrc: "/newlogo.jpeg",
-  tagline: "Where Expression is Power",
+  tagline: "Podcast | Presence | Personal Branding",
   description:
-    "Podcasting, visibility mentoring, and personal branding—helping entrepreneurs, professionals, and women leaders express themselves with confidence, clarity, and powerful presence.",
+    "A premium podcast and personal branding studio for founders, coaches, creators, and women building visibility—turning your story into authority through podcasts, strategic presence, and premium positioning.",
   url: process.env.NEXTAUTH_URL || "http://localhost:3000",
   /** Optional full-screen hero video (mp4 URL or path like /hero.mp4). Leave empty for gradient-only hero. */
   heroVideoUrl: (process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "").trim(),
@@ -44,7 +44,7 @@ export const SITE = {
     linkedin:
       "https://www.linkedin.com/in/namrata-tiwary-singh-47a29487",
     instagram: "https://www.instagram.com/bhawnamrata",
-    facebook: "https://www.facebook.com/share/1G1NX29pou/",
+    facebook: "https://www.facebook.com/BHAWNamrata/",
     whatsapp: "https://wa.me/919243122115",
   },
 };

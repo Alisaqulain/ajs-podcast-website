@@ -9,6 +9,7 @@ import { PageHero } from "@/components/hero/page-hero";
 import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
 import { ContactForm } from "@/components/contact/contact-form";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { SITE } from "@/lib/site";
 import { Mail } from "lucide-react";
 
@@ -35,10 +36,10 @@ export default async function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Let’s design your next level of expression"
-        subtitle="Coaching inquiries, podcast collaborations, and speaking requests are welcome. Share a few details and the right conversation will follow."
+        subtitle="Coaching, podcast collaborations, and visibility mentorship inquiries are welcome. Share a few details and we'll follow up with the right next step."
         align="left"
       >
-        <CTAButton intent="book">Book Podcast Now</CTAButton>
+        <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
       </PageHero>
 
       <Container className="mt-14 grid gap-12 lg:grid-cols-[1fr_380px] lg:items-start">

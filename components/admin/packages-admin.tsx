@@ -12,6 +12,8 @@ const schema = z.object({
   priceInr: z.string().min(1),
   discountInr: z.string().optional(),
   badge: z.string().optional(),
+  buttonText: z.string().optional(),
+  isDefault: z.boolean(),
   active: z.boolean(),
   sortOrder: z.string().optional(),
   features: z.array(z.object({ value: z.string() })),
@@ -27,6 +29,8 @@ type Row = {
   discountPrice?: number | null;
   features: string[];
   badge?: string;
+  buttonText?: string;
+  isDefault?: boolean;
   active: boolean;
   sortOrder: number;
 };
@@ -56,6 +60,8 @@ export function PackagesAdmin() {
       priceInr: "",
       discountInr: "",
       badge: "",
+      buttonText: "Select package",
+      isDefault: false,
       active: true,
       sortOrder: "",
       features: [{ value: "" }],
@@ -87,6 +93,8 @@ export function PackagesAdmin() {
       priceInr: "",
       discountInr: "",
       badge: "",
+      buttonText: "Select package",
+      isDefault: false,
       active: true,
       sortOrder: "",
       features: [{ value: "" }],
@@ -104,6 +112,8 @@ export function PackagesAdmin() {
           ? (r.discountPrice / 100).toFixed(2).replace(/\.00$/, "")
           : "",
       badge: r.badge || "",
+      buttonText: r.buttonText || "Select package",
+      isDefault: Boolean(r.isDefault),
       active: r.active !== false,
       sortOrder: String(r.sortOrder ?? ""),
       features:
@@ -133,6 +143,8 @@ export function PackagesAdmin() {
       discountPrice: discountPaise,
       features: values.features.map((f) => f.value.trim()).filter(Boolean),
       badge: values.badge?.trim() || "",
+      buttonText: values.buttonText?.trim() || "Select package",
+      isDefault: values.isDefault,
       active: values.active,
       sortOrder: values.sortOrder?.trim()
         ? Math.round(Number(values.sortOrder))
@@ -247,11 +259,29 @@ export function PackagesAdmin() {
               {...register("sortOrder")}
             />
           </div>
-          <div className="flex items-center gap-3 md:col-span-2">
-            <input type="checkbox" id="pkg-active" {...register("active")} />
-            <label htmlFor="pkg-active" className="text-sm text-brand-dark">
-              Active (visible on site)
+          <div>
+            <label className="text-sm font-medium text-brand-dark">
+              Button text
             </label>
+            <input
+              className="mt-1 w-full rounded-2xl border border-brand-gold/20 bg-white px-4 py-2.5 text-sm outline-none ring-brand-gold/30 focus:ring-2"
+              placeholder="Select package"
+              {...register("buttonText")}
+            />
+          </div>
+          <div className="flex flex-col gap-3 md:col-span-2">
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="pkg-active" {...register("active")} />
+              <label htmlFor="pkg-active" className="text-sm text-brand-dark">
+                Active (visible on site)
+              </label>
+            </div>
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="pkg-default" {...register("isDefault")} />
+              <label htmlFor="pkg-default" className="text-sm text-brand-dark">
+                Default selected package on booking form
+              </label>
+            </div>
           </div>
         </div>
 

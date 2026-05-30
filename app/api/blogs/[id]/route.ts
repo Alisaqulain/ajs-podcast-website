@@ -2,8 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { getDb } from "@/lib/mongodb";
 import { requireAdminSession } from "@/lib/api-auth";
-import { ensureUniqueBlogSlug } from "@/lib/blog-slug";
-import type { BlogInput } from "@/models/blog";
+import { ensureUniqueSlug } from "@/lib/content-slug";
+import {
+  normalizeContentFields,
+  serializeContentRow,
+  type ContentDocInput,
+} from "@/lib/cms-content";
+import type { ContentStatus } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +23,7 @@ export async function GET(_req: NextRequest, context: Ctx) {
   if (!db) return NextResponse.json(null, { status: 404 });
   const doc = await db.collection("blogs").findOne({ _id: new ObjectId(id) });
   if (!doc) return NextResponse.json(null, { status: 404 });
-  return NextResponse.json({ ...doc, _id: doc._id.toString() });
+  return NextResponse.json(serializeContentRow(doc));
 }
 
 export async function PATCH(req: NextRequest, context: Ctx) {
@@ -41,39 +46,56 @@ export async function PATCH(req: NextRequest, context: Ctx) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const body = (await req.json()) as Partial<BlogInput> & { slug?: string };
-  const update: Record<string, unknown> = {};
+  const body = (await req.json()) as Partial<ContentDocInput>;
+  const update: Record<string, unknown> = { updatedAt: new Date() };
 
-  if (body.title !== undefined) update.title = String(body.title).trim();
-  if (body.content !== undefined) update.content = body.content;
-  if (body.coverImage !== undefined) {
-    update.coverImage = String(body.coverImage).trim();
-  }
-  if (body.seoTitle !== undefined) {
-    update.seoTitle = String(body.seoTitle).trim();
-  }
-  if (body.seoDescription !== undefined) {
-    update.seoDescription = String(body.seoDescription).trim();
+  if (
+    body.title !== undefined ||
+    body.content !== undefined ||
+    body.shortDescription !== undefined ||
+    body.featuredImage !== undefined ||
+    body.coverImage !== undefined ||
+    body.videoUrl !== undefined ||
+    body.status !== undefined ||
+    body.seoTitle !== undefined ||
+    body.seoDescription !== undefined
+  ) {
+    const merged = normalizeContentFields({
+      title: body.title ?? String(existing.title),
+      shortDescription:
+        body.shortDescription ?? String(existing.shortDescription ?? ""),
+      content: body.content ?? String(existing.content),
+      featuredImage:
+        body.featuredImage ??
+        body.coverImage ??
+        String(existing.featuredImage ?? existing.coverImage ?? ""),
+      videoUrl: body.videoUrl ?? String(existing.videoUrl ?? ""),
+      status: (body.status ?? existing.status ?? "draft") as ContentStatus,
+      seoTitle: body.seoTitle ?? String(existing.seoTitle ?? existing.title),
+      seoDescription:
+        body.seoDescription ?? String(existing.seoDescription ?? ""),
+    });
+    Object.assign(update, merged);
   }
 
   if (body.slug !== undefined || body.title !== undefined) {
-    const title = (update.title as string) || (existing.title as string);
-    const slug = await ensureUniqueBlogSlug(
+    const title = (update.title as string) || String(existing.title);
+    update.slug = await ensureUniqueSlug(
       db,
+      "blogs",
       title,
       body.slug !== undefined ? String(body.slug) : undefined,
       oid
     );
-    update.slug = slug;
   }
 
-  if (Object.keys(update).length === 0) {
+  if (Object.keys(update).length === 1) {
     return NextResponse.json({ error: "No fields to update" }, { status: 400 });
   }
 
   await db.collection("blogs").updateOne({ _id: oid }, { $set: update });
   const doc = await db.collection("blogs").findOne({ _id: oid });
-  return NextResponse.json({ ...doc, _id: doc?._id?.toString() });
+  return NextResponse.json(serializeContentRow(doc!));
 }
 
 export async function DELETE(_req: NextRequest, context: Ctx) {

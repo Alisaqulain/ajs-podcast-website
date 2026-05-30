@@ -4,6 +4,7 @@ import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
 import { listBlogs } from "@/lib/data";
 import { BlogCard } from "@/components/blog/blog-card";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -25,9 +26,16 @@ export default async function BlogPage() {
     id: b.id,
     slug: String(b.slug),
     title: String(b.title),
-    coverImage: b.coverImage ? String(b.coverImage) : undefined,
-    seoDescription: b.seoDescription ? String(b.seoDescription) : undefined,
+    coverImage:
+      b.featuredImage || b.coverImage
+        ? String(b.featuredImage || b.coverImage)
+        : undefined,
+    seoDescription:
+      b.shortDescription || b.seoDescription
+        ? String(b.shortDescription || b.seoDescription)
+        : undefined,
     createdAt: b.createdAt,
+    hrefPrefix: "/blog" as const,
   }));
 
   return (
@@ -38,7 +46,7 @@ export default async function BlogPage() {
         subtitle="Long-form notes on self-image, voice, and the psychology of being seen."
         align="left"
       >
-        <CTAButton intent="book">Book Podcast Now</CTAButton>
+        <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
       </PageHero>
 
       <Container className="mt-14">

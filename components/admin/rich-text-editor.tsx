@@ -6,16 +6,24 @@ import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
+import TextAlign from "@tiptap/extension-text-align";
+import Youtube from "@tiptap/extension-youtube";
 import {
   Bold,
   Italic,
   List,
   ListOrdered,
+  Heading1,
   Heading2,
   Heading3,
   Link as LinkIcon,
   ImageIcon,
   Quote,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  Minus,
+  Video,
 } from "lucide-react";
 
 type Props = {
@@ -27,12 +35,15 @@ export function RichTextEditor({ value, onChange }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: { levels: [2, 3, 4] },
+        heading: { levels: [1, 2, 3] },
       }),
       Link.configure({ openOnClick: false, autolink: true }),
       Image.configure({ inline: false }),
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
+      Youtube.configure({ width: 640, height: 360 }),
       Placeholder.configure({
-        placeholder: "Headings, paragraphs, quotes, images, links…",
+        placeholder:
+          "Write with headings, lists, links, images, videos, quotes, and alignment…",
       }),
     ],
     content: value || "",
@@ -40,7 +51,7 @@ export function RichTextEditor({ value, onChange }: Props) {
     editorProps: {
       attributes: {
         class:
-          "min-h-[260px] max-w-none rounded-xl border border-brand-gold/15 bg-white/90 px-4 py-3 text-sm text-brand-dark outline-none focus:ring-2 focus:ring-brand-gold/30 prose-blog",
+          "min-h-[280px] max-w-none rounded-xl border border-brand-gold/15 bg-white/90 px-4 py-3 text-sm text-brand-dark outline-none focus:ring-2 focus:ring-brand-gold/30 prose-blog",
       },
     },
     onUpdate: ({ editor: ed }) => {
@@ -59,7 +70,7 @@ export function RichTextEditor({ value, onChange }: Props) {
 
   if (!editor) {
     return (
-      <div className="min-h-[260px] animate-pulse rounded-xl bg-brand-cream/80" />
+      <div className="min-h-[280px] animate-pulse rounded-xl bg-brand-cream/80" />
     );
   }
 
@@ -73,6 +84,52 @@ export function RichTextEditor({ value, onChange }: Props) {
       return;
     }
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  }
+
+  async function uploadImage() {
+    if (!editor) return;
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/jpeg,image/png,image/webp,image/jpg";
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: fd,
+        credentials: "same-origin",
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (data.url) {
+        editor.chain().focus().setImage({ src: data.url }).run();
+      } else {
+        window.alert(data.error || "Image upload failed");
+      }
+    };
+    input.click();
+  }
+
+  function embedVideo() {
+    if (!editor) return;
+    const url = window.prompt(
+      "YouTube URL or direct video URL (mp4/webm)",
+      "https://"
+    );
+    if (!url?.trim()) return;
+    const u = url.trim();
+    if (u.includes("youtube.com") || u.includes("youtu.be")) {
+      editor.chain().focus().setYoutubeVideo({ src: u }).run();
+    } else {
+      editor
+        .chain()
+        .focus()
+        .insertContent(
+          `<video src="${u}" controls playsinline class="max-w-full rounded-xl"></video>`
+        )
+        .run();
+    }
   }
 
   const btn =
@@ -96,6 +153,16 @@ export function RichTextEditor({ value, onChange }: Props) {
           aria-label="Italic"
         >
           <Italic className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          aria-label="Heading 1"
+        >
+          <Heading1 className="h-4 w-4" />
         </button>
         <button
           type="button"
@@ -129,29 +196,28 @@ export function RichTextEditor({ value, onChange }: Props) {
           type="button"
           className={btn}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          aria-label="Ordered list"
+          aria-label="Numbered list"
         >
           <ListOrdered className="h-4 w-4" />
         </button>
-        <button
-          type="button"
-          className={btn}
-          onClick={setLink}
-          aria-label="Link"
-        >
+        <button type="button" className={btn} onClick={setLink} aria-label="Link">
           <LinkIcon className="h-4 w-4" />
         </button>
         <button
           type="button"
           className={btn}
-          onClick={() => {
-            const url = window.prompt("Image URL (https://)", "https://");
-            if (!url?.trim()) return;
-            editor.chain().focus().setImage({ src: url.trim() }).run();
-          }}
+          onClick={() => void uploadImage()}
           aria-label="Image"
         >
           <ImageIcon className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={embedVideo}
+          aria-label="Video"
+        >
+          <Video className="h-4 w-4" />
         </button>
         <button
           type="button"
@@ -160,6 +226,38 @@ export function RichTextEditor({ value, onChange }: Props) {
           aria-label="Quote"
         >
           <Quote className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          aria-label="Align left"
+        >
+          <AlignLeft className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          aria-label="Align center"
+        >
+          <AlignCenter className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          aria-label="Align right"
+        >
+          <AlignRight className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+          aria-label="Spacing rule"
+        >
+          <Minus className="h-4 w-4" />
         </button>
       </div>
       <EditorContent editor={editor} />

@@ -39,9 +39,9 @@ export async function LatestConversations(props?: {
         <div className="readable-content-panel mb-8 w-full rounded-[1.25rem] px-4 py-5 sm:mb-12 sm:rounded-[1.5rem] sm:px-7 sm:py-7 md:mx-auto md:max-w-3xl">
           <SectionHeading
             id="latest-conversations-heading"
-            eyebrow="Now streaming"
-            title="Latest podcasts"
-            subtitle="A cinematic shelf of fresh uploads—hover any card for a 30-second muted preview, or jump straight into the full episode."
+            eyebrow="Podcast"
+            title="Watch the latest conversations"
+            subtitle="Episodes from the BHAW Namrata channel—preview clips or watch the full conversation on YouTube."
             className="mb-0"
           />
         </div>

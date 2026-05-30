@@ -5,12 +5,15 @@ export interface CoachingPackage {
   _id?: ObjectId;
   title: string;
   description: string;
-  /** Price in paise */
+  /** Original price in paise */
   price: number;
   /** Discounted price in paise; omit or null for no discount */
   discountPrice?: number | null;
   features: string[];
   badge?: string;
+  buttonText: string;
+  /** Pre-selected on booking UI */
+  isDefault: boolean;
   active: boolean;
   sortOrder: number;
   createdAt: Date;

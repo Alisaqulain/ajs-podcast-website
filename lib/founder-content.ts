@@ -1,4 +1,4 @@
-export const FOUNDER_TAGLINE = "Where Expression is Power";
+export const FOUNDER_TAGLINE = "Podcast | Presence | Personal Branding";
 
 export const FOUNDER_QUALIFICATIONS = [
   "MBA in Finance",
@@ -17,7 +17,7 @@ export const FOUNDER_FEARS = [
 ] as const;
 
 export const FOUNDER_MISSION =
-  "To help entrepreneurs, professionals, and women leaders build visibility, confidence, and credibility through authentic expression, strategic personal branding, meaningful content, and impactful storytelling.";
+  "To help people stop hiding and start being seen with confidence, clarity, and authority.";
 
 export const FOUNDER_VISION =
   "To empower 100 million business leaders, entrepreneurs, and individuals to transform their expression into influence, their visibility into impact, and their presence into powerful opportunities.";

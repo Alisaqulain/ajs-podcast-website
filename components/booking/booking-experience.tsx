@@ -1,21 +1,24 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  CalendarDays,
-  ChevronLeft,
-  ChevronRight,
-  Check,
-  Loader2,
-  Sparkles,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { Check, Loader2, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SITE } from "@/lib/site";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { Container } from "@/components/ui/container";
 import { PaymentTrustBadges } from "@/components/payment/payment-trust-badges";
-import { BOOKING_WEEKDAYS } from "@/lib/booking-rules";
+import { BookingDateTimePicker } from "@/components/booking/booking-datetime-picker";
+import { BookingDetailsFields } from "@/components/booking/booking-details-fields";
+import {
+  createBookingRequest,
+  formatInrPaise,
+  payablePaise,
+  startRazorpayCheckout,
+  validateBookingForm,
+  type BookingFormValues,
+} from "@/lib/booking-client";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export type PackagePublic = {
   _id: string;
@@ -25,65 +28,30 @@ export type PackagePublic = {
   discountPrice?: number | null;
   features: string[];
   badge?: string;
+  buttonText?: string;
+  isDefault?: boolean;
   active?: boolean;
 };
 
-function loadRazorpayScript(): Promise<void> {
-  if (typeof window === "undefined") return Promise.resolve();
-  if (window.Razorpay) return Promise.resolve();
-  return new Promise((resolve, reject) => {
-    const existing = document.querySelector(
-      'script[src="https://checkout.razorpay.com/v1/checkout.js"]'
-    );
-    if (existing) {
-      existing.addEventListener("load", () => resolve());
-      existing.addEventListener("error", () =>
-        reject(new Error("Razorpay script failed"))
-      );
-      return;
-    }
-    const s = document.createElement("script");
-    s.src = "https://checkout.razorpay.com/v1/checkout.js";
-    s.async = true;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error("Razorpay script failed"));
-    document.body.appendChild(s);
-  });
-}
+const emptyForm: BookingFormValues = {
+  name: "",
+  email: "",
+  phone: "",
+  businessName: "",
+  topic: "",
+  dateStr: "",
+  time: "",
+};
 
-function formatInrPaise(paise: number) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(paise / 100);
-}
-
-function formatSlotLabel(t: string) {
-  const [h, m] = t.split(":").map(Number);
-  const d = new Date(2000, 0, 1, h, m);
-  return d.toLocaleTimeString("en-IN", {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-}
-
-function payablePaise(pkg: PackagePublic) {
-  const base = Math.round(pkg.price);
-  const d =
-    pkg.discountPrice != null && pkg.discountPrice > 0
-      ? Math.round(pkg.discountPrice)
-      : null;
-  if (d != null && d < base) return d;
-  return base;
-}
-
-function pad2(n: number) {
-  return String(n).padStart(2, "0");
-}
-
-function ymd(d: Date) {
-  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+function pickInitialPackageId(
+  list: PackagePublic[],
+  queryPackageId: string | null
+) {
+  if (queryPackageId && list.some((p) => p._id === queryPackageId)) {
+    return queryPackageId;
+  }
+  const def = list.find((p) => p.isDefault);
+  return def?._id ?? list[0]?._id ?? null;
 }
 
 export function BookingExperience({
@@ -91,77 +59,39 @@ export function BookingExperience({
 }: {
   initialPackages: PackagePublic[];
 }) {
-  const [packages, setPackages] = useState<PackagePublic[]>(initialPackages);
-  const [selectedId, setSelectedId] = useState<string | null>(
-    initialPackages[0]?._id ?? null
-  );
+  const searchParams = useSearchParams();
+  const queryPackageId = searchParams.get("package");
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [businessName, setBusinessName] = useState("");
-  const [topic, setTopic] = useState("");
-  const [dateStr, setDateStr] = useState("");
-  const [time, setTime] = useState<string>("");
-  const [slots, setSlots] = useState<string[]>([]);
-  const [slotLoading, setSlotLoading] = useState(false);
+  const [packages, setPackages] = useState<PackagePublic[]>(initialPackages);
+  const [selectedId, setSelectedId] = useState<string | null>(() =>
+    pickInitialPackageId(initialPackages, queryPackageId)
+  );
+  const [values, setValues] = useState<BookingFormValues>(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{
     type: "ok" | "err";
     text: string;
   } | null>(null);
 
-  const [calMonth, setCalMonth] = useState(() => {
-    const n = new Date();
-    return new Date(n.getFullYear(), n.getMonth(), 1);
-  });
-
   useEffect(() => {
     if (initialPackages.length) return;
     (async () => {
       const res = await fetch("/api/packages");
       const data = (await res.json()) as PackagePublic[];
-      setPackages(Array.isArray(data) ? data : []);
-      if (data?.[0]?._id) setSelectedId(data[0]._id);
+      const list = Array.isArray(data) ? data : [];
+      setPackages(list);
+      setSelectedId((prev) =>
+        prev && list.some((p) => p._id === prev)
+          ? prev
+          : pickInitialPackageId(list, queryPackageId)
+      );
     })();
-  }, [initialPackages.length]);
+  }, [initialPackages.length, queryPackageId]);
 
   const selected = useMemo(
     () => packages.find((p) => p._id === selectedId) ?? null,
     [packages, selectedId]
   );
-
-  useEffect(() => {
-    if (!dateStr) {
-      setSlots([]);
-      setTime("");
-      return;
-    }
-    let cancelled = false;
-    (async () => {
-      setSlotLoading(true);
-      try {
-        const res = await fetch(
-          `/api/bookings/availability?date=${encodeURIComponent(dateStr)}`
-        );
-        const data = (await res.json()) as { slots?: string[]; error?: string };
-        if (!cancelled) {
-          setSlots(Array.isArray(data.slots) ? data.slots : []);
-          setTime("");
-          if (data.error && !data.slots?.length) {
-            setMessage({ type: "err", text: data.error });
-          }
-        }
-      } finally {
-        if (!cancelled) setSlotLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [dateStr]);
-
-  const logoUrl = `${SITE.url.replace(/\/$/, "")}${SITE.logoSrc}`;
 
   const scrollToForm = useCallback(() => {
     document
@@ -178,174 +108,40 @@ export function BookingExperience({
     [scrollToForm]
   );
 
-  const calendarCells = useMemo(() => {
-    const y = calMonth.getFullYear();
-    const m = calMonth.getMonth();
-    const firstDow = new Date(y, m, 1).getDay();
-    const daysInMonth = new Date(y, m + 1, 0).getDate();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const cells: { day: number | null; date: Date | null }[] = [];
-    for (let i = 0; i < firstDow; i++) cells.push({ day: null, date: null });
-    for (let d = 1; d <= daysInMonth; d++) {
-      cells.push({ day: d, date: new Date(y, m, d) });
-    }
-    return { cells, today };
-  }, [calMonth]);
-
-  function isSelectable(d: Date) {
-    const day = d.getDay();
-    if (!BOOKING_WEEKDAYS.includes(day as 3 | 5)) return false;
-    const startToday = new Date();
-    startToday.setHours(0, 0, 0, 0);
-    if (d < startToday) return false;
-    return true;
-  }
-
-  async function startPayment(bid: string) {
-    await loadRazorpayScript();
-    if (!window.Razorpay) throw new Error("Checkout could not load.");
-
-    const orderRes = await fetch("/api/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ bookingId: bid }),
-    });
-    const orderJson = await orderRes.json().catch(() => ({}));
-    if (!orderRes.ok) {
-      throw new Error(
-        typeof orderJson.error === "string"
-          ? orderJson.error
-          : "Could not start checkout."
-      );
-    }
-
-    const {
-      orderId,
-      amount,
-      currency,
-      keyId,
-      planTitle,
-    }: {
-      orderId: string;
-      amount: number;
-      currency: string;
-      keyId: string;
-      planTitle?: string;
-    } = orderJson;
-
-    return new Promise<void>((resolve, reject) => {
-      const rzp = new window.Razorpay!({
-        key: keyId,
-        amount,
-        currency: currency || "INR",
-        name: "BHAW Namrata",
-        description: planTitle
-          ? `${planTitle} — Coaching / Podcast Service`
-          : "Coaching / Podcast Service",
-        image: logoUrl,
-        order_id: orderId,
-        prefill: {
-          name: name.trim(),
-          email: email.trim(),
-          contact: phone.replace(/\D/g, "").slice(0, 15) || undefined,
-        },
-        theme: { color: "#A67C2E" },
-        handler: async (response) => {
-          try {
-            const verifyRes = await fetch("/api/verify-payment", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-                bookingId: bid,
-              }),
-            });
-            const verifyJson = await verifyRes.json().catch(() => ({}));
-            if (!verifyRes.ok) {
-              throw new Error(
-                typeof verifyJson.error === "string"
-                  ? verifyJson.error
-                  : "Verification failed."
-              );
-            }
-            setMessage({
-              type: "ok",
-              text: "Booking confirmed. Namrata will reach out with session details.",
-            });
-            resolve();
-          } catch (e) {
-            reject(e);
-          }
-        },
-        modal: {
-          ondismiss: () => resolve(),
-        },
-      });
-      rzp.open();
-    });
+  function patch(patch: Partial<BookingFormValues>) {
+    setValues((v) => ({ ...v, ...patch }));
   }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setMessage(null);
-    if (!selectedId) {
-      setMessage({ type: "err", text: "Select a package first." });
-      return;
-    }
-    if (!name.trim() || !email.trim() || !phone.trim()) {
-      setMessage({
-        type: "err",
-        text: "Name, email, and phone are required.",
-      });
-      return;
-    }
-    if (!businessName.trim() || !topic.trim()) {
-      setMessage({
-        type: "err",
-        text: "Business name and session topic are required.",
-      });
-      return;
-    }
-    if (!dateStr || !time) {
-      setMessage({
-        type: "err",
-        text: "Choose a valid date (Wed/Fri) and time slot.",
-      });
+    const err = validateBookingForm(values, selectedId);
+    if (err) {
+      setMessage({ type: "err", text: err });
       return;
     }
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          packageId: selectedId,
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          businessName: businessName.trim(),
-          topic: topic.trim(),
-          date: dateStr,
-          time,
-        }),
+      const { bookingId } = await createBookingRequest(selectedId!, values);
+      await startRazorpayCheckout({
+        bookingId,
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        onSuccess: () => {
+          setMessage({
+            type: "ok",
+            text: "Booking confirmed. Namrata will reach out with session details.",
+          });
+        },
+        onError: (text) => setMessage({ type: "err", text }),
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        throw new Error(
-          typeof data.error === "string" ? data.error : "Could not create booking."
-        );
-      }
-      const bid = data.bookingId as string;
-      await startPayment(bid);
-    } catch (err) {
+    } catch (e) {
       setMessage({
         type: "err",
         text:
-          err instanceof Error ? err.message : "Something went wrong. Try again.",
+          e instanceof Error ? e.message : "Something went wrong. Try again.",
       });
     } finally {
       setSubmitting(false);
@@ -481,196 +277,17 @@ export function BookingExperience({
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Field label="Full name" htmlFor="bk-name">
-                  <input
-                    id="bk-name"
-                    autoComplete="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="field-input"
-                    required
-                  />
-                </Field>
-                <Field label="Email" htmlFor="bk-email">
-                  <input
-                    id="bk-email"
-                    type="email"
-                    autoComplete="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="field-input"
-                    required
-                  />
-                </Field>
-                <Field label="Phone / WhatsApp" htmlFor="bk-phone">
-                  <input
-                    id="bk-phone"
-                    type="tel"
-                    autoComplete="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="field-input"
-                    required
-                  />
-                </Field>
-                <Field label="Business / brand name" htmlFor="bk-biz">
-                  <input
-                    id="bk-biz"
-                    value={businessName}
-                    onChange={(e) => setBusinessName(e.target.value)}
-                    className="field-input"
-                    required
-                  />
-                </Field>
-              </div>
-              <Field label="What would you like to focus on?" htmlFor="bk-topic">
-                <textarea
-                  id="bk-topic"
-                  rows={4}
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
-                  className="field-input resize-y"
-                  required
-                />
-              </Field>
+              <BookingDetailsFields
+                values={values}
+                onChange={patch}
+              />
 
-              <div className="grid gap-8 lg:grid-cols-2">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-gold-deep">
-                    Date
-                  </p>
-                  <div className="mt-3 rounded-3xl border border-luxury-border bg-luxury-bg p-4">
-                    <div className="mb-3 flex items-center justify-between">
-                      <button
-                        type="button"
-                        className="rounded-xl p-2 text-luxury-heading hover:bg-muted"
-                        onClick={() =>
-                          setCalMonth(
-                            new Date(
-                              calMonth.getFullYear(),
-                              calMonth.getMonth() - 1,
-                              1
-                            )
-                          )
-                        }
-                        aria-label="Previous month"
-                      >
-                        <ChevronLeft className="h-5 w-5" />
-                      </button>
-                      <span className="text-sm font-semibold text-luxury-heading">
-                        {calMonth.toLocaleString("en-IN", {
-                          month: "long",
-                          year: "numeric",
-                        })}
-                      </span>
-                      <button
-                        type="button"
-                        className="rounded-xl p-2 text-luxury-heading hover:bg-muted"
-                        onClick={() =>
-                          setCalMonth(
-                            new Date(
-                              calMonth.getFullYear(),
-                              calMonth.getMonth() + 1,
-                              1
-                            )
-                          )
-                        }
-                        aria-label="Next month"
-                      >
-                        <ChevronRight className="h-5 w-5" />
-                      </button>
-                    </div>
-                    <div className="grid grid-cols-7 gap-1 text-center text-[11px] font-medium text-luxury-muted">
-                      {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
-                        <span key={d}>{d}</span>
-                      ))}
-                    </div>
-                    <div className="mt-2 grid grid-cols-7 gap-1">
-                      {calendarCells.cells.map((c, idx) => {
-                        if (!c.date || c.day == null) {
-                          return <span key={`e-${idx}`} className="h-9" />;
-                        }
-                        const ok = isSelectable(c.date);
-                        const isSel = dateStr === ymd(c.date);
-                        return (
-                          <button
-                            key={idx}
-                            type="button"
-                            disabled={!ok}
-                            onClick={() => {
-                              if (ok && c.date) setDateStr(ymd(c.date));
-                            }}
-                            className={cn(
-                              "flex h-9 items-center justify-center rounded-xl text-sm transition",
-                              !ok && "cursor-not-allowed text-luxury-border",
-                              ok &&
-                                !isSel &&
-                                "text-luxury-body hover:bg-brand-gold/15 hover:text-luxury-heading",
-                              isSel &&
-                                "bg-gold-gradient font-semibold text-[#1A1A1A] shadow-md"
-                            )}
-                          >
-                            {c.day}
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <p className="mt-3 flex items-center gap-2 text-xs text-luxury-muted">
-                      <CalendarDays className="h-3.5 w-3.5" />
-                      Wednesdays &amp; Fridays only · past dates disabled
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-gold-deep">
-                    Time (IST)
-                  </p>
-                  <div className="mt-3 min-h-[200px] rounded-3xl border border-luxury-border bg-luxury-bg p-4">
-                    <AnimatePresence mode="wait">
-                      {!dateStr ? (
-                        <motion.p
-                          key="empty"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="py-12 text-center text-sm text-luxury-muted"
-                        >
-                          Pick a date to see open slots.
-                        </motion.p>
-                      ) : slotLoading ? (
-                        <div className="flex justify-center py-12">
-                          <Loader2 className="h-8 w-8 animate-spin text-brand-gold-deep" />
-                        </div>
-                      ) : slots.length === 0 ? (
-                        <p className="py-12 text-center text-sm text-luxury-muted">
-                          No slots left on this day. Try another Wednesday or
-                          Friday.
-                        </p>
-                      ) : (
-                        <div className="grid gap-2 sm:grid-cols-2">
-                          {slots.map((s) => (
-                            <button
-                              key={s}
-                              type="button"
-                              onClick={() => setTime(s)}
-                              className={cn(
-                                "rounded-2xl border px-3 py-3 text-sm font-medium transition",
-                                time === s
-                                  ? "border-brand-gold/50 bg-brand-gold/15 text-luxury-heading"
-                                  : "border-luxury-border bg-surface text-luxury-body hover:border-brand-gold/40 hover:bg-muted"
-                              )}
-                            >
-                              {formatSlotLabel(s)}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
+              <BookingDateTimePicker
+                dateStr={values.dateStr}
+                time={values.time}
+                onDateChange={(dateStr) => patch({ dateStr })}
+                onTimeChange={(time) => patch({ time })}
+              />
 
               <button
                 type="submit"
@@ -683,7 +300,7 @@ export function BookingExperience({
                     Processing…
                   </>
                 ) : (
-                  "Continue to secure payment"
+                  BOOK_NOW_LABEL
                 )}
               </button>
 
@@ -740,28 +357,6 @@ export function BookingExperience({
           </div>
         </Container>
       </section>
-    </div>
-  );
-}
-
-function Field({
-  label,
-  htmlFor,
-  children,
-}: {
-  label: string;
-  htmlFor: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="sm:col-span-1">
-      <label
-        className="text-xs font-semibold uppercase tracking-wide text-luxury-heading"
-        htmlFor={htmlFor}
-      >
-        {label}
-      </label>
-      <div className="mt-1.5">{children}</div>
     </div>
   );
 }

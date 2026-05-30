@@ -1,60 +1,45 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
+import {
+  createBookingRequest,
+  startRazorpayCheckout,
+  validateBookingForm,
+  type BookingFormValues,
+} from "@/lib/booking-client";
+import { BookingDateTimePicker } from "@/components/booking/booking-datetime-picker";
+import { BookingDetailsFields } from "@/components/booking/booking-details-fields";
+import { BookingPackageSelect } from "@/components/booking/booking-package-select";
+import type { PackagePublic } from "@/components/booking/booking-experience";
 import { useLeadCapture } from "./lead-capture-context";
 
-const schema = z.object({
-  name: z.string().min(1, "Name is required").max(200),
-  phone: z
-    .string()
-    .min(8, "Enter a valid phone number")
-    .max(20, "Phone number is too long"),
-  email: z.string().email("Enter a valid email"),
-  message: z.string().min(1, "Tell us about your podcast requirement").max(5000),
-  preferredDateTime: z.string().min(1, "Preferred date/time is required").max(200),
-});
+const emptyForm: BookingFormValues = {
+  name: "",
+  email: "",
+  phone: "",
+  businessName: "",
+  topic: "",
+  dateStr: "",
+  time: "",
+};
 
-type FormValues = z.infer<typeof schema>;
-
-const intentCopy = {
-  book: {
-    title: "Book your podcast slot",
-    subtitle: "Share your details and our team will confirm your session.",
-  },
-  enquire: {
-    title: "Enquire now",
-    subtitle: "Ask anything about packages, production, or guest slots.",
-  },
-  schedule: {
-    title: "Schedule your podcast",
-    subtitle: "Pick your preferred timing and we will align the studio calendar.",
-  },
-  "get-started": {
-    title: "Get started",
-    subtitle: "Take the first step toward a premium podcast feature with BN.",
-  },
-} as const;
-
-/** Premium lead capture popup — opened via `CTAButton`. */
+/** Booking popup — same fields & calendar as /book */
 export function LeadPopupForm() {
-  const { isOpen, close, intent } = useLeadCapture();
+  const { isOpen, close } = useLeadCapture();
   const [mounted, setMounted] = useState(false);
-  const [status, setStatus] = useState<"idle" | "ok" | "err">("idle");
-  const copy = intentCopy[intent];
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<FormValues>({ resolver: zodResolver(schema) });
+  const [packages, setPackages] = useState<PackagePublic[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [values, setValues] = useState<BookingFormValues>(emptyForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState<{
+    type: "ok" | "err";
+    text: string;
+  } | null>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -74,30 +59,58 @@ export function LeadPopupForm() {
 
   useEffect(() => {
     if (!isOpen) {
-      setStatus("idle");
-      reset();
+      setValues(emptyForm);
+      setMessage(null);
+      setSubmitting(false);
+      return;
     }
-  }, [isOpen, reset]);
+    (async () => {
+      const res = await fetch("/api/packages");
+      const data = (await res.json()) as PackagePublic[];
+      const list = Array.isArray(data) ? data : [];
+      setPackages(list);
+      setSelectedId(list[0]?._id ?? null);
+    })();
+  }, [isOpen]);
 
-  async function onSubmit(values: FormValues) {
-    setStatus("idle");
-    const res = await fetch("/api/contacts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+  function patch(patch: Partial<BookingFormValues>) {
+    setValues((v) => ({ ...v, ...patch }));
+  }
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setMessage(null);
+    const err = validateBookingForm(values, selectedId);
+    if (err) {
+      setMessage({ type: "err", text: err });
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const { bookingId } = await createBookingRequest(selectedId!, values);
+      await startRazorpayCheckout({
+        bookingId,
         name: values.name,
         email: values.email,
         phone: values.phone,
-        message: values.message,
-        preferredDateTime: values.preferredDateTime,
-        source: `lead-popup:${intent}`,
-      }),
-    });
-    if (res.ok) {
-      setStatus("ok");
-      reset();
-    } else {
-      setStatus("err");
+        onSuccess: () => {
+          setMessage({
+            type: "ok",
+            text: "Booking confirmed. Namrata will reach out with session details.",
+          });
+          setValues(emptyForm);
+        },
+        onError: (text) => setMessage({ type: "err", text }),
+      });
+    } catch (e) {
+      setMessage({
+        type: "err",
+        text:
+          e instanceof Error ? e.message : "Something went wrong. Try again.",
+      });
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -127,7 +140,7 @@ export function LeadPopupForm() {
             exit={{ opacity: 0, y: 24 }}
             transition={{ type: "spring", stiffness: 380, damping: 32 }}
             className={cn(
-              "relative z-10 flex max-h-[min(92dvh,720px)] w-full max-w-lg flex-col overflow-hidden",
+              "relative z-10 flex max-h-[min(94dvh,900px)] w-full max-w-3xl flex-col overflow-hidden",
               "rounded-t-3xl border border-luxury-border bg-[#fffdf9] shadow-soft-xl sm:rounded-3xl"
             )}
           >
@@ -147,97 +160,65 @@ export function LeadPopupForm() {
                 id="lead-modal-title"
                 className="mt-2 pr-10 font-display text-2xl font-semibold text-luxury-heading"
               >
-                {copy.title}
+                {BOOK_NOW_LABEL}
               </h2>
-              <p className="mt-2 text-sm text-luxury-body">{copy.subtitle}</p>
+              <p className="mt-2 text-sm text-luxury-body">
+                Same booking flow as our book page—choose a package, Wed/Fri slot,
+                and complete secure payment.
+              </p>
             </div>
 
             <form
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={onSubmit}
               className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-y-contain px-6 py-5 sm:px-8 sm:py-6"
             >
-              <div className="space-y-4">
-                <Field label="Name" id="lead-name" error={errors.name?.message}>
-                  <input
-                    id="lead-name"
-                    className="field-input"
-                    autoComplete="name"
-                    {...register("name")}
-                  />
-                </Field>
-                <Field
-                  label="Phone number"
-                  id="lead-phone"
-                  error={errors.phone?.message}
-                >
-                  <input
-                    id="lead-phone"
-                    type="tel"
-                    className="field-input"
-                    autoComplete="tel"
-                    placeholder="+91 …"
-                    {...register("phone")}
-                  />
-                </Field>
-                <Field label="Email" id="lead-email" error={errors.email?.message}>
-                  <input
-                    id="lead-email"
-                    type="email"
-                    className="field-input"
-                    autoComplete="email"
-                    {...register("email")}
-                  />
-                </Field>
-                <Field
-                  label="Podcast requirement / message"
-                  id="lead-message"
-                  error={errors.message?.message}
-                >
-                  <textarea
-                    id="lead-message"
-                    rows={3}
-                    className="field-input resize-y"
-                    placeholder="Topic, audience, goals…"
-                    {...register("message")}
-                  />
-                </Field>
-                <Field
-                  label="Preferred Date"
-                  id="lead-datetime"
-                  error={errors.preferredDateTime?.message}
-                >
-                  <input
-                    id="lead-datetime"
-                    type="date"
-                    className="field-input"
-                    {...register("preferredDateTime")}
-                  />
-                </Field>
+              <div className="space-y-6">
+                <BookingPackageSelect
+                  idPrefix="lead"
+                  packages={packages}
+                  selectedId={selectedId}
+                  onSelect={setSelectedId}
+                />
+                <BookingDetailsFields
+                  idPrefix="lead"
+                  values={values}
+                  onChange={patch}
+                  labelClassName="text-sm font-medium normal-case tracking-normal"
+                />
+                <BookingDateTimePicker
+                  idPrefix="lead"
+                  dateStr={values.dateStr}
+                  time={values.time}
+                  onDateChange={(dateStr) => patch({ dateStr })}
+                  onTimeChange={(time) => patch({ time })}
+                  compact
+                />
               </div>
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={submitting || !selectedId}
                 className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-gold-gradient py-3.5 text-sm font-semibold text-[var(--gold-foreground)] shadow-gold-glow transition hover:brightness-105 disabled:opacity-60"
               >
-                {isSubmitting ? (
+                {submitting ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Submitting…
+                    Processing…
                   </>
                 ) : (
-                  "Submit enquiry"
+                  BOOK_NOW_LABEL
                 )}
               </button>
 
-              {status === "ok" ? (
-                <p className="mt-4 text-center text-sm font-medium text-emerald-700">
-                  Thank you! We received your details and will follow up shortly.
-                </p>
-              ) : null}
-              {status === "err" ? (
-                <p className="mt-4 text-center text-sm font-medium text-red-600">
-                  Something went wrong. Please try again or message us on WhatsApp.
+              {message ? (
+                <p
+                  className={cn(
+                    "mt-4 text-center text-sm font-medium",
+                    message.type === "ok" ? "text-emerald-700" : "text-red-600"
+                  )}
+                  role="status"
+                >
+                  {message.text}
                 </p>
               ) : null}
             </form>
@@ -246,27 +227,5 @@ export function LeadPopupForm() {
       ) : null}
     </AnimatePresence>,
     document.body
-  );
-}
-
-function Field({
-  label,
-  id,
-  error,
-  children,
-}: {
-  label: string;
-  id: string;
-  error?: string;
-  children: ReactNode;
-}) {
-  return (
-    <div>
-      <label className="text-sm font-medium text-luxury-heading" htmlFor={id}>
-        {label}
-      </label>
-      <div className="mt-1.5">{children}</div>
-      {error ? <p className="mt-1 text-xs text-red-600">{error}</p> : null}
-    </div>
   );
 }

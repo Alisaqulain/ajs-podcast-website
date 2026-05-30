@@ -53,6 +53,19 @@ export async function PATCH(req: NextRequest, ctx: Ctx) {
   if (body.sortOrder != null) {
     $set.sortOrder = Math.round(Number(body.sortOrder));
   }
+  if (body.buttonText !== undefined) {
+    $set.buttonText =
+      body.buttonText?.trim() || "Select package";
+  }
+  if (body.isDefault !== undefined) {
+    $set.isDefault = Boolean(body.isDefault);
+    if ($set.isDefault) {
+      await db.collection("packages").updateMany(
+        { _id: { $ne: new ObjectId(id) } },
+        { $set: { isDefault: false } }
+      );
+    }
+  }
 
   const result = await db
     .collection("packages")

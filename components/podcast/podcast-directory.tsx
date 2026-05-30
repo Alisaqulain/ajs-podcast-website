@@ -7,6 +7,7 @@ import { Search } from "lucide-react";
 import { PageHeroVideo } from "@/components/hero/page-hero-video";
 import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
+import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { getYoutubeEmbedUrl } from "@/lib/youtube";
 import type { AmbientClip } from "@/lib/youtube-ambient";
 
@@ -97,7 +98,7 @@ export function PodcastDirectory({
           ) : null}
         </div>
         <CTAButton intent="book" className="mt-4">
-          Book Podcast Now
+          {BOOK_NOW_LABEL}
         </CTAButton>
       </PageHeroVideo>
 
