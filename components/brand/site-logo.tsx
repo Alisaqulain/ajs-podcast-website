@@ -28,7 +28,7 @@ function CircularLogo({
   return (
     <span
       className={cn(
-        "logo-pill relative inline-flex shrink-0 overflow-hidden rounded-full ring-1",
+        "logo-pill relative inline-flex shrink-0 overflow-hidden rounded-full ring-1 transition duration-500 motion-safe:hover:scale-105 motion-safe:hover:shadow-gold-glow",
         circularFrameClass[variant],
         className
       )}

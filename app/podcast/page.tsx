@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Podcast",
   description:
-    "Watch BHAW Namrata Podcast episodes—real conversations for confidence, clarity, and self-belief.",
+    "Watch Aj's Cycling Vlog and studio videos on YouTube—latest uploads from AJ'S Studio.",
   openGraph: {
     title: `Podcast | ${SITE.name}`,
     description:

@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
@@ -13,20 +16,40 @@ export function SectionHeading({
   subtitle?: string;
   align?: "center" | "left";
   className?: string;
-  /** Optional id on the section h2 (landmarks / aria-labelledby). */
   id?: string;
 }) {
+  const reduceMotion = useReducedMotion();
+
+  const motionProps = reduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 20 } as const,
+        whileInView: { opacity: 1, y: 0 } as const,
+        viewport: { once: true, margin: "-10% 0px" as const },
+        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+      };
+
   return (
-    <div
+    <motion.div
       className={cn(
         "mb-12 max-w-3xl",
         align === "center" && "mx-auto text-center",
         className
       )}
+      {...motionProps}
     >
       {eyebrow ? (
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
+        <p
+          className={cn(
+            "mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep",
+            align === "center" && "justify-center"
+          )}
+        >
+          <span className="h-px w-6 bg-gradient-to-r from-brand-gold to-transparent sm:w-8" />
           {eyebrow}
+          {align === "center" ? (
+            <span className="h-px w-6 bg-gradient-to-l from-brand-gold to-transparent sm:w-8" />
+          ) : null}
         </p>
       ) : null}
       <h2
@@ -40,6 +63,6 @@ export function SectionHeading({
           {subtitle}
         </p>
       ) : null}
-    </div>
+    </motion.div>
   );
 }

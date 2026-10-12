@@ -240,7 +240,7 @@ async function resolveUploadsPlaylistId(
   const clean = handle.replace(/^@/, "").trim();
   const handlesToTry = Array.from(
     new Set(
-      [clean, "BHAW Namrata", "BhawnaMrata", "bhawnamrata", "BHAWNamrata"].filter(
+      [clean, "ajsvlog", "AJ'S Studio", "ajsstudio"].filter(
         Boolean
       )
     )
@@ -305,7 +305,7 @@ export async function fetchYouTubeChannelStats(
   const clean = handle.replace(/^@/, "").trim();
   const handlesToTry = Array.from(
     new Set(
-      [clean, "BHAW Namrata", "BhawnaMrata", "bhawnamrata", "BHAWNamrata"].filter(
+      [clean, "ajsvlog", "AJ'S Studio", "ajsstudio"].filter(
         Boolean
       )
     )

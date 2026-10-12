@@ -80,8 +80,10 @@ export function Navbar() {
 
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b border-[#e8dfd3]/80 bg-[#fffdf9]/95 pt-[env(safe-area-inset-top,0px)] text-luxury-heading shadow-sm backdrop-blur-md transition-all duration-300",
-          scrolled ? "py-1.5 shadow-[0_4px_24px_-8px_rgba(15,23,42,0.12)] sm:py-2" : "py-2 sm:py-3 lg:py-4"
+          "fixed inset-x-0 top-0 z-50 border-b border-sky-200/70 bg-white/75 pt-[env(safe-area-inset-top,0px)] text-luxury-heading shadow-sm backdrop-blur-xl transition-all duration-500",
+          scrolled
+            ? "py-1.5 shadow-[0_8px_32px_-12px_rgba(14,116,144,0.18)] sm:py-2"
+            : "py-2 sm:py-3 lg:py-4"
         )}
       >
         <Container className="flex items-center justify-between gap-2 sm:gap-4">
@@ -118,7 +120,7 @@ export function Navbar() {
                   {active ? (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-brand-gold/15 ring-1 ring-brand-gold/40 shadow-[0_2px_8px_rgba(201,161,74,0.15)]"
+                      className="absolute inset-0 -z-10 rounded-full bg-sky-400/15 ring-1 ring-sky-400/35 shadow-[0_2px_12px_rgba(14,165,233,0.2)]"
                       transition={{
                         type: "spring",
                         stiffness: 400,

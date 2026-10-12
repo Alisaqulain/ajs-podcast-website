@@ -118,25 +118,37 @@ export async function resolveChannelIdFromEnvOrHandle(
 }
 
 /** Scrapes the public channel page for `"channelId":"UC…"`. Cached ~24h. */
+function extractChannelIdFromHtml(html: string): string | null {
+  const patterns = [
+    /"channelId":"(UC[a-zA-Z0-9_-]{22})"/,
+    /"externalId":"(UC[a-zA-Z0-9_-]{22})"/,
+    /youtube\.com\/channel\/(UC[a-zA-Z0-9_-]{22})/,
+    /browse_id\":\"(UC[a-zA-Z0-9_-]{22})\"/,
+  ];
+  for (const p of patterns) {
+    const m = html.match(p);
+    if (m?.[1]) return m[1];
+  }
+  return null;
+}
+
 export async function resolveChannelIdFromHandle(
   handle: string
 ): Promise<string | null> {
   const clean = handle.replace(/^@/, "").trim();
   if (!clean) return null;
+  const urls = [
+    `https://www.youtube.com/@${encodeURIComponent(clean)}`,
+    `https://www.youtube.com/c/${encodeURIComponent(clean)}`,
+    `https://www.youtube.com/user/${encodeURIComponent(clean)}`,
+  ];
   try {
-    const url = `https://www.youtube.com/@${encodeURIComponent(clean)}`;
-    const res = await fetch(url, channelPageFetchInit());
-    if (!res.ok) return null;
-    const html = await res.text();
-    const patterns = [
-      /"channelId":"(UC[a-zA-Z0-9_-]{22})"/,
-      /"externalId":"(UC[a-zA-Z0-9_-]{22})"/,
-      /youtube\.com\/channel\/(UC[a-zA-Z0-9_-]{22})/,
-      /browse_id\":\"(UC[a-zA-Z0-9_-]{22})\"/,
-    ];
-    for (const p of patterns) {
-      const m = html.match(p);
-      if (m?.[1]) return m[1];
+    for (const url of urls) {
+      const res = await fetch(url, channelPageFetchInit());
+      if (!res.ok) continue;
+      const html = await res.text();
+      const id = extractChannelIdFromHtml(html);
+      if (id) return id;
     }
     return null;
   } catch {

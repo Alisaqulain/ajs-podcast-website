@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, X } from "lucide-react";
 import { GoldButton } from "@/components/ui/gold-button";
 import type { PodcastEpisodeCard } from "@/lib/podcast-episodes";
+import { SITE } from "@/lib/site";
 import { PodcastPreviewCard } from "@/components/podcast/podcast-preview-card";
 import { PodcastPreviewPlaybackProvider } from "@/components/podcast/podcast-preview-playback";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -48,7 +49,7 @@ export function LatestConversationsGrid({
           channel directly on YouTube.
         </p>
         <div className="mt-6 flex justify-center">
-          <GoldButton href="https://www.youtube.com/@bhawnamrata">
+          <GoldButton href={SITE.social.youtube}>
             Subscribe on YouTube
           </GoldButton>
         </div>

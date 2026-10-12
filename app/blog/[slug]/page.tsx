@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
     datePublished: post.createdAt
       ? new Date(post.createdAt as Date).toISOString()
       : undefined,
-    author: { "@type": "Person", name: "Namrata Tiwary Singh" },
+    author: { "@type": "Organization", name: SITE.name },
     image: cover
       ? [
           {

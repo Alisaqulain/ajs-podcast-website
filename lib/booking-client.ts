@@ -105,7 +105,7 @@ export async function startRazorpayCheckout(opts: {
       key: keyId,
       amount,
       currency: currency || "INR",
-      name: "BHAW Namrata",
+      name: "AJ'S Studio",
       description: planTitle
         ? `${planTitle} — Coaching / Podcast Service`
         : "Coaching / Podcast Service",
@@ -116,7 +116,7 @@ export async function startRazorpayCheckout(opts: {
         email: opts.email.trim(),
         contact: opts.phone.replace(/\D/g, "").slice(0, 15) || undefined,
       },
-      theme: { color: "#A67C2E" },
+      theme: { color: "#0284C7" },
       handler: async (response) => {
         try {
           const verifyRes = await fetch("/api/verify-payment", {

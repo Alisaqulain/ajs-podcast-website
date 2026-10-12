@@ -13,7 +13,7 @@ import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Book Now",
   description:
-    "Book podcast production, visibility mentorship, or personal branding with BHAW Namrata—packages, availability, and secure checkout.",
+    `Book films, photoshoots, or podcast sessions with ${SITE.name}—packages, availability, and secure checkout.`,
   openGraph: {
     title: `Book a Guest Slot | ${SITE.name}`,
     description:

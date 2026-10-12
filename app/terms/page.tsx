@@ -8,11 +8,11 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Terms of use for BHAW Namrata services, including payments, coaching, and digital content.",
+    `Terms of use for ${SITE.name} services, including payments, studio bookings, and digital content.`,
   openGraph: {
     title: `Terms & Conditions | ${SITE.name}`,
     description:
-      "Service usage rules, payment terms, and liability disclaimer for BHAW Namrata.",
+      `Service usage rules, payment terms, and liability disclaimer for ${SITE.name}.`,
   },
   robots: { index: true, follow: true },
 };
@@ -94,7 +94,7 @@ export default async function TermsPage() {
             Services and content are provided &quot;as is&quot; to the fullest
             extent permitted by law. We do not guarantee specific outcomes from
             coaching or programs. To the maximum extent permitted by applicable
-            law, {SITE.name} and Namrata Tiwary Singh shall not be liable for any
+            law, {SITE.name} shall not be liable for any
             indirect, incidental, special, consequential, or punitive damages, or
             loss of profits or data, arising from use of the site or services.
           </p>

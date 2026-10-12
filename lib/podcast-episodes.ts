@@ -11,6 +11,7 @@ import {
   resolveChannelIdFromEnvOrHandle,
 } from "@/lib/youtube-rss";
 import { serializeDocuments } from "@/lib/serialize";
+import { SITE } from "@/lib/site";
 import type { PodcastApi } from "@/components/podcast/podcast-directory";
 import type { Podcast } from "@/models/podcast";
 
@@ -33,7 +34,7 @@ export type PodcastEpisodeCard = {
 };
 
 const DEFAULT_HANDLE =
-  process.env.YOUTUBE_CHANNEL_HANDLE?.trim() || "bhawnamrata";
+  process.env.YOUTUBE_CHANNEL_HANDLE?.trim() || "ajsvlog";
 
 function truncateDescription(text: string, max = 150): string {
   const t = text.replace(/\s+/g, " ").trim();
@@ -263,7 +264,7 @@ export function podcastEpisodesVideoObjectJsonLd(
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Latest Conversations — BHAW Namrata Podcast",
+    name: "Latest Videos — Aj's Cycling Vlog",
     numberOfItems: episodes.length,
     itemListElement: episodes.map((e, i) => ({
       "@type": "ListItem",
@@ -278,7 +279,7 @@ export function podcastEpisodesVideoObjectJsonLd(
         contentUrl: e.watchUrl,
         publisher: {
           "@type": "Organization",
-          name: "BHAW Namrata",
+          name: SITE.name,
           url: siteUrl,
         },
       },

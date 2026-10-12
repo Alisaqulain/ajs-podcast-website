@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Articles",
   description:
-    "Articles on self-image, expression, and showing up powerfully—from BHAW Namrata.",
+    `Articles on cycling, creativity, and studio life—from ${SITE.name}.`,
   openGraph: {
     title: `Articles | ${SITE.name}`,
     description: "Insights and coaching notes for ambitious women.",

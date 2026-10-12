@@ -1,25 +1,24 @@
+import { SITE } from "@/lib/site";
+
 const siteUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
 
 export function OrganizationJsonLd() {
   const data = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Namrata Tiwary Singh",
-    alternateName: ["BhawnaMrata", "BHAW Namrata"],
+    "@type": "Organization",
+    name: SITE.name,
+    alternateName: ["AJ'S Studio", "Aj's Cycling Vlog"],
     url: siteUrl,
-    jobTitle: [
-      "Visibility Mentor",
-      "Podcast Strategist",
-      "Self-Image Coach",
-      "Founder",
-    ],
-    sameAs: [
-      "https://youtube.com/@bhawnamrata",
-      "https://www.linkedin.com/in/namrata-tiwary-singh-47a29487",
-      "https://www.instagram.com/bhawnamrata",
-      "https://www.facebook.com/BHAWNamrata/",
-    ],
-    knowsAbout: ["Self-image coaching", "Women's empowerment", "Podcasting"],
+    email: SITE.contactEmail,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "#27, Castle street",
+      addressLocality: "Bangalore",
+      postalCode: "560025",
+      addressCountry: "IN",
+    },
+    sameAs: [SITE.social.youtube, SITE.social.instagram].filter(Boolean),
+    knowsAbout: ["Cycling", "Video production", "Podcasting", "Photography"],
   };
 
   return (
@@ -33,16 +32,15 @@ export function OrganizationJsonLd() {
 export function PodcastSeriesJsonLd() {
   const data = {
     "@context": "https://schema.org",
-    "@type": "PodcastSeries",
-    name: "BHAW Namrata Podcast",
+    "@type": "VideoSeries",
+    name: "Aj's Cycling Vlog",
     url: `${siteUrl}/podcast`,
     author: {
-      "@type": "Person",
-      name: "Namrata Tiwary Singh",
+      "@type": "Organization",
+      name: SITE.name,
     },
-    description:
-      "Real conversations that inspire women to build confidence, clarity, and self-belief.",
-    webFeedElement: "https://youtube.com/@bhawnamrata",
+    description: SITE.description,
+    webFeedElement: SITE.social.youtube,
   };
 
   return (

@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/providers";
 import { OrganizationJsonLd, PodcastSeriesJsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/site";
+import { SiteAmbientBg } from "@/components/ui/site-ambient-bg";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -48,7 +49,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffffff",
+  themeColor: "#e0f2fe",
 };
 
 export default function RootLayout({
@@ -62,7 +63,8 @@ export default function RootLayout({
       className={`light ${playfair.variable} ${poppins.variable}`}
       style={{ colorScheme: "light" }}
     >
-      <body className="min-h-screen bg-luxury-bg font-sans antialiased text-luxury-body selection:bg-brand-gold/25 selection:text-luxury-heading">
+      <body className="relative min-h-screen bg-transparent font-sans antialiased text-luxury-body selection:bg-brand-gold/25 selection:text-luxury-heading">
+        <SiteAmbientBg />
         <OrganizationJsonLd />
         <PodcastSeriesJsonLd />
         <Providers>

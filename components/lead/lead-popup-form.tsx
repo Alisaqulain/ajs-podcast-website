@@ -97,7 +97,7 @@ export function LeadPopupForm() {
         onSuccess: () => {
           setMessage({
             type: "ok",
-            text: "Booking confirmed. Namrata will reach out with session details.",
+            text: "Booking confirmed. The studio will reach out with session details.",
           });
           setValues(emptyForm);
         },
@@ -154,7 +154,7 @@ export function LeadPopupForm() {
                 <X className="h-5 w-5" />
               </button>
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
-                BHAW Namrata
+                AJ&apos;S Studio
               </p>
               <h2
                 id="lead-modal-title"

@@ -8,7 +8,6 @@ import { ServicesSection } from "@/components/home/services-section";
 import { IdealClientSection } from "@/components/home/ideal-client-section";
 import { ProcessSection } from "@/components/home/process-section";
 import { LatestConversations } from "@/components/home/latest-conversations";
-import { FounderSection } from "@/components/home/founder-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
 import { PricingSection } from "@/components/home/pricing-section";
 import { FaqSection } from "@/components/home/faq-section";
@@ -16,16 +15,15 @@ import { CtaSection } from "@/components/home/cta-section";
 import { getLatestPodcastEpisodesForHome } from "@/lib/podcast-episodes";
 
 export const metadata: Metadata = {
-  title: `${SITE.name} | Podcast, Personal Branding & Visibility`,
-  description:
-    "BHAW Namrata helps coaches, founders, experts, and creators turn their story into influence through premium podcasts, strategic visibility, and personal branding.",
+  title: `${SITE.name} | Aj's Cycling Vlog`,
+  description: SITE.description,
   keywords: [
-    "podcast production India",
-    "personal branding coach",
-    "visibility mentorship",
-    "founder podcast",
-    "BHAW Namrata",
-    "Namrata podcast strategist",
+    "Aj's Cycling Vlog",
+    "AJ'S Studio Bangalore",
+    "cycling vlog India",
+    "Bangalore commute cycling",
+    "ajsvlog YouTube",
+    "podcast studio Bangalore",
   ],
 };
 
@@ -44,7 +42,6 @@ export default async function HomePage() {
       <IdealClientSection />
       <ProcessSection />
       <LatestConversations episodes={episodes} />
-      <FounderSection />
       <TestimonialsSection />
       <PricingSection />
       <FaqSection />

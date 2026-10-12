@@ -67,7 +67,7 @@ export function Hero() {
               transition={{ delay: 0.35, duration: 0.6 }}
               className="mt-8 text-sm text-brand-dark/55"
             >
-              Namrata Tiwary Singh · Founder & Host · Self Image Coach
+              {SITE.name} · Aj&apos;s Cycling Vlog · Films · Podcasts
             </motion.p>
           </div>
 

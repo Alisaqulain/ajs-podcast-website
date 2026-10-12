@@ -13,7 +13,7 @@ import { stripHtml } from "@/lib/strip-html";
 export const metadata: Metadata = {
   title: "Testimonials",
   description:
-    "Stories from women who worked with Namrata and listened to the BHAW Namrata Podcast.",
+    `Stories from clients and viewers who work with ${SITE.name} and Aj's Cycling Vlog.`,
   openGraph: {
     title: `Testimonials | ${SITE.name}`,
     description: "Client and listener reflections on confidence and self-image.",
@@ -45,8 +45,8 @@ export default async function TestimonialsPage() {
     <div className="pb-24">
       <PageHero
         eyebrow="Testimonials"
-        title="What founders say after they choose themselves"
-        subtitle="A living gallery of courage, clarity, and the kind of confidence that compounds on camera."
+        title="What people say about the studio"
+        subtitle="Reflections from clients, collaborators, and viewers."
       >
         <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
       </PageHero>
@@ -56,7 +56,7 @@ export default async function TestimonialsPage() {
           <div className="glass-panel rounded-3xl p-12 text-center text-luxury-body">
             Testimonials will appear here as they are shared.{" "}
             <a href="/contact" className="font-semibold text-brand-gold-deep underline hover:text-brand-gold">
-              Tell Namrata about your transformation
+              Share your experience with us
             </a>
             .
           </div>

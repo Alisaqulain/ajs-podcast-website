@@ -16,10 +16,10 @@ import { Mail } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Book Namrata for coaching, speaking, or collaborations—or send a message.",
+    "Contact AJ'S Studio for films, photoshoots, podcasts, or cycling vlog collaborations.",
   openGraph: {
     title: `Contact | ${SITE.name}`,
-    description: "Reach BHAW Namrata via the form, WhatsApp, or social channels.",
+    description: "Reach AJ'S Studio via the form, phone, WhatsApp, or social channels.",
   },
 };
 
@@ -28,15 +28,15 @@ const social = [
   { href: SITE.social.linkedin, label: "LinkedIn", Icon: IconLinkedin },
   { href: SITE.social.instagram, label: "Instagram", Icon: IconInstagram },
   { href: SITE.social.facebook, label: "Facebook", Icon: IconFacebook },
-];
+].filter((item) => Boolean(item.href?.trim()));
 
 export default async function ContactPage() {
   return (
     <div className="pb-24">
       <PageHero
         eyebrow="Contact"
-        title="Let’s design your next level of expression"
-        subtitle="Coaching, podcast collaborations, and visibility mentorship inquiries are welcome. Share a few details and we'll follow up with the right next step."
+        title="Get in touch with AJ'S Studio"
+        subtitle="Films, photoshoots, podcasts, or vlog ideas—share a few details and we'll follow up."
         align="left"
       >
         <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
@@ -51,7 +51,10 @@ export default async function ContactPage() {
               Email
             </p>
             <p className="mt-3 text-sm text-luxury-muted">
-              For coaching, collaborations, and payment questions.
+              {SITE.address}
+            </p>
+            <p className="mt-2 text-sm text-luxury-muted">
+              {SITE.phones.landline} · {SITE.phones.mobile}
             </p>
             <a
               href={`mailto:${SITE.contactEmail}`}
@@ -67,7 +70,7 @@ export default async function ContactPage() {
               WhatsApp
             </p>
             <p className="mt-3 text-sm text-luxury-muted">
-              Prefer a quick hello? Message Namrata directly.
+              Prefer a quick hello? Message us on WhatsApp.
             </p>
             <a
               href={SITE.social.whatsapp}

@@ -8,7 +8,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Refund & Cancellation Policy",
   description:
-    "Refund eligibility, cancellation rules, and processing times for BHAW Namrata coaching and digital purchases.",
+    `Refund eligibility, cancellation rules, and processing times for ${SITE.name} services and digital purchases.`,
   openGraph: {
     title: `Refund & Cancellation | ${SITE.name}`,
     description:

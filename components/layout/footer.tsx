@@ -18,7 +18,7 @@ const social = [
   { href: SITE.social.youtube, icon: IconVideo, label: "YouTube" },
   { href: SITE.social.linkedin, icon: IconLinkedin, label: "LinkedIn" },
   { href: SITE.social.facebook, icon: IconFacebook, label: "Facebook" },
-];
+].filter((item) => Boolean(item.href?.trim()));
 
 const linkClass =
   "text-luxury-body transition-colors hover:text-luxury-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold rounded-sm";
@@ -30,7 +30,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-luxury-border bg-muted">
+    <footer className="border-t border-luxury-border bg-white/60 backdrop-blur-md">
       <Container className="py-16 sm:py-20 pb-[max(3rem,calc(env(safe-area-inset-bottom,0px)+2rem))]">
         <div className="flex flex-col gap-12 md:flex-row md:flex-wrap md:items-start md:justify-between lg:flex-nowrap">
           <div className="max-w-md">
@@ -91,11 +91,16 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={SITE.social.whatsapp} className={linkClass}>
-                  Phone: {FOOTER_CONTENT.phoneDisplay}
+                <a href={`tel:${SITE.phones.landline.replace(/\s/g, "")}`} className={linkClass}>
+                  {SITE.phones.landline}
                 </a>
               </li>
-              <li>{FOOTER_CONTENT.location}</li>
+              <li>
+                <a href={`tel:${SITE.phones.mobile}`} className={linkClass}>
+                  {SITE.phones.mobile}
+                </a>
+              </li>
+              <li>{SITE.address}</li>
             </ul>
           </div>
 

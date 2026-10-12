@@ -132,7 +132,7 @@ export function BookingExperience({
         onSuccess: () => {
           setMessage({
             type: "ok",
-            text: "Booking confirmed. Namrata will reach out with session details.",
+            text: "Booking confirmed. The studio will reach out with session details.",
           });
         },
         onError: (text) => setMessage({ type: "err", text }),

@@ -7,11 +7,11 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How BHAW Namrata collects, uses, and protects your personal information, including cookies and contact details.",
+    `How ${SITE.name} collects, uses, and protects your personal information, including cookies and contact details.`,
   openGraph: {
     title: `Privacy Policy | ${SITE.name}`,
     description:
-      "Privacy practices for the BHAW Namrata website, coaching services, and payments.",
+      `Privacy practices for the ${SITE.name} website, studio services, and payments.`,
   },
   robots: { index: true, follow: true },
 };
@@ -31,8 +31,8 @@ export default async function PrivacyPolicyPage() {
         <LegalProse>
           <h2>Who we are</h2>
           <p>
-            {SITE.name} is operated by Namrata Tiwary Singh, offering podcast
-            content, coaching, and related digital services. For privacy
+            {SITE.name} offers films, photoshoots, podcasts, cycling vlogs, and
+            related digital services. For privacy
             questions, contact{" "}
             <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> or
             message us on{" "}

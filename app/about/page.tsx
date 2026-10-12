@@ -1,25 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/hero/page-hero";
-import { CTAButton } from "@/components/hero/cta-button";
 import { Container } from "@/components/ui/container";
-import {
-  FOUNDER_FEARS,
-  FOUNDER_MISSION,
-  FOUNDER_QUALIFICATIONS,
-  FOUNDER_STORY_CLOSING,
-  FOUNDER_STORY_CLOSING_LINE,
-  FOUNDER_STORY_INTRO,
-  FOUNDER_TAGLINE,
-  FOUNDER_VISION,
-} from "@/lib/founder-content";
-import { HOME_FOUNDER, HOME_INTRO } from "@/lib/site-content";
-import { BOOK_NOW_LABEL } from "@/lib/cta";
+import { GoldButton } from "@/components/ui/gold-button";
+import { buttonStyles } from "@/components/ui/button";
+import { HOME_INTRO, HOME_WHY_US, HOME_SERVICES } from "@/lib/site-content";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Namrata",
-  description:
-    "Meet Namrata — visibility mentor, podcast strategist, and self-image coach behind BHAW Namrata.",
+  title: "About",
+  description: SITE.description,
   openGraph: {
     title: `About | ${SITE.name}`,
     description: HOME_INTRO.mission,
@@ -31,19 +21,19 @@ export default async function AboutPage() {
     <div className="pb-24">
       <PageHero
         eyebrow="About"
-        title={HOME_FOUNDER.title}
+        title={SITE.name}
         subtitle={
           <>
             <span className="font-display text-lg text-brand-gold-deep md:text-xl">
-              {HOME_FOUNDER.roles}
+              {SITE.tagline}
             </span>
             <span className="mt-4 block text-base text-luxury-body">
-              {HOME_FOUNDER.belief}
+              {HOME_INTRO.mission}
             </span>
           </>
         }
       >
-        <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
+        <GoldButton href={SITE.social.youtube}>Subscribe on YouTube</GoldButton>
       </PageHero>
 
       <Container className="mt-16 space-y-16 md:mt-24 md:space-y-24">
@@ -51,7 +41,6 @@ export default async function AboutPage() {
           <h2 className="font-display text-3xl font-semibold text-luxury-heading md:text-4xl">
             {HOME_INTRO.title}
           </h2>
-          <p className="font-display text-lg text-brand-gold-deep">{FOUNDER_TAGLINE}</p>
           <p className="text-lg font-medium text-luxury-heading">{HOME_INTRO.lead}</p>
           <p>{HOME_INTRO.mission}</p>
           <p className="font-medium text-luxury-heading">{HOME_INTRO.attention}</p>
@@ -63,45 +52,11 @@ export default async function AboutPage() {
 
         <section>
           <h2 className="font-display text-3xl font-semibold text-luxury-heading">
-            My Story
+            {HOME_WHY_US.title}
           </h2>
-          <div className="mt-6 space-y-4 leading-relaxed text-luxury-body">
-            {FOUNDER_STORY_INTRO.map((paragraph) => (
-              <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-            ))}
-          </div>
-
-          <div className="mt-8 rounded-3xl border border-luxury-border bg-luxury-bg/80 p-6 md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold-deep">
-              As a woman entrepreneur, I deeply understood the fears many people
-              silently carry
-            </p>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {FOUNDER_FEARS.map((fear) => (
-                <li key={fear} className="flex gap-3 text-sm text-luxury-body">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-deep" />
-                  {fear}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mt-6 space-y-4 leading-relaxed text-luxury-body">
-            {FOUNDER_STORY_CLOSING.map((paragraph) => (
-              <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-            ))}
-            <p className="font-display text-lg font-medium text-luxury-heading">
-              {FOUNDER_STORY_CLOSING_LINE}
-            </p>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="font-display text-2xl font-semibold text-luxury-heading">
-            Educational Qualification &amp; Experience
-          </h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {FOUNDER_QUALIFICATIONS.map((item) => (
+          <p className="mt-4 max-w-2xl text-luxury-body">{HOME_WHY_US.closing}</p>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {HOME_WHY_US.focusAreas.map((item) => (
               <li
                 key={item}
                 className="flex items-start gap-3 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 text-sm text-luxury-body"
@@ -113,27 +68,38 @@ export default async function AboutPage() {
           </ul>
         </section>
 
-        <section className="grid gap-8 md:grid-cols-2">
-          <div className="glass-panel rounded-4xl p-8 md:p-10">
-            <h3 className="font-display text-xl font-semibold text-luxury-heading">
-              Mission
-            </h3>
-            <p className="mt-3 leading-relaxed text-luxury-body">
-              {FOUNDER_MISSION}
-            </p>
-          </div>
-          <div className="glass-panel rounded-4xl p-8 md:p-10">
-            <h3 className="font-display text-xl font-semibold text-luxury-heading">
-              Vision
-            </h3>
-            <p className="mt-3 leading-relaxed text-luxury-body">
-              {FOUNDER_VISION}
-            </p>
+        <section>
+          <h2 className="font-display text-3xl font-semibold text-luxury-heading">
+            {HOME_SERVICES.title}
+          </h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {HOME_SERVICES.items.map((service) => (
+              <article
+                key={service.title}
+                className="glass-panel rounded-3xl p-6 md:p-8"
+              >
+                <h3 className="font-display text-xl font-semibold text-luxury-heading">
+                  {service.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-luxury-body">
+                  {service.description}
+                </p>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="flex flex-wrap gap-4">
-          <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
+        <section className="glass-panel rounded-4xl p-8 text-center md:p-10">
+          <p className="text-sm text-luxury-muted">{SITE.address}</p>
+          <p className="mt-2 text-sm text-luxury-body">
+            {SITE.phones.landline} · {SITE.phones.mobile} · {SITE.contactEmail}
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <GoldButton href={SITE.social.youtube}>Watch on YouTube</GoldButton>
+            <Link href="/contact" className={buttonStyles({ variant: "outline", size: "lg" })}>
+              Contact
+            </Link>
+          </div>
         </section>
       </Container>
     </div>

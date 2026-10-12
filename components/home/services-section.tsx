@@ -12,7 +12,7 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="scroll-mt-28 border-t border-luxury-border bg-luxury-bg py-20 md:py-28"
+      className="scroll-mt-28 border-t border-luxury-border bg-section-mesh py-20 md:py-28"
       aria-labelledby="services-heading"
     >
       <Container>
@@ -26,11 +26,16 @@ export function ServicesSection() {
           {HOME_SERVICES.items.map((service, i) => (
             <motion.article
               key={service.title}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: Math.min(i * 0.06, 0.24) }}
-              className="glass-panel flex h-full flex-col rounded-3xl p-6 md:p-8"
+              viewport={{ once: true, margin: "-5% 0px" }}
+              transition={{
+                delay: Math.min(i * 0.08, 0.32),
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              className="glass-panel glass-panel-hover flex h-full flex-col rounded-3xl p-6 md:p-8"
             >
               <h3 className="font-display text-xl font-semibold text-luxury-heading">
                 {i + 1}. {service.title}

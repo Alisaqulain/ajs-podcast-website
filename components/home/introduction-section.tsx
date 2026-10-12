@@ -9,7 +9,7 @@ export function IntroductionSection() {
   return (
     <section
       id="introduction"
-      className="scroll-mt-28 border-t border-luxury-border bg-luxury-section py-20 md:py-28"
+      className="scroll-mt-28 border-t border-luxury-border bg-surface/60 py-20 backdrop-blur-sm md:py-28"
       aria-labelledby="introduction-heading"
     >
       <Container>
@@ -59,7 +59,7 @@ export function IntroductionSection() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mx-auto mt-12 max-w-3xl rounded-3xl border border-luxury-border bg-luxury-bg/90 p-6 md:p-8"
+          className="mx-auto mt-12 max-w-3xl rounded-3xl border border-luxury-border bg-white/70 p-6 shadow-glass backdrop-blur-md transition duration-500 hover:border-sky-300/50 hover:shadow-gold-glow md:p-8"
         >
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold-deep">
             {HOME_INTRO.audienceIntro}

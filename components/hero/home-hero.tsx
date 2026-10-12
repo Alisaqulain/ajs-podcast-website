@@ -3,13 +3,27 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/ui/container";
-import { CTAButton } from "@/components/hero/cta-button";
+import Link from "next/link";
+import { buttonStyles } from "@/components/ui/button";
 import { HeroVideoPlaceholder } from "@/components/hero/hero-video-placeholder";
 import { SITE } from "@/lib/site";
-import { BOOK_NOW_LABEL } from "@/lib/cta";
+import { GoldButton } from "@/components/ui/gold-button";
 import { HOME_HERO } from "@/lib/site-content";
 
 const HERO_VIDEO_SRC = SITE.homeHeroVideoUrl;
+
+const stagger = {
+  hidden: { opacity: 0, y: 22 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      delay: 0.06 * i,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  }),
+};
 
 export function HomeHero() {
   const reduceMotion = useReducedMotion();
@@ -47,71 +61,89 @@ export function HomeHero() {
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-[#e8dfd3] bg-gradient-to-b from-[#fffdf9] via-[#faf7f2] to-[#f5efe6] pt-[max(5.5rem,env(safe-area-inset-top)+4.25rem)] pb-14 sm:pb-20 md:pb-24">
+    <section className="relative overflow-hidden border-b border-sky-200/70 pt-[max(5.5rem,env(safe-area-inset-top)+4.25rem)] pb-14 sm:pb-20 md:pb-24">
+      <div className="pointer-events-none absolute inset-0 hero-gradient-shimmer opacity-80" aria-hidden />
       <div
-        className="pointer-events-none absolute -left-28 top-8 h-80 w-80 rounded-full bg-brand-gold/12 blur-3xl"
+        className="pointer-events-none absolute -left-32 top-12 h-96 w-96 animate-blob rounded-full bg-sky-400/20 blur-3xl"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#c4a574]/10 blur-3xl"
+        className="pointer-events-none absolute -right-28 bottom-8 h-80 w-80 animate-blob animation-delay-2000 rounded-full bg-cyan-300/25 blur-3xl"
         aria-hidden
       />
 
       <Container className="relative">
         <div className="mx-auto max-w-4xl text-center">
           <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            custom={0}
+            initial={reduceMotion ? false : "hidden"}
+            animate="show"
+            variants={stagger}
             className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-gold-deep sm:tracking-[0.28em]"
           >
             {HOME_HERO.trustLine}
           </motion.p>
 
           <motion.h1
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.08 }}
-            className="mt-6 font-display text-[clamp(2rem,6.5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-[#0f172a] text-balance"
+            custom={1}
+            initial={reduceMotion ? false : "hidden"}
+            animate="show"
+            variants={stagger}
+            className="mt-6 font-display text-[clamp(2rem,6.5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-luxury-heading text-balance"
           >
             {HOME_HERO.headline}
-            <span className="mt-2 block bg-gold-gradient bg-clip-text text-transparent">
+            <span className="mt-2 block text-gradient-animate">
               {HOME_HERO.headlineAccent}
             </span>
           </motion.h1>
 
           <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.14 }}
+            custom={2}
+            initial={reduceMotion ? false : "hidden"}
+            animate="show"
+            variants={stagger}
             className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-luxury-body sm:mt-6 sm:text-lg"
           >
             {HOME_HERO.subheading}
           </motion.p>
 
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            custom={3}
+            initial={reduceMotion ? false : "hidden"}
+            animate="show"
+            variants={stagger}
             className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4"
           >
-            <CTAButton intent="book" size="lg" className="w-full sm:w-auto">
-              {BOOK_NOW_LABEL}
-            </CTAButton>
+            <GoldButton
+              href={SITE.social.youtube}
+              className="w-full sm:w-auto motion-safe:hover:scale-[1.03]"
+            >
+              {HOME_HERO.ctaPrimary}
+            </GoldButton>
+            <Link
+              href="/contact"
+              className={buttonStyles({
+                variant: "outline",
+                size: "lg",
+                className: "w-full sm:w-auto motion-safe:hover:scale-[1.02]",
+              })}
+            >
+              Contact
+            </Link>
           </motion.div>
         </div>
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.26 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 32, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.65, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto mt-10 max-w-3xl sm:mt-12"
         >
           <div
-            className="absolute -inset-3 rounded-[1.85rem] bg-gradient-to-br from-brand-gold/25 via-transparent to-[#0f172a]/10 blur-xl"
+            className="absolute -inset-3 animate-pulse-soft rounded-[1.85rem] bg-gradient-to-br from-sky-400/30 via-transparent to-cyan-500/15 blur-xl"
             aria-hidden
           />
-          <div className="relative overflow-hidden rounded-2xl border border-[#d4c4a8]/50 bg-[#0f172a]/5 shadow-[0_24px_60px_-16px_rgba(15,23,42,0.28)] ring-1 ring-[#c9a14a]/25 sm:rounded-3xl">
+          <div className="relative overflow-hidden rounded-2xl border border-sky-200/80 bg-white/40 shadow-[0_24px_60px_-16px_rgba(14,116,144,0.22)] ring-1 ring-sky-300/40 sm:rounded-3xl motion-safe:hover:ring-sky-400/55 transition-[box-shadow,transform] duration-500 hover:-translate-y-1">
             <div className="relative aspect-[16/9] w-full">
               {hasVideo && shouldLoadVideo && !reduceMotion ? (
                 <>
@@ -128,10 +160,10 @@ export function HomeHero() {
                   >
                     <source src={HERO_VIDEO_SRC} type="video/mp4" />
                   </video>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-sky-950/45 via-transparent to-transparent" />
                   <button
                     type="button"
-                    className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white/70 bg-white/95 text-[#0f172a] shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl sm:h-[4.5rem] sm:w-[4.5rem]"
+                    className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white/80 bg-white/95 text-sky-900 shadow-lg transition duration-300 hover:scale-110 hover:shadow-xl sm:h-[4.5rem] sm:w-[4.5rem]"
                     aria-label="Play highlight"
                     onClick={handlePlayClick}
                   >
@@ -141,7 +173,10 @@ export function HomeHero() {
                   </button>
                 </>
               ) : (
-                <HeroVideoPlaceholder onPlayClick={handlePlayClick} />
+                <HeroVideoPlaceholder
+                  onPlayClick={handlePlayClick}
+                  label="Aj's Cycling Vlog"
+                />
               )}
             </div>
           </div>
