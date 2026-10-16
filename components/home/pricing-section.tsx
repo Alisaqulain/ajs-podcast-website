@@ -53,8 +53,8 @@ export function PricingSection() {
               {BOOK_NOW_LABEL}
             </h2>
             <p className="mt-4 text-base text-luxury-body">
-              Choose a recording slot, full podcast production, or a brand video
-              package. Secure checkout and simple scheduling.{" "}
+              Every studio set is ₹1,000 an hour, including the space, lights and a
+              wireless RODE mic. Videographer and editing are extra. Secure checkout.{" "}
               <Link
                 href="/refund-policy"
                 className="font-medium text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold"
@@ -73,19 +73,19 @@ export function PricingSection() {
             <ul className="mx-auto mt-8 grid max-w-6xl gap-3 text-left text-sm text-luxury-body sm:grid-cols-2 lg:grid-cols-4">
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Treated room, broadcast mics, and multi-cam video
+                2, 3 & 5-seater studio sets
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Edited episodes plus reels and shorts
+                Studio lights + wireless RODE mic included
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                A producer on the desk for every session
+                Green room to get ready
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Publishing help for YouTube and Spotify
+                Videographer, editing & extra gear on request
               </li>
             </ul>
         </div>

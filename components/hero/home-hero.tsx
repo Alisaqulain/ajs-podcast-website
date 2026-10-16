@@ -24,9 +24,9 @@ const fadeUp = {
 };
 
 const HERO_STATS = [
-  { value: "400+", label: "Videos by our founder" },
-  { value: "10+", label: "Years on camera" },
-  { value: "4", label: "Languages hosted" },
+  { value: "₹1,000", label: "Per hour" },
+  { value: "3", label: "Studio sets" },
+  { value: "RODE", label: "Wireless mic" },
 ];
 
 /** Embed src with the JS API on so we can toggle sound without reloading. */
@@ -192,7 +192,7 @@ export function HomeHero() {
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
             <Link
-              href="/#founder"
+              href="/#spaces"
               className="inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition hover:border-sky-300/70 hover:bg-white/15"
             >
               {HOME_HERO.ctaSecondary}

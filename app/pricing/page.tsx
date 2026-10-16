@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SpacesSection } from "@/components/home/spaces-section";
 import { PageHero } from "@/components/hero/page-hero";
 import { GoldButton } from "@/components/ui/gold-button";
 import { PricingSection } from "@/components/home/pricing-section";
@@ -8,10 +9,10 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: `Studio hours, full episode production, and monthly podcast packages at ${SITE.name}, Bengaluru.`,
+  description: `Podcast studio hire at ${SITE.name}, Bengaluru: ₹1,000 per hour including space, lights and a wireless RODE mic.`,
   openGraph: {
     title: `Pricing | ${SITE.name}`,
-    description: "Transparent studio and production packages. Book and pay online.",
+    description: "₹1,000 per hour. Videographer, editing and extra equipment available as add-ons.",
   },
 };
 
@@ -20,11 +21,12 @@ export default async function PricingPage() {
     <div>
       <PageHero
         eyebrow="Pricing"
-        title="Simple packages, studio-grade results"
-        subtitle="Pick a recording slot or a fully produced show. Secure online payment and easy scheduling."
+        title="One simple rate"
+        subtitle="₹1,000 an hour for any of our three studio sets, with lights and a wireless RODE mic included. Videographer, editing and extra equipment are optional add-ons."
       >
         <GoldButton href="/book">Book now</GoldButton>
       </PageHero>
+      <SpacesSection showBookLink={false} />
       <PricingSection />
       <FaqSection />
       <CtaSection />

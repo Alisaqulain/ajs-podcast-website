@@ -1,35 +1,99 @@
 /** Marketing copy for Anushtan — single source for homepage & shared sections. */
 
+/** Studio hire rate in rupees per hour (space + lights + wireless RODE mic). */
+export const STUDIO_HOURLY_RATE = 1000;
+
+export const STUDIO_RATE_LABEL = "₹1,000 / hour";
+
+/** What every booking includes, straight from the studio's rate card. */
+export const STUDIO_INCLUDES = [
+  "Your choice of studio space",
+  "Studio lights",
+  "Wireless RODE microphone",
+  "Access to the green room",
+] as const;
+
+/** Optional extras — charged separately. */
+export const STUDIO_ADDONS = [
+  {
+    title: "Videographer",
+    description: "A camera operator to shoot your session.",
+  },
+  {
+    title: "Editing",
+    description: "Have your recording edited into a finished episode or clips.",
+  },
+  {
+    title: "Additional equipment",
+    description: "Anything beyond the standard setup, charged at actuals.",
+  },
+] as const;
+
+export const STUDIO_SPACES = {
+  eyebrow: "The spaces",
+  title: "Three Sets. Pick Your Size.",
+  subtitle:
+    "Every space comes with lights and a wireless RODE microphone, plus a green room to get ready. All at one simple rate.",
+  items: [
+    {
+      seats: 2,
+      name: "The Duo",
+      label: "2-seater",
+      description: "Made for one-on-one interviews and two-host shows.",
+      bestFor: ["Interviews", "Co-hosted shows", "Expert conversations"],
+    },
+    {
+      seats: 3,
+      name: "The Trio",
+      label: "3-seater",
+      description: "Room for a host and two guests, or a small team.",
+      bestFor: ["Host + 2 guests", "Founder chats", "Mini panels"],
+    },
+    {
+      seats: 5,
+      name: "The Roundtable",
+      label: "5-seater",
+      description: "Our largest set, built for group discussions.",
+      bestFor: ["Panel discussions", "Group podcasts", "Team recordings"],
+    },
+  ],
+  greenRoom: {
+    title: "Green room",
+    description:
+      "A small private room where you and your guests can get ready before you go on camera.",
+  },
+} as const;
+
 export const HOME_HERO = {
-  trustLine: "Podcast Recording · Video Production · Bengaluru",
+  trustLine: "Podcast Studio · Castle Street · Bengaluru",
   headline: "Your story deserves a",
   headlineAccent: "studio built for conversation",
   subheading:
-    "Anushtan is a podcast and video studio in Bengaluru. Walk in with an idea, walk out with a polished episode, clips for social, and content that works for your brand.",
+    "Three ready-to-record sets with studio lights and a wireless RODE mic, from ₹1,000 an hour. Add a videographer or editor whenever you need one.",
   ctaPrimary: "Book a Studio Session",
-  ctaSecondary: "Meet the Founder",
+  ctaSecondary: "See the Spaces",
 } as const;
 
 export const HOME_INTRO = {
   eyebrow: "The Studio",
   title: "Welcome to Anushtan",
-  lead: "A calm, camera-ready space where founders, experts, and creators sit down and talk.",
+  lead: "A calm, camera-ready space in central Bengaluru where founders, experts, and creators sit down and talk.",
   mission:
-    "We handle the mics, cameras, lighting, and edit so you can focus on what you're saying. Every session is produced by people who have published hundreds of videos themselves and know what holds an audience.",
+    "Choose a 2, 3, or 5-seater set. The lights are set and a wireless RODE mic is ready, so you can sit down and start talking.",
   attention:
-    "Book an hour to record, or hand us the whole show: planning, recording, editing, and publishing.",
+    "Need more? Add a videographer to shoot your session and an editor to turn it into a finished episode.",
   podcastTrust:
-    "Anushtan grows out of a decade of independent video publishing and twenty years of brand-building in retail. Content has always been the connecting thread.",
-  audienceIntro: "What you get at the studio",
+    "Anushtan is run by Ajay Rao, a creator with 400+ published videos and twenty years of brand-building in retail. He knows what it takes to hold an audience.",
+  audienceIntro: "Included with every booking",
   audiences: [
-    "Acoustically treated podcast room",
-    "Multi-camera 4K video setup",
-    "Broadcast microphones for up to 4 voices",
-    "Soft, flattering studio lighting",
-    "Live monitoring by a producer",
-    "Edited episode + short-form clips",
+    "2, 3 & 5-seater studio sets",
+    "Studio lighting",
+    "Wireless RODE microphone",
+    "Private green room",
+    "Videographer on request",
+    "Editing on request",
   ],
-  closing: "Show up with your voice. Leave with content.",
+  closing: "All from ₹1,000 an hour.",
 } as const;
 
 export const HOME_WHY_PODCAST = {
@@ -37,7 +101,7 @@ export const HOME_WHY_PODCAST = {
   title: "Why Video Podcasts Work",
   subtitle: "One conversation, a month of content.",
   intro:
-    "A well-run hour in the studio becomes a full episode, a stack of reels, and the trust that only comes from people hearing you think out loud.",
+    "A well-run hour in the studio can become a full episode, a stack of reels, and the trust that only comes from people hearing you think out loud.",
   helpsIntro: "A podcast helps you:",
   benefits: [
     "Build authority in your field, in your own voice",
@@ -47,11 +111,11 @@ export const HOME_WHY_PODCAST = {
     "Train and onboard teams with reusable video",
     "Stay visible on YouTube, Spotify, and Instagram",
   ],
-  becomesIntro: "Every session becomes:",
+  becomesIntro: "One studio hour can become:",
   becomes: [
     "A full-length video and audio episode",
     "Vertical clips ready for social",
-    "Thumbnails, titles, and show notes",
+    "Talking points for your next post",
     "An asset your brand keeps using for years",
   ],
 } as const;
@@ -61,16 +125,16 @@ export const HOME_WHY_US = {
   title: "Why Record at Anushtan?",
   subtitle: "Run by a creator, not just a rental room.",
   tagline:
-    "Our founder has built channels from zero, so we produce for the audience, not just the recording.",
-  focusIntro: "At Anushtan we focus on:",
+    "Our founder has built YouTube channels from zero, so the studio is set up the way creators actually work.",
+  focusIntro: "What you get at Anushtan:",
   focusAreas: [
-    "Studio-grade sound, every time",
-    "Cinematic multi-cam framing",
-    "Guests who feel at ease on camera",
-    "Editing that keeps viewers watching",
-    "Clips built for reels and shorts",
-    "Brand storytelling, not just recording",
-    "Quick turnaround in Bengaluru",
+    "Clear sound with a wireless RODE mic",
+    "Three sets: 2, 3 & 5 seaters",
+    "Studio lights, ready when you arrive",
+    "A green room to get camera-ready",
+    "Videographer available on request",
+    "Editing available on request",
+    "One simple rate: ₹1,000 an hour",
     "Sessions in English, Hindi, Kannada & Tamil",
   ],
   closing:
@@ -79,51 +143,48 @@ export const HOME_WHY_US = {
 
 export const HOME_SERVICES = {
   eyebrow: "Services",
-  title: "What We Do",
+  title: "What We Offer",
   items: [
     {
-      title: "Podcast Recording",
+      title: "Studio Hire",
       description:
-        "Book the studio by the hour. Treated room, pro mics, and a producer on the desk.",
+        "Book any of our three sets by the hour. Everything you need to start recording is already in place.",
       includes: [
-        "Up to 4 broadcast microphones",
-        "Multi-camera video capture",
-        "Live audio monitoring",
-        "Raw files handed over same day",
+        "2, 3 or 5-seater space",
+        "Studio lights",
+        "Wireless RODE microphone",
+        "Green room access",
+        "₹1,000 per hour",
       ],
     },
     {
-      title: "Full Podcast Production",
+      title: "Videographer",
       description:
-        "We run your show end to end: format, recording, edit, and publishing.",
+        "Add a camera operator to shoot your session so you can focus on the conversation.",
       includes: [
-        "Show format & episode planning",
-        "Recording with a dedicated producer",
-        "Edited video + audio episode",
-        "Thumbnails, titles & show notes",
-        "Upload to YouTube & podcast platforms",
+        "Camera setup & framing",
+        "Shoots your full session",
+        "Add-on, charged separately",
       ],
     },
     {
-      title: "Short-form Clips",
+      title: "Editing",
       description:
-        "Turn every episode into reels and shorts that pull new listeners in.",
+        "Hand over your recording and get it back edited as an episode or short clips.",
       includes: [
-        "Vertical 9:16 edits",
-        "Captions & hooks",
-        "Platform-ready exports",
-        "Posting guidance",
+        "Full-length episode edit",
+        "Short clips for reels & shorts",
+        "Add-on, charged separately",
       ],
     },
     {
-      title: "Brand & Training Videos",
+      title: "Additional Equipment",
       description:
-        "Product explainers, team training, and brand stories, shot in-studio or on location.",
+        "Need something beyond the standard setup? Tell us and we'll arrange it.",
       includes: [
-        "Script & storyboard support",
-        "Studio or on-location shoot",
-        "Editing & motion graphics",
-        "Delivery for web, social & events",
+        "Extra mics, cameras or gear",
+        "Arranged before your session",
+        "Charged at actuals",
       ],
     },
   ],
@@ -138,12 +199,12 @@ export const HOME_IDEAL_CLIENT = {
     "Brands launching a show",
     "Creators upgrading their setup",
     "Interviewers & panel hosts",
-    "Retail & product teams needing training video",
+    "Teams recording training video",
     "Authors & speakers",
     "First-time podcasters",
   ],
   closing:
-    "If you have something worth saying, we'll help you say it well.",
+    "If you have something worth saying, we'll give you the space to say it well.",
 } as const;
 
 export const HOME_PROCESS = {
@@ -151,24 +212,24 @@ export const HOME_PROCESS = {
   title: "From Idea to Episode",
   steps: [
     {
-      title: "Plan",
-      description: "A quick call to shape your format, guests, and goals.",
+      title: "Choose a space",
+      description: "Pick the 2, 3 or 5-seater set that fits your guests.",
     },
     {
       title: "Book",
-      description: "Pick a slot online and confirm your session.",
+      description: "Pick a slot online or call us to confirm your hours.",
+    },
+    {
+      title: "Get ready",
+      description: "Freshen up in the green room before you go on camera.",
     },
     {
       title: "Record",
-      description: "Walk in, mic up, and talk. We handle the tech.",
+      description: "Lights are set and the mic is ready. Just talk.",
     },
     {
-      title: "Edit",
-      description: "We cut, grade, and mix the episode and the clips.",
-    },
-    {
-      title: "Publish",
-      description: "Go live on YouTube, Spotify, and social, with our help.",
+      title: "Add-ons",
+      description: "Optionally add a videographer and editing for a finished episode.",
     },
   ],
 } as const;
@@ -176,23 +237,8 @@ export const HOME_PROCESS = {
 export const HOME_TESTIMONIALS = {
   eyebrow: "Testimonials",
   title: "What Guests Say",
-  fallbacks: [
-    {
-      name: "Podcast Host",
-      message:
-        "The sound was perfect and the team made our guests completely relaxed on camera.",
-    },
-    {
-      name: "Founder",
-      message:
-        "We walked in with talking points and walked out with an episode and ten reels.",
-    },
-    {
-      name: "Brand Team",
-      message:
-        "Ajay understands both storytelling and retail. Our training videos finally landed.",
-    },
-  ],
+  /** Shown only from the admin panel — no placeholder quotes. */
+  fallbacks: [] as { name: string; message: string }[],
 } as const;
 
 export const HOME_FAQ = {
@@ -200,28 +246,28 @@ export const HOME_FAQ = {
   title: "Frequently Asked Questions",
   items: [
     {
-      question: "Where is the studio?",
-      answer: "#27, Castle Street, Bengaluru 560025. Parking details are shared when you book.",
+      question: "How much does the studio cost?",
+      answer: "₹1,000 per hour. This includes the studio space, lights, and a wireless RODE microphone.",
     },
     {
       question: "How many people can record at once?",
-      answer: "The podcast set comfortably seats up to four people, each with their own microphone and camera angle.",
+      answer: "We have three spaces: a 2-seater, a 3-seater, and a 5-seater. Pick the one that fits your guests.",
     },
     {
-      question: "Do I need any experience or equipment?",
-      answer: "No. Bring your ideas; we set up the mics, cameras, and lighting and guide you through the session.",
+      question: "Is there a place to get ready?",
+      answer: "Yes. A small green room is available for you and your guests to get ready before recording.",
     },
     {
-      question: "How soon do I get my files?",
-      answer: "Raw recordings are shared the same day. Edited episodes and clips are typically delivered within 3–5 working days.",
+      question: "Can you film and edit my podcast?",
+      answer: "Yes. A videographer and editing are available as add-on services, charged separately.",
     },
     {
-      question: "Can you help publish my podcast?",
-      answer: "Yes. With full production we prepare thumbnails, titles, and show notes and upload to YouTube and podcast platforms for you.",
+      question: "What if I need more equipment?",
+      answer: "Let us know when you book. Any additional equipment is arranged for you and charged at actuals.",
     },
     {
-      question: "Do you shoot outside the studio?",
-      answer: "Yes. Brand, product, and training videos can be shot on location in Bengaluru.",
+      question: "Where is the studio?",
+      answer: "#27, Castle Street, Bengaluru 560025.",
     },
   ],
 } as const;
@@ -230,8 +276,8 @@ export const HOME_FINAL_CTA = {
   eyebrow: "Book the studio",
   title: "Ready to Hit Record?",
   body: [
-    "Pick a slot, bring your guest, and leave the production to us.",
-    "Not sure where to start? Book a short discovery call and we'll plan your show together.",
+    "Pick a space, bring your guests, and start talking. From ₹1,000 an hour.",
+    "Want it filmed and edited too? Add a videographer and editing when you book.",
   ],
   ctaPrimary: "Book a Studio Session",
   ctaSecondary: "Contact the studio",
@@ -308,6 +354,7 @@ export const FOOTER_CONTENT = {
   quickLinks: [
     { href: "/", label: "Home" },
     { href: "/about", label: "About the Studio" },
+    { href: "/spaces", label: "Studio Spaces" },
     { href: "/services", label: "Services" },
     { href: "/how-it-works", label: "How It Works" },
     { href: "/founder", label: "Founder" },

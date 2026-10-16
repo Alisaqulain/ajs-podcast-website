@@ -160,8 +160,8 @@ export function BookingExperience({
               Choose your studio package
             </h2>
             <p className="mt-4 text-base text-luxury-body">
-              Pick how much help you want, from a recording slot to full production
-              and clips. Select one to unlock the booking calendar—sessions are
+              Pick your studio set (2, 3 or 5 seats) at ₹1,000 an hour. Add a videographer
+              or editing if you need them. Select one to unlock the booking calendar—sessions are
               held on{" "}
               <strong className="text-luxury-heading">Wednesdays &amp; Fridays</strong>.
             </p>

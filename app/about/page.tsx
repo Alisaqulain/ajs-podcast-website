@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SpacesSection } from "@/components/home/spaces-section";
 import { PageHero } from "@/components/hero/page-hero";
 import { GoldButton } from "@/components/ui/gold-button";
 import { IntroductionSection } from "@/components/home/introduction-section";
@@ -38,6 +39,7 @@ export default async function AboutPage() {
         <GoldButton href="/book">Book a Studio Session</GoldButton>
       </PageHero>
       <IntroductionSection />
+      <SpacesSection />
       <WhyUsSection />
       <FounderSection />
       <WhyPodcastSection />

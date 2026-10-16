@@ -1,46 +1,46 @@
 [
   {
-    "title": "Studio Hour",
-    "description": "Book the podcast room for an hour. Mics, cameras, lighting, and a producer on the desk; raw files handed over the same day.",
-    "price": 299900,
+    "title": "2-Seater Studio — 1 Hour",
+    "description": "Our two-seat set for interviews and co-hosted shows. Includes the space, studio lights and a wireless RODE microphone.",
+    "price": 100000,
     "discountPrice": null,
     "features": [
-      "1 hour of recording time",
-      "Up to 4 broadcast microphones",
-      "Multi-camera video capture",
-      "Raw audio & video files same day"
+      "2-seater studio set",
+      "Studio lights",
+      "Wireless RODE microphone",
+      "Green room access"
     ],
     "badge": "",
     "active": true,
     "sortOrder": 5
   },
   {
-    "title": "Full Episode Production",
-    "description": "Record, edit, and publish one complete episode, plus short clips to promote it.",
-    "price": 999900,
+    "title": "3-Seater Studio — 1 Hour",
+    "description": "Room for a host and two guests. Includes the space, studio lights and a wireless RODE microphone.",
+    "price": 100000,
     "discountPrice": null,
     "features": [
-      "2 hours of studio time",
-      "Edited multi-cam video + audio episode",
-      "3 vertical clips for reels & shorts",
-      "Thumbnail, title & show notes"
+      "3-seater studio set",
+      "Studio lights",
+      "Wireless RODE microphone",
+      "Green room access"
     ],
     "badge": "Most Popular",
     "active": true,
     "sortOrder": 10
   },
   {
-    "title": "Monthly Show (4 episodes)",
-    "description": "Your podcast, run end to end every month: planning, recording, editing, and publishing.",
-    "price": 3499900,
-    "discountPrice": 2999900,
+    "title": "5-Seater Studio — 1 Hour",
+    "description": "Our largest set, built for panels and group conversations. Includes the space, studio lights and a wireless RODE microphone.",
+    "price": 100000,
+    "discountPrice": null,
     "features": [
-      "4 recording sessions per month",
-      "4 fully edited episodes",
-      "12 short-form clips",
-      "Upload to YouTube & podcast platforms"
+      "5-seater studio set",
+      "Studio lights",
+      "Wireless RODE microphone",
+      "Green room access"
     ],
-    "badge": "Best Value",
+    "badge": "",
     "active": true,
     "sortOrder": 20
   }

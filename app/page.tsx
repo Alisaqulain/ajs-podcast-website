@@ -6,6 +6,7 @@ import { WhyPodcastSection } from "@/components/home/why-podcast-section";
 import { WhyUsSection } from "@/components/home/why-us-section";
 import { ServicesSection } from "@/components/home/services-section";
 import { FounderSection } from "@/components/home/founder-section";
+import { SpacesSection } from "@/components/home/spaces-section";
 import { IdealClientSection } from "@/components/home/ideal-client-section";
 import { ProcessSection } from "@/components/home/process-section";
 import { LatestConversations } from "@/components/home/latest-conversations";
@@ -38,6 +39,7 @@ export default async function HomePage() {
     <>
       <HomeHero />
       <IntroductionSection />
+      <SpacesSection />
       <ServicesSection />
       <WhyPodcastSection />
       <FounderSection />

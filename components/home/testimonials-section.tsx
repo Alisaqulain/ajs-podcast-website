@@ -29,6 +29,9 @@ export async function TestimonialsSection() {
         ? t.rating
         : undefined,
   }));
+  // No placeholder quotes: the section appears once real testimonials are added in the admin.
+  if (items.length === 0) return null;
+
 
   const displayItems: TestimonialItem[] =
     items.length > 0

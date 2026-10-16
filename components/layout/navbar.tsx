@@ -12,8 +12,8 @@ import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { CtaButton } from "@/components/lead/cta-button";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/spaces", label: "Spaces" },
   { href: "/services", label: "Services" },
   { href: "/founder", label: "Founder" },
   { href: "/podcast", label: "Episodes" },
