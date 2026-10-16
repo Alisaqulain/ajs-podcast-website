@@ -42,7 +42,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       <div className="flex">
         <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-brand-gold/15 bg-brand-dark text-brand-cream md:flex">
           <div className="border-b border-white/10 px-6 py-6">
-            <p className="font-display text-lg font-semibold">AJ&apos;S Studio Admin</p>
+            <p className="font-display text-lg font-semibold">Anushtan Admin</p>
             <p className="text-xs text-brand-cream/55">CMS</p>
           </div>
           <nav className="flex-1 space-y-1 p-4">

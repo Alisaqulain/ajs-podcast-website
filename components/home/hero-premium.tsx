@@ -99,7 +99,7 @@ export function HeroPremium() {
           transition={{ duration: 0.55 }}
           className="text-xs font-semibold uppercase tracking-[0.38em] text-brand-gold-deep"
         >
-          AJ&apos;S Studio · Cycling Vlog · Podcast
+          Anushtan · Podcast &amp; Video Studio
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
@@ -145,7 +145,7 @@ export function HeroPremium() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-12 text-sm text-luxury-muted"
         >
-          AJ&apos;S Studio · Films · Photoshoots · Podcasts
+          Anushtan · Podcast &amp; Video Studio
         </motion.p>
       </div>
     </section>

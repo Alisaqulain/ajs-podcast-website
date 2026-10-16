@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -8,7 +9,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
 import { HOME_FAQ } from "@/lib/site-content";
 
-export function FaqSection() {
+export function FaqSection({ showMoreLink = true }: { showMoreLink?: boolean } = {}) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -24,7 +25,7 @@ export function FaqSection() {
           title={HOME_FAQ.title}
         />
 
-        <div className="mx-auto max-w-3xl divide-y divide-luxury-border rounded-3xl border border-luxury-border bg-luxury-bg/90">
+        <div className="mx-auto max-w-5xl divide-y divide-luxury-border rounded-3xl border border-luxury-border bg-luxury-bg/90">
           {HOME_FAQ.items.map((item, i) => {
             const isOpen = openIndex === i;
             return (
@@ -65,6 +66,19 @@ export function FaqSection() {
             );
           })}
         </div>
+        {showMoreLink ? (
+        <p className="mt-10 text-center text-sm text-luxury-body">
+          More questions?{" "}
+          <Link href="/faq" className="font-semibold text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold">
+            Read the full FAQ
+          </Link>{" "}
+          or{" "}
+          <Link href="/contact" className="font-semibold text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold">
+            contact the studio
+          </Link>
+          .
+        </p>
+        ) : null}
       </Container>
     </section>
   );

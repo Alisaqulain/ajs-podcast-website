@@ -5,6 +5,7 @@ import { IntroductionSection } from "@/components/home/introduction-section";
 import { WhyPodcastSection } from "@/components/home/why-podcast-section";
 import { WhyUsSection } from "@/components/home/why-us-section";
 import { ServicesSection } from "@/components/home/services-section";
+import { FounderSection } from "@/components/home/founder-section";
 import { IdealClientSection } from "@/components/home/ideal-client-section";
 import { ProcessSection } from "@/components/home/process-section";
 import { LatestConversations } from "@/components/home/latest-conversations";
@@ -15,30 +16,32 @@ import { CtaSection } from "@/components/home/cta-section";
 import { getLatestPodcastEpisodesForHome } from "@/lib/podcast-episodes";
 
 export const metadata: Metadata = {
-  title: `${SITE.name} | Aj's Cycling Vlog`,
+  title: { absolute: `${SITE.name} | ${SITE.tagline}` },
   description: SITE.description,
   keywords: [
-    "Aj's Cycling Vlog",
-    "AJ'S Studio Bangalore",
-    "cycling vlog India",
-    "Bangalore commute cycling",
-    "ajsvlog YouTube",
+    "Anushtan",
+    "podcast studio Bengaluru",
     "podcast studio Bangalore",
+    "video podcast recording Bangalore",
+    "podcast production India",
+    "studio rental Bengaluru",
+    "brand video production Bangalore",
   ],
 };
 
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const episodes = await getLatestPodcastEpisodesForHome(12);
+  const episodes = await getLatestPodcastEpisodesForHome(4);
 
   return (
     <>
       <HomeHero />
       <IntroductionSection />
-      <WhyPodcastSection />
-      <WhyUsSection />
       <ServicesSection />
+      <WhyPodcastSection />
+      <FounderSection />
+      <WhyUsSection />
       <IdealClientSection />
       <ProcessSection />
       <LatestConversations episodes={episodes} />

@@ -19,7 +19,7 @@ export function IdealClientSection() {
           title={HOME_IDEAL_CLIENT.title}
         />
 
-        <ul className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {HOME_IDEAL_CLIENT.clients.map((client, i) => (
             <motion.li
               key={client}

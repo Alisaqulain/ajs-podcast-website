@@ -49,8 +49,8 @@ export function LatestConversationsGrid({
           channel directly on YouTube.
         </p>
         <div className="mt-6 flex justify-center">
-          <GoldButton href={SITE.social.youtube}>
-            Subscribe on YouTube
+          <GoldButton href={SITE.videosUrl}>
+            Watch on YouTube
           </GoldButton>
         </div>
       </div>

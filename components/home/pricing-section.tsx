@@ -45,7 +45,7 @@ export function PricingSection() {
       className="scroll-mt-28 border-t border-luxury-border bg-luxury-section py-20 md:py-28"
     >
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-6xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
               Book your session
             </p>
@@ -53,8 +53,8 @@ export function PricingSection() {
               {BOOK_NOW_LABEL}
             </h2>
             <p className="mt-4 text-base text-luxury-body">
-              Choose a package for podcast production, visibility mentorship, or
-              personal branding support. Secure checkout and calm scheduling.{" "}
+              Choose a recording slot, full podcast production, or a brand video
+              package. Secure checkout and simple scheduling.{" "}
               <Link
                 href="/refund-policy"
                 className="font-medium text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold"
@@ -70,22 +70,22 @@ export function PricingSection() {
               </Link>
               .
             </p>
-            <ul className="mx-auto mt-8 grid max-w-3xl gap-3 text-left text-sm text-luxury-body sm:grid-cols-2">
+            <ul className="mx-auto mt-8 grid max-w-6xl gap-3 text-left text-sm text-luxury-body sm:grid-cols-2 lg:grid-cols-4">
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Personal branding lift—story-led positioning on camera
+                Treated room, broadcast mics, and multi-cam video
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Audience exposure through publishing &amp; promo assets
+                Edited episodes plus reels and shorts
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Production credibility—sound, edit, and cinematic finish
+                A producer on the desk for every session
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Limited monthly guest slots—quality over volume
+                Publishing help for YouTube and Spotify
               </li>
             </ul>
         </div>

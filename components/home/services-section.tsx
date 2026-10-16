@@ -1,4 +1,6 @@
 "use client";
+import { StudioBackdrop } from "@/components/ui/studio-backdrop";
+import Link from "next/link";
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -8,21 +10,22 @@ import { CtaButton } from "@/components/lead/cta-button";
 import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { HOME_SERVICES } from "@/lib/site-content";
 
-export function ServicesSection() {
+export function ServicesSection({ showMoreLink = true }: { showMoreLink?: boolean } = {}) {
   return (
     <section
       id="services"
-      className="scroll-mt-28 border-t border-luxury-border bg-section-mesh py-20 md:py-28"
+      className="relative overflow-hidden scroll-mt-28 border-t border-luxury-border bg-section-mesh py-20 md:py-28"
       aria-labelledby="services-heading"
     >
-      <Container>
+      <StudioBackdrop />
+      <Container className="relative">
         <SectionHeading
           id="services-heading"
           eyebrow={HOME_SERVICES.eyebrow}
           title={HOME_SERVICES.title}
         />
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {HOME_SERVICES.items.map((service, i) => (
             <motion.article
               key={service.title}
@@ -64,10 +67,18 @@ export function ServicesSection() {
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <CtaButton intent="book" size="lg">
             {BOOK_NOW_LABEL}
           </CtaButton>
+          {showMoreLink ? (
+            <Link
+              href="/services"
+              className="text-sm font-semibold text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold"
+            >
+              Explore all services →
+            </Link>
+          ) : null}
         </div>
       </Container>
     </section>

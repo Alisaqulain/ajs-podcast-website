@@ -16,10 +16,10 @@ import { Mail } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact AJ'S Studio for films, photoshoots, podcasts, or cycling vlog collaborations.",
+    "Contact Anushtan to book podcast recording, full podcast production, or brand video in Bengaluru.",
   openGraph: {
     title: `Contact | ${SITE.name}`,
-    description: "Reach AJ'S Studio via the form, phone, WhatsApp, or social channels.",
+    description: "Reach Anushtan via the form, phone, WhatsApp, or social channels.",
   },
 };
 
@@ -35,8 +35,8 @@ export default async function ContactPage() {
     <div className="pb-24">
       <PageHero
         eyebrow="Contact"
-        title="Get in touch with AJ'S Studio"
-        subtitle="Films, photoshoots, podcasts, or vlog ideas—share a few details and we'll follow up."
+        title="Let's plan your podcast"
+        subtitle="Recording a single episode or launching a full show? Share a few details and we'll get back within a day."
         align="left"
       >
         <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>

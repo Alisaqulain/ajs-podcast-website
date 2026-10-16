@@ -9,7 +9,7 @@ import {
 } from "@/lib/podcast-episodes";
 import { SITE } from "@/lib/site";
 
-const HOME_EPISODE_COUNT = 12;
+const HOME_EPISODE_COUNT = 4;
 
 export async function LatestConversations(props?: {
   episodes?: PodcastEpisodeCard[];
@@ -39,9 +39,9 @@ export async function LatestConversations(props?: {
         <div className="readable-content-panel mb-8 w-full rounded-[1.25rem] px-4 py-5 sm:mb-12 sm:rounded-[1.5rem] sm:px-7 sm:py-7 md:mx-auto md:max-w-3xl">
           <SectionHeading
             id="latest-conversations-heading"
-            eyebrow="Videos"
-            title="Latest from Aj's Cycling Vlog"
-            subtitle="Fresh uploads from the YouTube channel—preview here or watch the full video on YouTube."
+            eyebrow="Episodes"
+            title="Latest from the Studio"
+            subtitle="Conversations recorded at Anushtan. Preview here or watch the full episode on YouTube."
             className="mb-0"
           />
         </div>

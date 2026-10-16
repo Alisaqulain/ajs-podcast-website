@@ -338,3 +338,108 @@ body {
   border-color: var(--luxury-border);
   box-shadow: var(--glass-shadow);
 }
+
+/* ── Studio backdrop animations (sound waves, rings, particles) ── */
+@keyframes eq-bar {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes particle-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-520px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+@keyframes ring-ping {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes wave-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.studio-eq-bar {
+  transform-origin: bottom;
+  animation: eq-bar 1.6s ease-in-out infinite;
+}
+
+.studio-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+
+.studio-spin-reverse {
+  animation: spin-slow 60s linear infinite reverse;
+}
+
+.studio-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.studio-particle {
+  animation: particle-rise linear infinite;
+}
+
+.studio-ring-ping {
+  animation: ring-ping 4.5s ease-out infinite;
+}
+
+.studio-wave-scroll {
+  animation: wave-scroll 18s linear infinite;
+}
+
+.studio-photo-ring {
+  background: conic-gradient(from 0deg, #38bdf8, #0284c7, #22d3ee, #7dd3fc, #38bdf8);
+  animation: spin-slow 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-eq-bar,
+  .studio-spin-slow,
+  .studio-spin-reverse,
+  .studio-float,
+  .studio-particle,
+  .studio-ring-ping,
+  .studio-wave-scroll,
+  .studio-photo-ring {
+    animation: none !important;
+  }
+}

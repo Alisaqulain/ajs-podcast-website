@@ -1,4 +1,3 @@
-import { getPageHeroAmbientClips } from "@/lib/page-hero-clips";
 import {
   PageHeroVideo,
   type PageHeroVideoProps,
@@ -6,8 +5,11 @@ import {
 
 export type PageHeroProps = Omit<PageHeroVideoProps, "ambientClips">;
 
-/** Server hero with YouTube ambient background when no page MP4 URL is configured. */
+/**
+ * Inner-page hero. Uses the animated studio backdrop (or NEXT_PUBLIC_PAGE_HERO_VIDEO_URL
+ * when set) — the YouTube ambient clips came from the founder's vlog channel, which
+ * is off-brand for the studio.
+ */
 export async function PageHero(props: PageHeroProps) {
-  const ambientClips = await getPageHeroAmbientClips();
-  return <PageHeroVideo {...props} ambientClips={ambientClips} />;
+  return <PageHeroVideo {...props} ambientClips={[]} />;
 }

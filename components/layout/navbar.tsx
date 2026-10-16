@@ -14,11 +14,11 @@ import { CtaButton } from "@/components/lead/cta-button";
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/podcast", label: "Podcast" },
-  { href: "/blog", label: "Blog" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/book", label: "Book" },
+  { href: "/services", label: "Services" },
+  { href: "/founder", label: "Founder" },
+  { href: "/podcast", label: "Episodes" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -72,7 +72,7 @@ export function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             aria-label="Close menu"
-            className="fixed inset-0 z-40 bg-slate-900/25 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-slate-900/25 backdrop-blur-sm xl:hidden"
             onClick={closeMenu}
           />
         ) : null}
@@ -101,7 +101,7 @@ export function Navbar() {
           </motion.div>
 
           <nav
-            className="hidden items-center gap-0.5 lg:flex xl:gap-1"
+            className="hidden items-center gap-0.5 xl:flex 2xl:gap-1"
             aria-label="Main"
           >
             {links.map((l) => {
@@ -111,7 +111,7 @@ export function Navbar() {
                   key={l.href}
                   href={l.href}
                   className={cn(
-                    "relative rounded-full px-3 py-2.5 text-sm font-medium transition-colors xl:px-3.5",
+                    "relative rounded-full px-3 py-2.5 text-sm font-medium transition-colors 2xl:px-3.5",
                     active
                       ? "font-semibold text-[#0f172a]"
                       : "text-luxury-body hover:text-[#0f172a]"
@@ -135,7 +135,7 @@ export function Navbar() {
           </nav>
 
           <motion.div
-            className="hidden shrink-0 items-center gap-2 lg:flex"
+            className="hidden shrink-0 items-center gap-2 xl:flex"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -145,7 +145,7 @@ export function Navbar() {
           </motion.div>
 
           <motion.div
-            className="flex shrink-0 items-center gap-2 lg:hidden"
+            className="flex shrink-0 items-center gap-2 xl:hidden"
             whileTap={{ scale: 0.95 }}
           >
             <button
@@ -171,7 +171,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-              className="overflow-hidden border-t border-luxury-border bg-surface shadow-soft-xl lg:hidden"
+              className="overflow-hidden border-t border-luxury-border bg-surface shadow-soft-xl xl:hidden"
             >
               <Container className="max-h-[min(70vh,calc(100dvh-5.5rem))] overflow-y-auto overscroll-y-contain py-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
                 <ul className="flex flex-col gap-0.5">

@@ -1,5 +1,6 @@
 "use client";
 
+import { StudioBackdrop } from "@/components/ui/studio-backdrop";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { CtaButton } from "@/components/lead/cta-button";
@@ -8,8 +9,9 @@ import { HOME_FINAL_CTA } from "@/lib/site-content";
 
 export function CtaSection() {
   return (
-    <section className="border-t border-luxury-border bg-luxury-bg py-20 md:py-28">
-      <Container>
+    <section className="relative overflow-hidden border-t border-luxury-border bg-luxury-bg py-20 md:py-28">
+      <StudioBackdrop />
+      <Container className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

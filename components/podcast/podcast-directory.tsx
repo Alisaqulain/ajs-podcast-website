@@ -74,7 +74,7 @@ export function PodcastDirectory({
   return (
     <div className="pb-20 md:pb-28">
       <PageHeroVideo
-        eyebrow="Aj's Cycling Vlog"
+        eyebrow="Anushtan Episodes"
         title="Conversations that return you to yourself"
         subtitle="Watch episodes on YouTube—search below to find a topic or title."
         ambientClips={ambientClips}

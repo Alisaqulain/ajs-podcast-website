@@ -31,7 +31,7 @@ export default async function PrivacyPolicyPage() {
         <LegalProse>
           <h2>Who we are</h2>
           <p>
-            {SITE.name} offers films, photoshoots, podcasts, cycling vlogs, and
+            {SITE.name} offers podcast recording, podcast production, video production, and
             related digital services. For privacy
             questions, contact{" "}
             <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> or
@@ -65,7 +65,7 @@ export default async function PrivacyPolicyPage() {
           <h2>How we use personal information</h2>
           <p>We use information to:</p>
           <ul>
-            <li>Respond to inquiries and deliver coaching or purchased services.</li>
+            <li>Respond to inquiries and deliver studio bookings and purchased services.</li>
             <li>Process and verify payments, prevent fraud, and meet legal duties.</li>
             <li>Improve the website, content, and user experience.</li>
             <li>

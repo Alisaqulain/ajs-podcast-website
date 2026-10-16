@@ -64,9 +64,29 @@ export function SiteLogo({
     );
   }
 
-  if (variant === "nav" || variant === "footer" || variant === "auth") {
+  if (variant === "auth") {
     return (
       <CircularLogo variant={variant} priority={priority} className={className} />
+    );
+  }
+
+  if (variant === "nav" || variant === "footer") {
+    return (
+      <span className="inline-flex min-w-0 items-center gap-3">
+        <CircularLogo
+          variant={variant}
+          priority={priority}
+          className={cn(variant === "nav" && "!h-11 !w-11 sm:!h-12 sm:!w-12", className)}
+        />
+        <span className="flex min-w-0 flex-col leading-none">
+          <span className="font-display text-xl font-semibold tracking-tight text-luxury-heading sm:text-2xl">
+            {SITE.name}
+          </span>
+          <span className="mt-1 truncate text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-gold-deep sm:text-[11px]">
+            Podcast Studio
+          </span>
+        </span>
+      </span>
     );
   }
 

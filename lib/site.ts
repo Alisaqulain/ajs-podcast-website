@@ -1,11 +1,17 @@
 export const SITE = {
-  name: "AJ'S Studio",
+  name: "Anushtan",
   /** Primary brand mark (navbar, footer, auth, payments). */
-  logoSrc: "/ajs-logo.jpeg",
-  tagline: "Films, Photoshoots, Podcasts",
+  logoSrc: "/anushtan-logo.png",
+  tagline: "Podcast & Video Studio, Bengaluru",
   description:
-    "Welcome to Aj's Cycling Vlog — entertaining videos on all things cycling, plus films, photoshoots, and podcasts from AJ'S Studio in Bangalore.",
-  url: process.env.NEXTAUTH_URL || "http://localhost:3000",
+    "Anushtan is a podcast and video studio in Bengaluru. Record, film, and publish conversations that build your brand, with production led by creator and brand storyteller Ajay Rao.",
+  url: process.env.NEXTAUTH_URL || "https://www.anushtan.com",
+  /** Founder's personal creator hub — YouTube channel links live there, not on this site. */
+  creatorSiteUrl: "https://ajsvlog.com",
+  /** Where "watch" links go: the studio channel once set, otherwise the founder's hub. */
+  videosUrl:
+    (process.env.NEXT_PUBLIC_STUDIO_YOUTUBE_URL || "").trim() ||
+    "https://ajsvlog.com",
   /** Optional full-screen hero video (mp4 URL or path like /hero.mp4). Leave empty for gradient-only hero. */
   heroVideoUrl: (process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "").trim(),
   /**
@@ -14,17 +20,23 @@ export const SITE = {
    */
   homeHeroVideoUrl: (process.env.NEXT_PUBLIC_HOME_HERO_VIDEO_URL || "").trim(),
   /**
+   * YouTube video played muted behind the homepage hero (used when no mp4 is set).
+   * Default: the "Ajs Studio" studio tour. Override with NEXT_PUBLIC_HOME_HERO_YOUTUBE_ID.
+   */
+  homeHeroYoutubeId:
+    (process.env.NEXT_PUBLIC_HOME_HERO_YOUTUBE_ID || "").trim() || "l01F2OFq0L4",
+  /**
    * Viral-style background video for inner page heroes.
    * TODO: Replace with viral background video URL
    */
   pageHeroVideoUrl: (process.env.NEXT_PUBLIC_PAGE_HERO_VIDEO_URL || "").trim(),
   /** Poster shown before video loads or if video errors */
   heroPosterUrl:
-    (process.env.NEXT_PUBLIC_HERO_POSTER_URL || "").trim() || "/ajs-logo.jpeg",
+    (process.env.NEXT_PUBLIC_HERO_POSTER_URL || "").trim() || "/anushtan-logo.png",
   /** Homepage hero card poster — unused while CSS placeholder is active */
   homeHeroPosterUrl:
     (process.env.NEXT_PUBLIC_HOME_HERO_POSTER_URL || "").trim() ||
-    "/ajs-logo.jpeg",
+    "/anushtan-logo.png",
   /**
    * Extra zoom on hero YouTube embed so the frame **covers** the viewport (true landscape crop).
    * Long-form landscape uploads need less aggressive scale than Shorts — default ~1.1; override via env.
@@ -37,7 +49,7 @@ export const SITE = {
   })(),
   /** Public inquiries; replace with your live inbox if different */
   contactEmail: "info@anushtan.com",
-  address: "#27, Castle street, Bangalore 560025",
+  address: "#27, Castle Street, Bengaluru 560025",
   phones: {
     landline: "080 41126938",
     mobile: "9845826938",
@@ -45,7 +57,8 @@ export const SITE = {
   /** Optional Calendly embed URL, e.g. https://calendly.com/your-handle/discovery-call */
   calendlyUrl: (process.env.NEXT_PUBLIC_CALENDLY_URL || "").trim(),
   social: {
-    youtube: "https://www.youtube.com/c/ajsvlog",
+    /** Studio YouTube channel — set NEXT_PUBLIC_STUDIO_YOUTUBE_URL once it is live. */
+    youtube: (process.env.NEXT_PUBLIC_STUDIO_YOUTUBE_URL || "").trim(),
     linkedin: "",
     instagram: "http://www.instagram.com/ajs.studio.space",
     facebook: "",

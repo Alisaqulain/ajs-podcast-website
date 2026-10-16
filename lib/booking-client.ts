@@ -105,10 +105,10 @@ export async function startRazorpayCheckout(opts: {
       key: keyId,
       amount,
       currency: currency || "INR",
-      name: "AJ'S Studio",
+      name: SITE.name,
       description: planTitle
-        ? `${planTitle} — Coaching / Podcast Service`
-        : "Coaching / Podcast Service",
+        ? `${planTitle} — Studio Booking`
+        : "Studio Booking",
       image: logoUrl,
       order_id: orderId,
       prefill: {

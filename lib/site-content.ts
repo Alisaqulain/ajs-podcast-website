@@ -1,77 +1,80 @@
-/** Marketing copy for AJ'S Studio — single source for homepage & shared sections. */
+/** Marketing copy for Anushtan — single source for homepage & shared sections. */
 
 export const HOME_HERO = {
-  trustLine: "Films · Photoshoots · Podcasts · Cycling",
-  headline: "Welcome to AJ'S Studio",
-  headlineAccent: "Aj's Cycling Vlog",
+  trustLine: "Podcast Recording · Video Production · Bengaluru",
+  headline: "Your story deserves a",
+  headlineAccent: "studio built for conversation",
   subheading:
-    "I commute on my cycle around town — it's my primary mode of transport. On YouTube I make entertaining videos on all things related to cycling.",
-  ctaPrimary: "Subscribe on YouTube",
-  ctaSecondary: "Watch on YouTube",
+    "Anushtan is a podcast and video studio in Bengaluru. Walk in with an idea, walk out with a polished episode, clips for social, and content that works for your brand.",
+  ctaPrimary: "Book a Studio Session",
+  ctaSecondary: "Meet the Founder",
 } as const;
 
 export const HOME_INTRO = {
-  eyebrow: "Welcome",
-  title: "Welcome to my Aj's Cycling Vlog!!",
-  lead: "I am a cyclist who commutes on his cycle around town — yup, it's my primary mode of transport.",
+  eyebrow: "The Studio",
+  title: "Welcome to Anushtan",
+  lead: "A calm, camera-ready space where founders, experts, and creators sit down and talk.",
   mission:
-    "I use my creativity on this YouTube channel, where I try to make entertaining videos on all things related to cycling.",
+    "We handle the mics, cameras, lighting, and edit so you can focus on what you're saying. Every session is produced by people who have published hundreds of videos themselves and know what holds an audience.",
   attention:
-    "Do smash the Subscribe button and ring that bell so I will be in your notifications every week with a new video.",
+    "Book an hour to record, or hand us the whole show: planning, recording, editing, and publishing.",
   podcastTrust:
-    "AJ'S Studio also brings you films, photoshoots, and podcasts — all rooted in storytelling and community.",
-  audienceIntro: "On the channel you'll find",
+    "Anushtan grows out of a decade of independent video publishing and twenty years of brand-building in retail. Content has always been the connecting thread.",
+  audienceIntro: "What you get at the studio",
   audiences: [
-    "Commute rides around Bangalore",
-    "Cycling tips & gear",
-    "Town explorations on two wheels",
-    "Entertaining ride vlogs",
-    "Films & studio projects",
-    "Podcast conversations",
+    "Acoustically treated podcast room",
+    "Multi-camera 4K video setup",
+    "Broadcast microphones for up to 4 voices",
+    "Soft, flattering studio lighting",
+    "Live monitoring by a producer",
+    "Edited episode + short-form clips",
   ],
-  closing: "New videos every week — see you on the road.",
+  closing: "Show up with your voice. Leave with content.",
 } as const;
 
 export const HOME_WHY_PODCAST = {
-  eyebrow: "Why cycling vlogs",
-  title: "Why Cycling Stories Matter",
-  subtitle: "Two wheels, one city, endless stories",
-  intro: "Cycling isn't just transport — it's how you experience your town up close.",
-  helpsIntro: "This channel helps you:",
+  eyebrow: "Why a podcast",
+  title: "Why Video Podcasts Work",
+  subtitle: "One conversation, a month of content.",
+  intro:
+    "A well-run hour in the studio becomes a full episode, a stack of reels, and the trust that only comes from people hearing you think out loud.",
+  helpsIntro: "A podcast helps you:",
   benefits: [
-    "See Bangalore from a cyclist's perspective",
-    "Pick up practical commute tips",
-    "Stay entertained on short and long rides",
-    "Discover routes, gear, and community",
-    "Follow weekly uploads you can count on",
-    "Support independent creative storytelling",
+    "Build authority in your field, in your own voice",
+    "Turn one recording into reels, shorts, and posts",
+    "Open doors with guests, partners, and clients",
+    "Show customers the people behind the brand",
+    "Train and onboard teams with reusable video",
+    "Stay visible on YouTube, Spotify, and Instagram",
   ],
-  becomesIntro: "Every video becomes:",
+  becomesIntro: "Every session becomes:",
   becomes: [
-    "A snapshot of life on the road",
-    "Inspiration to ride more",
-    "A conversation starter",
-    "Part of the AJ'S Studio story",
+    "A full-length video and audio episode",
+    "Vertical clips ready for social",
+    "Thumbnails, titles, and show notes",
+    "An asset your brand keeps using for years",
   ],
 } as const;
 
 export const HOME_WHY_US = {
-  eyebrow: "Why AJ'S Studio",
-  title: "Why AJ'S Studio?",
-  subtitle: "More than a YouTube channel.",
-  tagline: "Creative studio energy on every project.",
-  focusIntro: "At AJ'S Studio we focus on:",
+  eyebrow: "Why Anushtan",
+  title: "Why Record at Anushtan?",
+  subtitle: "Run by a creator, not just a rental room.",
+  tagline:
+    "Our founder has built channels from zero, so we produce for the audience, not just the recording.",
+  focusIntro: "At Anushtan we focus on:",
   focusAreas: [
-    "Films that feel personal",
-    "Photoshoots with character",
-    "Podcasts with real conversation",
-    "Cycling vlogs with heart",
-    "Community and collaboration",
-    "Weekly consistency on YouTube",
-    "Bangalore-rooted storytelling",
+    "Studio-grade sound, every time",
+    "Cinematic multi-cam framing",
+    "Guests who feel at ease on camera",
+    "Editing that keeps viewers watching",
+    "Clips built for reels and shorts",
+    "Brand storytelling, not just recording",
+    "Quick turnaround in Bengaluru",
+    "Sessions in English, Hindi, Kannada & Tamil",
   ],
   closing:
-    "Whether you're here for the ride or the studio work — welcome to the crew.",
+    "Whether it's your first episode or your fiftieth, we make the studio feel like a conversation, not a production.",
 } as const;
 
 export const HOME_SERVICES = {
@@ -79,44 +82,48 @@ export const HOME_SERVICES = {
   title: "What We Do",
   items: [
     {
-      title: "Cycling Vlog",
-      description: "Weekly YouTube videos on commuting, routes, and cycling life.",
+      title: "Podcast Recording",
+      description:
+        "Book the studio by the hour. Treated room, pro mics, and a producer on the desk.",
       includes: [
-        "Ride vlogs",
-        "Commute stories",
-        "Gear & tips",
-        "Town explorations",
-        "Subscribe for new uploads",
+        "Up to 4 broadcast microphones",
+        "Multi-camera video capture",
+        "Live audio monitoring",
+        "Raw files handed over same day",
       ],
     },
     {
-      title: "Films",
-      description: "Short and long-form film projects from AJ'S Studio.",
+      title: "Full Podcast Production",
+      description:
+        "We run your show end to end: format, recording, edit, and publishing.",
       includes: [
-        "Concept development",
-        "Production",
-        "Editing",
-        "Delivery for web & events",
+        "Show format & episode planning",
+        "Recording with a dedicated producer",
+        "Edited video + audio episode",
+        "Thumbnails, titles & show notes",
+        "Upload to YouTube & podcast platforms",
       ],
     },
     {
-      title: "Photoshoots",
-      description: "Portrait and brand shoots with a collaborative vibe.",
+      title: "Short-form Clips",
+      description:
+        "Turn every episode into reels and shorts that pull new listeners in.",
       includes: [
-        "Planning & direction",
-        "On-location or studio",
-        "Retouching",
-        "Social-ready assets",
+        "Vertical 9:16 edits",
+        "Captions & hooks",
+        "Platform-ready exports",
+        "Posting guidance",
       ],
     },
     {
-      title: "Podcasts",
-      description: "Conversations recorded and produced at the studio.",
+      title: "Brand & Training Videos",
+      description:
+        "Product explainers, team training, and brand stories, shot in-studio or on location.",
       includes: [
-        "Recording support",
-        "Editing",
-        "Publishing guidance",
-        "Clips for social",
+        "Script & storyboard support",
+        "Studio or on-location shoot",
+        "Editing & motion graphics",
+        "Delivery for web, social & events",
       ],
     },
   ],
@@ -124,63 +131,66 @@ export const HOME_SERVICES = {
 
 export const HOME_IDEAL_CLIENT = {
   eyebrow: "Who it's for",
-  title: "Who This Is For",
+  title: "Who Records With Us",
   clients: [
-    "Cycling commuters",
-    "Weekend riders",
-    "Bangalore locals curious about routes",
-    "Brands wanting authentic video",
-    "Podcast guests & collaborators",
-    "Anyone who loves two-wheeled stories",
-    "Creators looking for studio support",
-    "Viewers who want weekly entertainment",
+    "Founders & business owners",
+    "Doctors, coaches & consultants",
+    "Brands launching a show",
+    "Creators upgrading their setup",
+    "Interviewers & panel hosts",
+    "Retail & product teams needing training video",
+    "Authors & speakers",
+    "First-time podcasters",
   ],
   closing:
-    "Hop on — subscribe on YouTube and say hello on Instagram.",
+    "If you have something worth saying, we'll help you say it well.",
 } as const;
 
 export const HOME_PROCESS = {
   eyebrow: "How it works",
-  title: "From Idea to Upload",
+  title: "From Idea to Episode",
   steps: [
     {
-      title: "Ride or concept",
-      description: "Pick a route, topic, or studio brief.",
+      title: "Plan",
+      description: "A quick call to shape your format, guests, and goals.",
     },
     {
-      title: "Shoot",
-      description: "On the bike, on set, or in the podcast room.",
+      title: "Book",
+      description: "Pick a slot online and confirm your session.",
+    },
+    {
+      title: "Record",
+      description: "Walk in, mic up, and talk. We handle the tech.",
     },
     {
       title: "Edit",
-      description: "Cut, grade, and polish for YouTube or delivery.",
+      description: "We cut, grade, and mix the episode and the clips.",
     },
     {
       title: "Publish",
-      description: "New vlog on the channel; studio work to you or your platform.",
-    },
-    {
-      title: "Community",
-      description: "Comments, DMs, and the next ride together.",
+      description: "Go live on YouTube, Spotify, and social, with our help.",
     },
   ],
 } as const;
 
 export const HOME_TESTIMONIALS = {
   eyebrow: "Testimonials",
-  title: "What People Say",
+  title: "What Guests Say",
   fallbacks: [
     {
-      name: "Viewer",
-      message: "Love the commute vlogs — feels like riding with a friend.",
+      name: "Podcast Host",
+      message:
+        "The sound was perfect and the team made our guests completely relaxed on camera.",
     },
     {
-      name: "Collaborator",
-      message: "Professional, creative, and easy to work with at the studio.",
+      name: "Founder",
+      message:
+        "We walked in with talking points and walked out with an episode and ten reels.",
     },
     {
-      name: "Subscriber",
-      message: "New video every week — exactly what I subscribed for.",
+      name: "Brand Team",
+      message:
+        "Ajay understands both storytelling and retail. Our training videos finally landed.",
     },
   ],
 } as const;
@@ -190,49 +200,123 @@ export const HOME_FAQ = {
   title: "Frequently Asked Questions",
   items: [
     {
-      question: "How often do you upload?",
-      answer: "New cycling vlog videos aim to land every week on YouTube.",
+      question: "Where is the studio?",
+      answer: "#27, Castle Street, Bengaluru 560025. Parking details are shared when you book.",
     },
     {
-      question: "Where are you based?",
-      answer: "#27, Castle street, Bangalore 560025.",
+      question: "How many people can record at once?",
+      answer: "The podcast set comfortably seats up to four people, each with their own microphone and camera angle.",
     },
     {
-      question: "Can I book a photoshoot or podcast?",
-      answer: "Yes — use Contact or call the studio numbers listed on the site.",
+      question: "Do I need any experience or equipment?",
+      answer: "No. Bring your ideas; we set up the mics, cameras, and lighting and guide you through the session.",
     },
     {
-      question: "Is the channel only about cycling?",
-      answer: "Cycling vlogs are the heart of the YouTube channel; AJ'S Studio also does films, photoshoots, and podcasts.",
+      question: "How soon do I get my files?",
+      answer: "Raw recordings are shared the same day. Edited episodes and clips are typically delivered within 3–5 working days.",
     },
     {
-      question: "How do I subscribe?",
-      answer: "Hit Subscribe and the bell on the Aj's Cycling Vlog YouTube channel.",
+      question: "Can you help publish my podcast?",
+      answer: "Yes. With full production we prepare thumbnails, titles, and show notes and upload to YouTube and podcast platforms for you.",
+    },
+    {
+      question: "Do you shoot outside the studio?",
+      answer: "Yes. Brand, product, and training videos can be shot on location in Bengaluru.",
     },
   ],
 } as const;
 
 export const HOME_FINAL_CTA = {
-  eyebrow: "Subscribe",
-  title: "New Video Every Week",
+  eyebrow: "Book the studio",
+  title: "Ready to Hit Record?",
   body: [
-    "Smash Subscribe and ring the bell on YouTube.",
-    "Follow @ajs.studio.space on Instagram for studio updates and behind the scenes.",
+    "Pick a slot, bring your guest, and leave the production to us.",
+    "Not sure where to start? Book a short discovery call and we'll plan your show together.",
   ],
-  ctaPrimary: "Subscribe on YouTube",
+  ctaPrimary: "Book a Studio Session",
   ctaSecondary: "Contact the studio",
 } as const;
 
+/** Founder profile — shown on the homepage and About page. */
+export const FOUNDER = {
+  name: "Ajay Rao",
+  role: "Founder, Anushtan",
+  photo: "/founder.jpeg",
+  headline: "Content Creator & Retail Marketing Professional",
+  summary:
+    "Ajay has spent a decade publishing video independently and twenty years building brands in retail and distribution. He started a cycling YouTube channel from scratch in 2016 and grew it to 400+ videos and nearly 20,000 subscribers, then brought the same camera-facing storytelling into his professional work, producing training and brand videos for national retail brands.",
+  studioStory:
+    "Anushtan is the name of the business Ajay founded in 2003. The studio carries it forward: a space where the instincts he built as a creator (framing, pacing, keeping an audience) and as a marketer (positioning, brand story, what makes people buy) come together for every guest who walks in.",
+  stats: [
+    { value: "10+", label: "Years publishing video" },
+    { value: "400+", label: "Videos produced" },
+    { value: "~20K", label: "YouTube subscribers" },
+    { value: "20+", label: "Years in retail & brands" },
+  ],
+  highlights: [
+    "Built a cycling YouTube channel from zero to 400+ videos and ~20K subscribers",
+    "Runs two more channels: AJs Vlogz (tech & food) and Rides by AJ (motovlogs)",
+    "Shoots, edits, and publishes all of his own content",
+    "Produced social video training for retail staff nationwide at Brightex Synergizer",
+    "Launched the Garmin brand store at Dickenson Road, Bengaluru",
+    "Consulted food brands on retail placement across Bengaluru and Mumbai",
+  ],
+  timeline: [
+    {
+      period: "2025 – Present",
+      title: "Managing Partner & Founder, Thvisha",
+      body: "Solar power, home automation, and LED lighting solutions, built on two decades of clean-energy retail experience.",
+    },
+    {
+      period: "2022 – 2025",
+      title: "Freelance Retail Marketing Specialist",
+      body: "Retail marketing and merchandising for food brands including Waterful India, Awe Foods, and Parapocraft Tales.",
+    },
+    {
+      period: "2019 – 2022",
+      title: "Product Manager, Brightex Synergizer",
+      body: "Built retail training modules, led the Garmin brand store, and produced social video as a scalable training channel.",
+    },
+    {
+      period: "2016 – Present",
+      title: "Independent Creator",
+      body: "Cycling, tech, food, and moto content across YouTube, Instagram, and Facebook.",
+    },
+    {
+      period: "2003 – 2019",
+      title: "Proprietor, Anushtan Associates",
+      body: "Distribution for William Penn, Crossword, Landmark, and Sapna; later 5 EV and solar retail outlets across Bengaluru.",
+    },
+  ],
+  education: [
+    "MBA (Dual Degree), Marketing & HR — IIPM New Delhi with IMI Belgium",
+    "BBM — Seshadripuram College, Bengaluru",
+  ],
+  languages: ["English", "Hindi", "Kannada", "Tamil"],
+  channels: [
+    { name: "AJs Vlog", topic: "Cycling", href: "https://www.youtube.com/c/ajsvlog" },
+    { name: "AJs Vlogz", topic: "Tech & Food", href: "https://www.youtube.com/c/ajsvlogz" },
+    { name: "Rides by AJ", topic: "Motovlogs", href: "https://www.youtube.com/@ridesbyaj" },
+  ],
+} as const;
+
 export const FOOTER_CONTENT = {
-  tagline: "Films, Photoshoots, Podcasts",
-  quote: "See you on the road — and in your notifications every week.",
-  location: "#27, Castle street, Bangalore 560025",
+  tagline: "Podcast & Video Studio",
+  quote: "Show up with your voice. Leave with content.",
+  location: "#27, Castle Street, Bengaluru 560025",
   phoneDisplay: "080 41126938 · 9845826938",
   quickLinks: [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/#services", label: "Services" },
-    { href: "/podcast", label: "Videos" },
+    { href: "/about", label: "About the Studio" },
+    { href: "/services", label: "Services" },
+    { href: "/how-it-works", label: "How It Works" },
+    { href: "/founder", label: "Founder" },
+    { href: "/podcast", label: "Episodes" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/testimonials", label: "Testimonials" },
+    { href: "/blog", label: "Blog" },
+    { href: "/book", label: "Book" },
     { href: "/contact", label: "Contact" },
   ],
   socialLabels: ["Instagram", "YouTube"] as const,

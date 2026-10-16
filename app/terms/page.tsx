@@ -32,8 +32,8 @@ export default async function TermsPage() {
         <LegalProse>
           <h2>Services</h2>
           <p>
-            {SITE.name} provides podcast content, coaching, speaking, and related
-            digital offerings. Descriptions and pricing on{" "}
+            {SITE.name} provides podcast recording, podcast and video production, and related
+            services. Descriptions and pricing on{" "}
             <Link href="/book">the Book &amp; pay page</Link> and elsewhere on
             this site form part of these terms.
           </p>
@@ -45,7 +45,7 @@ export default async function TermsPage() {
               contacting us.
             </li>
             <li>
-              Coaching and content are for personal development; they are not a
+              You are responsible for the content you record, and for holding the rights to any music, footage, or material you bring; studio content is not a
               substitute for medical, legal, or financial advice.
             </li>
             <li>
@@ -93,7 +93,7 @@ export default async function TermsPage() {
           <p>
             Services and content are provided &quot;as is&quot; to the fullest
             extent permitted by law. We do not guarantee specific outcomes from
-            coaching or programs. To the maximum extent permitted by applicable
+            any recording, episode, or campaign. To the maximum extent permitted by applicable
             law, {SITE.name} shall not be liable for any
             indirect, incidental, special, consequential, or punitive damages, or
             loss of profits or data, arising from use of the site or services.

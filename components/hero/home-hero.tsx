@@ -1,86 +1,155 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { Container } from "@/components/ui/container";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { buttonStyles } from "@/components/ui/button";
-import { HeroVideoPlaceholder } from "@/components/hero/hero-video-placeholder";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ChevronDown, Mic, PlayCircle, Volume2, VolumeX } from "lucide-react";
+import { Container } from "@/components/ui/container";
 import { SITE } from "@/lib/site";
-import { GoldButton } from "@/components/ui/gold-button";
 import { HOME_HERO } from "@/lib/site-content";
+import { youtubeAmbientEmbedSrc, youtubePosterSrc } from "@/lib/youtube-ambient";
 
-const HERO_VIDEO_SRC = SITE.homeHeroVideoUrl;
+const MP4_SRC = SITE.homeHeroVideoUrl;
+const YT_ID = SITE.homeHeroYoutubeId;
 
-const stagger = {
-  hidden: { opacity: 0, y: 22 },
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.55,
-      delay: 0.06 * i,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
+    transition: { duration: 0.7, delay: 0.15 + 0.1 * i, ease },
   }),
 };
 
+const HERO_STATS = [
+  { value: "400+", label: "Videos by our founder" },
+  { value: "10+", label: "Years on camera" },
+  { value: "4", label: "Languages hosted" },
+];
+
+/** Embed src with the JS API on so we can toggle sound without reloading. */
+function heroEmbedSrc(videoId: string) {
+  const base = youtubeAmbientEmbedSrc(videoId, true);
+  return `${base}&enablejsapi=1&start=5`;
+}
+
 export function HomeHero() {
   const reduceMotion = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoFailed, setVideoFailed] = useState(false);
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-  const hasVideo = Boolean(HERO_VIDEO_SRC) && !videoFailed;
+  const [mountVideo, setMountVideo] = useState(false);
+  const [videoVisible, setVideoVisible] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const [iframeEl, setIframeEl] = useState<HTMLIFrameElement | null>(null);
 
+  // Mount the embed after first paint so the hero text renders instantly.
   useEffect(() => {
-    if (!HERO_VIDEO_SRC || reduceMotion) return;
-    setShouldLoadVideo(true);
+    if (reduceMotion) return;
+    const t = window.setTimeout(() => setMountVideo(true), 300);
+    return () => window.clearTimeout(t);
   }, [reduceMotion]);
 
-  const tryPlay = useCallback(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.play().catch(() => setVideoFailed(true));
-  }, []);
-
-  useEffect(() => {
-    if (!shouldLoadVideo || !HERO_VIDEO_SRC || videoFailed) return;
-    const v = videoRef.current;
-    if (!v) return;
-    v.load();
-    tryPlay();
-  }, [shouldLoadVideo, videoFailed, tryPlay]);
-
-  const handlePlayClick = () => {
-    if (hasVideo && videoRef.current) {
-      videoRef.current.muted = false;
-      void videoRef.current.play();
-      return;
-    }
-    window.open(SITE.social.youtube, "_blank", "noopener,noreferrer");
+  const toggleSound = () => {
+    const next = !muted;
+    setMuted(next);
+    if (MP4_SRC) return;
+    iframeEl?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func: next ? "mute" : "unMute", args: [] }),
+      "*"
+    );
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-sky-200/70 pt-[max(5.5rem,env(safe-area-inset-top)+4.25rem)] pb-14 sm:pb-20 md:pb-24">
-      <div className="pointer-events-none absolute inset-0 hero-gradient-shimmer opacity-80" aria-hidden />
-      <div
-        className="pointer-events-none absolute -left-32 top-12 h-96 w-96 animate-blob rounded-full bg-sky-400/20 blur-3xl"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -right-28 bottom-8 h-80 w-80 animate-blob animation-delay-2000 rounded-full bg-cyan-300/25 blur-3xl"
-        aria-hidden
-      />
+    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#031a2e] text-white">
+      {/* ── Background media ── */}
+      <div className="absolute inset-0 -z-10" aria-hidden>
+        {/* poster first, so there is never an empty frame */}
+        {!MP4_SRC && YT_ID ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={youtubePosterSrc(YT_ID, "max")}
+            alt=""
+            className="absolute inset-0 h-full w-full scale-110 object-cover blur-[2px]"
+          />
+        ) : null}
 
-      <Container className="relative">
-        <div className="mx-auto max-w-4xl text-center">
+        {mountVideo && MP4_SRC ? (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted={muted}
+            playsInline
+            loop
+            onPlaying={() => setVideoVisible(true)}
+          >
+            <source src={MP4_SRC} type="video/mp4" />
+          </video>
+        ) : null}
+
+        {mountVideo && !MP4_SRC && YT_ID ? (
+          <div
+            className={`absolute inset-0 transition-opacity duration-[1500ms] ${videoVisible ? "opacity-100" : "opacity-0"}`}
+          >
+            <iframe
+              ref={setIframeEl}
+              src={heroEmbedSrc(YT_ID)}
+              title="Anushtan studio video"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              tabIndex={-1}
+              // Wait a beat after load so YouTube's title overlay has faded before we reveal.
+              onLoad={() => window.setTimeout(() => setVideoVisible(true), 1800)}
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{
+                width: "max(100vw, 177.78svh)",
+                height: "max(100svh, 56.25vw)",
+                transform: "translate(-50%, -50%) scale(1.18)",
+                border: 0,
+              }}
+            />
+          </div>
+        ) : null}
+
+        {/* scrims: readable copy on the left, cinematic fade at the bottom */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#031a2e]/95 via-[#031a2e]/70 to-[#031a2e]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#031a2e] via-transparent to-[#031a2e]/50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(56,189,248,0.18),transparent_60%)]" />
+      </div>
+
+      {/* animated equalizer along the bottom edge */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 flex h-24 items-end justify-between gap-[3px] px-2 opacity-40"
+        aria-hidden
+        style={{
+          maskImage: "linear-gradient(90deg, transparent, black 20%, black 80%, transparent)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent, black 20%, black 80%, transparent)",
+        }}
+      >
+        {Array.from({ length: 90 }).map((_, i) => (
+          <span
+            key={i}
+            className="studio-eq-bar w-full max-w-[5px] rounded-t-full bg-gradient-to-t from-sky-500 to-cyan-200"
+            style={{
+              height: `${25 + ((i * 37) % 75)}%`,
+              animationDuration: `${1 + ((i * 13) % 9) * 0.12}s`,
+              animationDelay: `${((i * 7) % 11) * -0.15}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <Container className="relative pb-28 pt-[max(7rem,env(safe-area-inset-top)+6rem)] sm:pb-32">
+        <div className="max-w-3xl">
           <motion.p
             custom={0}
             initial={reduceMotion ? false : "hidden"}
             animate="show"
-            variants={stagger}
-            className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-gold-deep sm:tracking-[0.28em]"
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 rounded-full border border-sky-300/30 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-100 backdrop-blur-md sm:text-xs"
           >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+            </span>
             {HOME_HERO.trustLine}
           </motion.p>
 
@@ -88,11 +157,11 @@ export function HomeHero() {
             custom={1}
             initial={reduceMotion ? false : "hidden"}
             animate="show"
-            variants={stagger}
-            className="mt-6 font-display text-[clamp(2rem,6.5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-luxury-heading text-balance"
+            variants={fadeUp}
+            className="mt-7 font-display text-[clamp(2.5rem,7vw,5.5rem)] font-semibold leading-[1.02] tracking-tight text-balance"
           >
-            {HOME_HERO.headline}
-            <span className="mt-2 block text-gradient-animate">
+            {HOME_HERO.headline}{" "}
+            <span className="bg-gradient-to-r from-sky-300 via-cyan-200 to-sky-400 bg-clip-text text-transparent">
               {HOME_HERO.headlineAccent}
             </span>
           </motion.h1>
@@ -101,8 +170,8 @@ export function HomeHero() {
             custom={2}
             initial={reduceMotion ? false : "hidden"}
             animate="show"
-            variants={stagger}
-            className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-luxury-body sm:mt-6 sm:text-lg"
+            variants={fadeUp}
+            className="mt-6 max-w-2xl text-base leading-relaxed text-sky-50/85 sm:text-lg md:text-xl"
           >
             {HOME_HERO.subheading}
           </motion.p>
@@ -111,77 +180,70 @@ export function HomeHero() {
             custom={3}
             initial={reduceMotion ? false : "hidden"}
             animate="show"
-            variants={stagger}
-            className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4"
+            variants={fadeUp}
+            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
           >
-            <GoldButton
-              href={SITE.social.youtube}
-              className="w-full sm:w-auto motion-safe:hover:scale-[1.03]"
-            >
-              {HOME_HERO.ctaPrimary}
-            </GoldButton>
             <Link
-              href="/contact"
-              className={buttonStyles({
-                variant: "outline",
-                size: "lg",
-                className: "w-full sm:w-auto motion-safe:hover:scale-[1.02]",
-              })}
+              href="/book"
+              className="group inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-cyan-300 px-8 text-base font-semibold text-[#031a2e] shadow-[0_12px_40px_-10px_rgba(56,189,248,0.9)] transition hover:scale-[1.03] hover:brightness-110"
             >
-              Contact
+              <Mic className="h-5 w-5" />
+              {HOME_HERO.ctaPrimary}
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/#founder"
+              className="inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition hover:border-sky-300/70 hover:bg-white/15"
+            >
+              {HOME_HERO.ctaSecondary}
+            </Link>
+            <Link
+              href="/podcast"
+              className="inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-semibold text-sky-200 transition hover:text-white"
+            >
+              <PlayCircle className="h-5 w-5" />
+              Watch episodes
             </Link>
           </motion.div>
-        </div>
 
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 32, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.65, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto mt-10 max-w-3xl sm:mt-12"
-        >
-          <div
-            className="absolute -inset-3 animate-pulse-soft rounded-[1.85rem] bg-gradient-to-br from-sky-400/30 via-transparent to-cyan-500/15 blur-xl"
-            aria-hidden
-          />
-          <div className="relative overflow-hidden rounded-2xl border border-sky-200/80 bg-white/40 shadow-[0_24px_60px_-16px_rgba(14,116,144,0.22)] ring-1 ring-sky-300/40 sm:rounded-3xl motion-safe:hover:ring-sky-400/55 transition-[box-shadow,transform] duration-500 hover:-translate-y-1">
-            <div className="relative aspect-[16/9] w-full">
-              {hasVideo && shouldLoadVideo && !reduceMotion ? (
-                <>
-                  <video
-                    ref={videoRef}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                    preload="metadata"
-                    onError={() => setVideoFailed(true)}
-                    onLoadedData={tryPlay}
-                  >
-                    <source src={HERO_VIDEO_SRC} type="video/mp4" />
-                  </video>
-                  <div className="absolute inset-0 bg-gradient-to-t from-sky-950/45 via-transparent to-transparent" />
-                  <button
-                    type="button"
-                    className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white/80 bg-white/95 text-sky-900 shadow-lg transition duration-300 hover:scale-110 hover:shadow-xl sm:h-[4.5rem] sm:w-[4.5rem]"
-                    aria-label="Play highlight"
-                    onClick={handlePlayClick}
-                  >
-                    <svg viewBox="0 0 24 24" className="ml-0.5 h-7 w-7 fill-current sm:h-8 sm:w-8" aria-hidden>
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </button>
-                </>
-              ) : (
-                <HeroVideoPlaceholder
-                  onPlayClick={handlePlayClick}
-                  label="Aj's Cycling Vlog"
-                />
-              )}
-            </div>
-          </div>
-        </motion.div>
+          <motion.dl
+            custom={4}
+            initial={reduceMotion ? false : "hidden"}
+            animate="show"
+            variants={fadeUp}
+            className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-white/15 pt-8"
+          >
+            {HERO_STATS.map((s) => (
+              <div key={s.label} className="flex flex-col-reverse">
+                <dt className="mt-1 text-xs text-sky-100/70 sm:text-sm">{s.label}</dt>
+                <dd className="font-display text-3xl font-semibold text-white sm:text-4xl">{s.value}</dd>
+              </div>
+            ))}
+          </motion.dl>
+        </div>
       </Container>
+
+      {/* sound toggle */}
+      {mountVideo && (MP4_SRC || YT_ID) ? (
+        <button
+          type="button"
+          onClick={toggleSound}
+          aria-label={muted ? "Unmute background video" : "Mute background video"}
+          className="absolute bottom-8 right-5 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20 sm:right-10"
+        >
+          {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+        </button>
+      ) : null}
+
+      {/* scroll cue */}
+      <a
+        href="#introduction"
+        aria-label="Scroll to content"
+        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-1 text-xs font-medium uppercase tracking-[0.2em] text-sky-100/70 transition hover:text-white sm:flex"
+      >
+        Scroll
+        <ChevronDown className="h-5 w-5 animate-bounce" />
+      </a>
     </section>
   );
 }

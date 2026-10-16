@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Anushtan">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0C4A6E"/>
+      <stop offset="1" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="mic" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#7DD3FC"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#7DD3FC" stroke-opacity=".35" stroke-width="2"/>
+  <!-- sound waves -->
+  <g fill="none" stroke="#7DD3FC" stroke-linecap="round" stroke-width="6">
+    <path d="M52 78 q-12 22 0 44" stroke-opacity=".55"/>
+    <path d="M36 66 q-20 34 0 68" stroke-opacity=".3"/>
+    <path d="M148 78 q12 22 0 44" stroke-opacity=".55"/>
+    <path d="M164 66 q20 34 0 68" stroke-opacity=".3"/>
+  </g>
+  <!-- microphone -->
+  <rect x="80" y="44" width="40" height="70" rx="20" fill="url(#mic)"/>
+  <g stroke="#0C4A6E" stroke-opacity=".35" stroke-width="3" stroke-linecap="round">
+    <line x1="88" y1="62" x2="112" y2="62"/>
+    <line x1="88" y1="72" x2="112" y2="72"/>
+    <line x1="88" y1="82" x2="112" y2="82"/>
+  </g>
+  <path d="M66 100 a34 34 0 0 0 68 0" fill="none" stroke="#E0F2FE" stroke-width="7" stroke-linecap="round"/>
+  <line x1="100" y1="134" x2="100" y2="152" stroke="#E0F2FE" stroke-width="7" stroke-linecap="round"/>
+  <line x1="80" y1="156" x2="120" y2="156" stroke="#E0F2FE" stroke-width="7" stroke-linecap="round"/>
+</svg>

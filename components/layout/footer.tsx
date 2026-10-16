@@ -49,7 +49,7 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-widest text-brand-gold-deep">
               Quick Links
             </p>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2.5 text-sm">
               {FOOTER_CONTENT.quickLinks.map(({ href, label }) => (
                 <li key={href}>
                   <Link href={href} className={linkClass}>
@@ -78,6 +78,17 @@ export function Footer() {
                 </a>
               ))}
             </div>
+            <p className="mt-5 text-sm text-luxury-body">
+              Founder&apos;s channels:{" "}
+              <a
+                href={SITE.creatorSiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-brand-gold-deep underline-offset-4 hover:underline"
+              >
+                ajsvlog.com
+              </a>
+            </p>
           </div>
 
           <div>

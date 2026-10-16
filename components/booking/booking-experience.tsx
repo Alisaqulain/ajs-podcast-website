@@ -157,11 +157,11 @@ export function BookingExperience({
               Packages
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-luxury-heading md:text-4xl">
-              Choose your container for transformation
+              Choose your studio package
             </h2>
             <p className="mt-4 text-base text-luxury-body">
-              Each package is crafted for expression, presence, and sustainable
-              confidence. Select one to unlock the booking calendar—sessions are
+              Pick how much help you want, from a recording slot to full production
+              and clips. Select one to unlock the booking calendar—sessions are
               held on{" "}
               <strong className="text-luxury-heading">Wednesdays &amp; Fridays</strong>.
             </p>

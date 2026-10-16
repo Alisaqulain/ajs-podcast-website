@@ -57,10 +57,10 @@ export function AboutPreview({ clips }: { clips: AmbientClip[] }) {
                   <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand-gold-deep" />
                   <div>
                     <p className="font-semibold text-luxury-heading">
-                      Aj&apos;s Cycling Vlog
+                      Podcast recording
                     </p>
                     <p className="text-sm text-luxury-muted">
-                      Weekly ride videos and commute stories on YouTube.
+                      Multi-cam video podcasts recorded in Bengaluru.
                     </p>
                   </div>
                 </li>
@@ -68,7 +68,7 @@ export function AboutPreview({ clips }: { clips: AmbientClip[] }) {
                   <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand-gold-deep" />
                   <div>
                     <p className="font-semibold text-luxury-heading">
-                      Films &amp; photoshoots
+                      Brand &amp; training video
                     </p>
                     <p className="text-sm text-luxury-muted">
                       Creative production from the Bangalore studio.

@@ -264,7 +264,7 @@ export function podcastEpisodesVideoObjectJsonLd(
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Latest Videos — Aj's Cycling Vlog",
+    name: "Latest Episodes — Anushtan",
     numberOfItems: episodes.length,
     itemListElement: episodes.map((e, i) => ({
       "@type": "ListItem",

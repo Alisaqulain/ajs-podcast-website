@@ -13,10 +13,10 @@ import { stripHtml } from "@/lib/strip-html";
 export const metadata: Metadata = {
   title: "Testimonials",
   description:
-    `Stories from clients and viewers who work with ${SITE.name} and Aj's Cycling Vlog.`,
+    `What hosts, guests, and brands say about recording at ${SITE.name}.`,
   openGraph: {
     title: `Testimonials | ${SITE.name}`,
-    description: "Client and listener reflections on confidence and self-image.",
+    description: "What hosts, guests, and brands say about recording at Anushtan.",
   },
 };
 

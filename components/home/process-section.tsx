@@ -1,4 +1,5 @@
 "use client";
+import { StudioBackdrop } from "@/components/ui/studio-backdrop";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -12,17 +13,18 @@ export function ProcessSection() {
   return (
     <section
       id="process"
-      className="scroll-mt-28 border-t border-luxury-border bg-luxury-bg py-20 md:py-28"
+      className="relative overflow-hidden scroll-mt-28 border-t border-luxury-border bg-luxury-bg py-20 md:py-28"
       aria-labelledby="process-heading"
     >
-      <Container>
+      <StudioBackdrop />
+      <Container className="relative">
         <SectionHeading
           id="process-heading"
           eyebrow={HOME_PROCESS.eyebrow}
           title={HOME_PROCESS.title}
         />
 
-        <ol className="mx-auto grid max-w-5xl list-none gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="grid list-none gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {HOME_PROCESS.steps.map((step, i) => (
             <motion.li
               key={step.title}
@@ -55,10 +57,10 @@ export function ProcessSection() {
             {BOOK_NOW_LABEL}
           </CtaButton>
           <Link
-            href="/book"
+            href="/how-it-works"
             className="text-sm font-semibold text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold"
           >
-            View packages &amp; book →
+            See the full process →
           </Link>
         </div>
       </Container>

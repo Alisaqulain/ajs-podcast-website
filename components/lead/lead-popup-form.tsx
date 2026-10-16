@@ -154,7 +154,7 @@ export function LeadPopupForm() {
                 <X className="h-5 w-5" />
               </button>
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
-                AJ&apos;S Studio
+                Anushtan
               </p>
               <h2
                 id="lead-modal-title"

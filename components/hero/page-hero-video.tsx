@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { BackgroundVideo } from "@/components/cinematic/background-video";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
+import { StudioBackdrop } from "@/components/ui/studio-backdrop";
 import { SITE } from "@/lib/site";
 import type { AmbientClip } from "@/lib/youtube-ambient";
 
@@ -32,10 +33,9 @@ export type PageHeroVideoProps = {
 function AnimatedGradientFallback() {
   return (
     <div className="hero-gradient-fallback absolute inset-0" aria-hidden>
-      <div className="absolute inset-0 bg-gradient-to-br from-[#f5efe6] via-[#faf7f2] to-[#fffdf9]" />
-      <div className="hero-gradient-shimmer absolute inset-0 opacity-60" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_40%,rgba(201,161,74,0.18),transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_80%_60%,rgba(15,23,42,0.08),transparent_50%)]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-sky-100 via-white to-cyan-50" />
+      <div className="hero-gradient-shimmer absolute inset-0 opacity-70" />
+      <StudioBackdrop />
     </div>
   );
 }
@@ -98,7 +98,7 @@ export function PageHeroVideo({
     <section
       ref={sectionRef}
       className={cn(
-        "relative isolate overflow-hidden border-b border-[#e8dfd3]",
+        "relative isolate overflow-hidden border-b border-sky-200/70",
         compact ? "min-h-[min(52vh,28rem)]" : "min-h-[min(72vh,36rem)]",
         className
       )}
@@ -131,7 +131,7 @@ export function PageHeroVideo({
         {/* Cream + navy scrim for readable copy */}
         <div
           className={cn(
-            "absolute inset-0 bg-gradient-to-b from-[#fffdf9]/80 via-[#faf7f2]/70 to-[#0f172a]/60",
+            "absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_45%,rgba(255,255,255,0.75),transparent_70%)]",
             (showMp4 || showYoutubeAmbient) &&
               "from-[#fffdf9]/85 via-[#faf7f2]/75 to-[#0f172a]/70"
           )}
@@ -139,7 +139,7 @@ export function PageHeroVideo({
         />
         <div
           className={cn(
-            "absolute inset-0 bg-[#0f172a]/[0.15]",
+            "absolute inset-0",
             (showMp4 || showYoutubeAmbient) && "bg-[#0f172a]/[0.25]"
           )}
           aria-hidden

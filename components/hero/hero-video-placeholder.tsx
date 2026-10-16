@@ -1,6 +1,6 @@
 "use client";
 
-import { Bike, Play } from "lucide-react";
+import { Mic, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type HeroVideoPlaceholderProps = {
@@ -12,7 +12,7 @@ type HeroVideoPlaceholderProps = {
 
 export function HeroVideoPlaceholder({
   className,
-  label = "Aj's Cycling Vlog",
+  label = "Anushtan Studio",
   onPlayClick,
   compact = false,
 }: HeroVideoPlaceholderProps) {
@@ -62,17 +62,17 @@ export function HeroVideoPlaceholder({
 
       <div className="absolute left-4 top-4 z-10 sm:left-6 sm:top-6">
         <span className="inline-flex items-center gap-2 rounded-full border border-sky-400/35 bg-sky-950/50 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-200 backdrop-blur-sm sm:text-xs">
-          <Bike className="h-3 w-3" aria-hidden />
+          <Mic className="h-3 w-3" aria-hidden />
           {label}
         </span>
       </div>
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <p className="font-display text-sm font-medium tracking-wide text-sky-200/80 sm:text-base">
-          AJ&apos;S Studio
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-10 text-center sm:pt-0">
+        <p className="hidden font-display text-sm font-medium tracking-wide text-sky-200/80 sm:block sm:text-base">
+          Anushtan
         </p>
         <p className="mt-1 font-display text-lg font-semibold text-white sm:text-xl md:text-2xl">
-          Ride. Film. Share.
+          Talk. Record. Publish.
         </p>
 
         <button
@@ -85,7 +85,7 @@ export function HeroVideoPlaceholder({
             "transition duration-300 hover:scale-110 hover:border-sky-300 hover:shadow-[0_12px_40px_rgba(56,189,248,0.5)]",
             compact ? "h-14 w-14" : "h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]"
           )}
-          aria-label="Watch on YouTube"
+          aria-label="Watch episodes"
         >
           <span
             className="absolute inset-0 rounded-full bg-sky-400/25 opacity-0 transition group-hover:opacity-100"
@@ -100,7 +100,7 @@ export function HeroVideoPlaceholder({
         </button>
 
         <p className="mt-4 text-xs text-sky-200/60 sm:text-sm">
-          Tap to open the latest on YouTube
+          Tap to watch episodes recorded at the studio
         </p>
       </div>
 

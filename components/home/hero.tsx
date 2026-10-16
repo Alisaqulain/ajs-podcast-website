@@ -67,7 +67,7 @@ export function Hero() {
               transition={{ delay: 0.35, duration: 0.6 }}
               className="mt-8 text-sm text-brand-dark/55"
             >
-              {SITE.name} · Aj&apos;s Cycling Vlog · Films · Podcasts
+              {SITE.name} · Podcast &amp; Video Studio
             </motion.p>
           </div>
 

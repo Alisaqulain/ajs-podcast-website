@@ -40,12 +40,12 @@ export default async function RefundPolicyPage() {
         <LegalProse>
           <h2>Overview</h2>
           <p>
-            We want you to feel confident when booking coaching or purchasing
+            We want you to feel confident when booking a studio session or purchasing
             premium materials from {SITE.name}. This policy explains when
             refunds or cancellations may apply and how long processing takes.
           </p>
 
-          <h2>Coaching sessions — cancellation</h2>
+          <h2>Studio sessions — cancellation</h2>
           <ul>
             <li>
               You may request to reschedule or cancel a confirmed session by

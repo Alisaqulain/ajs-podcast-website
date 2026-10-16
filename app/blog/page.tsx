@@ -10,10 +10,10 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    `Articles on cycling, creativity, and studio life—from ${SITE.name}.`,
+    `Podcasting tips, production notes, and brand storytelling from ${SITE.name}.`,
   openGraph: {
     title: `Blog | ${SITE.name}`,
-    description: "Insights, stories, and coaching notes for ambitious women.",
+    description: "Podcasting tips, production notes, and brand storytelling from Anushtan.",
   },
 };
 
@@ -42,8 +42,8 @@ export default async function BlogPage() {
     <div className="pb-24">
       <PageHero
         eyebrow="Journal"
-        title="Ideas for a braver, clearer you"
-        subtitle="Long-form notes on self-image, voice, and the psychology of being seen."
+        title="Notes from the studio"
+        subtitle="Practical guides on starting a podcast, sounding great on mic, and turning conversations into content."
         align="left"
       >
         <CTAButton intent="book">{BOOK_NOW_LABEL}</CTAButton>
@@ -54,7 +54,7 @@ export default async function BlogPage() {
           <div className="glass-panel rounded-3xl p-12 text-center text-luxury-body">
             Fresh articles are being prepared. Meanwhile, catch the latest on the{" "}
             <a
-              href={SITE.social.youtube}
+              href={SITE.videosUrl}
               className="font-semibold text-brand-gold-deep underline hover:text-brand-gold"
             >
               podcast
