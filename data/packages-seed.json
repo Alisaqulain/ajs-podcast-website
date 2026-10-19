@@ -10,7 +10,7 @@
       "Wireless RODE microphone",
       "Green room access"
     ],
-    "badge": "",
+    "badge": "Most Popular",
     "active": true,
     "sortOrder": 5
   },
@@ -25,7 +25,7 @@
       "Wireless RODE microphone",
       "Green room access"
     ],
-    "badge": "Most Popular",
+    "badge": "",
     "active": true,
     "sortOrder": 10
   },

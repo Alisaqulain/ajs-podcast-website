@@ -18,11 +18,16 @@ export const STUDIO_INCLUDES = [
   { text: "Wireless RODE microphone", chargeable: false },
   { text: "Access to the green room", chargeable: false },
   { text: "Videographer on request", chargeable: true },
+  { text: "Camera on request", chargeable: true },
   { text: "Editing on request", chargeable: true },
 ] as const;
 
 /** Optional extras — add-ons charged at actuals. */
 export const STUDIO_ADDONS = [
+  {
+    title: "Camera",
+    description: "Cameras rented from reputed rental agencies. Add-on, charged at actuals.",
+  },
   {
     title: "Videographer",
     description: "A camera operator to shoot your session. Add-on, charged at actuals.",
@@ -99,6 +104,7 @@ export const HOME_INTRO = {
     "Wireless RODE microphone",
     "Private green room",
     "Videographer on request ★",
+    "Camera on request ★",
     "Editing on request ★",
   ],
   closing: "All from ₹1,000 an hour.",
@@ -141,6 +147,7 @@ export const HOME_WHY_US = {
     "Studio lights, ready when you arrive",
     "A green room to get camera-ready",
     "Videographer on request ★ (charged at actuals)",
+    "Camera on request ★ (charged at actuals)",
     "Editing on request ★ (charged at actuals)",
     "One simple rate: ₹1,000 an hour",
     "Sessions in English, Hindi, Kannada & Tamil",
@@ -170,6 +177,7 @@ export const HOME_SERVICES = {
       description:
         "Add a camera operator to shoot your session so you can focus on the conversation.",
       includes: [
+        "Shoots with 2 cameras",
         "Camera setup & framing",
         "Shoots your full session",
         "Add-on, charged at actuals",
@@ -311,42 +319,8 @@ export const FOUNDER = {
     "Built a cycling YouTube channel from zero to 400+ videos and ~20K subscribers",
     "Runs two more channels: AJs Vlogz (tech & food) and Rides by AJ (motovlogs)",
     "Shoots, edits, and publishes all of his own content",
-    "Produced social video training for retail staff nationwide at Brightex Synergizer",
-    "Launched the Garmin brand store at Dickenson Road, Bengaluru",
-    "Consulted food brands on retail placement across Bengaluru and Mumbai",
+    "An entrepreneur since 2003, working with multiple brands",
   ],
-  timeline: [
-    {
-      period: "2025 – Present",
-      title: "Managing Partner & Founder, Thvisha",
-      body: "Solar power, home automation, and LED lighting solutions, built on two decades of clean-energy retail experience.",
-    },
-    {
-      period: "2022 – 2025",
-      title: "Freelance Retail Marketing Specialist",
-      body: "Retail marketing and merchandising for food brands including Waterful India, Awe Foods, and Parapocraft Tales.",
-    },
-    {
-      period: "2019 – 2022",
-      title: "Product Manager, Brightex Synergizer",
-      body: "Built retail training modules, led the Garmin brand store, and produced social video as a scalable training channel.",
-    },
-    {
-      period: "2016 – Present",
-      title: "Independent Creator",
-      body: "Cycling, tech, food, and moto content across YouTube, Instagram, and Facebook.",
-    },
-    {
-      period: "2003 – 2019",
-      title: "Proprietor, Anushtan Associates",
-      body: "Distribution for William Penn, Crossword, Landmark, and Sapna; later 5 EV and solar retail outlets across Bengaluru.",
-    },
-  ],
-  education: [
-    "MBA (Dual Degree), Marketing & HR — IIPM New Delhi with IMI Belgium",
-    "BBM — Seshadripuram College, Bengaluru",
-  ],
-  languages: ["English", "Hindi", "Kannada", "Tamil"],
   channels: [
     { name: "AJs Vlog", topic: "Cycling", href: "https://www.youtube.com/c/ajsvlog" },
     { name: "AJs Vlogz", topic: "Tech & Food", href: "https://www.youtube.com/c/ajsvlogz" },

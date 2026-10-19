@@ -55,7 +55,7 @@ export function PricingSection() {
             </h2>
             <p className="mt-4 text-base text-luxury-body">
               Every studio set is ₹1,000 an hour, including the space, lights and a
-              wireless RODE mic. Videographer and editing are add-ons, charged at actuals. Secure checkout.{" "}
+              wireless RODE mic. Videographer, camera and editing are add-ons, charged at actuals. Secure checkout.{" "}
               <Link
                 href="/refund-policy"
                 className="font-medium text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold"
@@ -86,7 +86,7 @@ export function PricingSection() {
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Videographer ★ &amp; editing ★ on request, charged at actuals
+                Videographer ★, camera ★ &amp; editing ★ on request, charged at actuals
               </li>
             </ul>
         </div>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: `Podcast studio hire at ${SITE.name}, Bengaluru: ₹1,000 per hour including space, lights and a wireless RODE mic.`,
   openGraph: {
     title: `Pricing | ${SITE.name}`,
-    description: "₹1,000 per hour. Videographer, editing and extra equipment available as add-ons.",
+    description: "₹1,000 per hour. Videographer, camera, editing and extra equipment available as add-ons.",
   },
 };
 
@@ -22,7 +22,7 @@ export default async function PricingPage() {
       <PageHero
         eyebrow="Pricing"
         title="One simple rate"
-        subtitle="₹1,000 an hour for any of our three studio sets, with lights and a wireless RODE mic included. Videographer, editing and extra equipment are optional add-ons."
+        subtitle="₹1,000 an hour for any of our three studio sets, with lights and a wireless RODE mic included. Videographer, camera, editing and extra equipment are optional add-ons."
       >
         <GoldButton href="/book">Book now</GoldButton>
       </PageHero>

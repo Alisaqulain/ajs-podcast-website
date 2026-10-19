@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, GraduationCap, Languages } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/hero/page-hero";
 import { Container } from "@/components/ui/container";
 import { GoldButton } from "@/components/ui/gold-button";
@@ -115,46 +115,6 @@ export default async function FounderPage() {
                   </li>
                 ))}
               </ul>
-
-              <h3 className="mt-14 font-display text-2xl font-semibold text-luxury-heading">
-                Journey
-              </h3>
-              <ol className="mt-6 border-l-2 border-sky-200">
-                {FOUNDER.timeline.map((t) => (
-                  <li key={t.title} className="relative pb-8 pl-7 last:pb-0">
-                    <span
-                      className="absolute -left-[0.5rem] top-1 h-3.5 w-3.5 rounded-full border-2 border-white bg-brand-gold-deep shadow-[0_0_0_4px_rgba(56,189,248,0.2)]"
-                      aria-hidden
-                    />
-                    <p className="text-xs font-semibold uppercase tracking-widest text-brand-gold-deep">
-                      {t.period}
-                    </p>
-                    <p className="mt-1 text-lg font-semibold text-luxury-heading">{t.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-luxury-body">{t.body}</p>
-                  </li>
-                ))}
-              </ol>
-
-              <div className="mt-14 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-3xl border border-luxury-border bg-white/80 p-6 shadow-sm backdrop-blur">
-                  <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-gold-deep">
-                    <GraduationCap className="h-4 w-4" /> Education
-                  </h3>
-                  <ul className="mt-3 space-y-2 text-sm text-luxury-body">
-                    {FOUNDER.education.map((e) => (
-                      <li key={e}>{e}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-3xl border border-luxury-border bg-white/80 p-6 shadow-sm backdrop-blur">
-                  <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-gold-deep">
-                    <Languages className="h-4 w-4" /> Languages
-                  </h3>
-                  <p className="mt-3 text-sm text-luxury-body">
-                    Sessions can be hosted in {FOUNDER.languages.join(", ")}.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </Container>
