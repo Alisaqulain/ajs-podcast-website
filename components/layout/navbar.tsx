@@ -15,7 +15,7 @@ const links = [
   { href: "/spaces", label: "Spaces" },
   { href: "/services", label: "Services" },
   { href: "/founder", label: "Founder" },
-  { href: "/creators", label: "Record Here" },
+  { href: "/creators", label: "Recorded Here" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
