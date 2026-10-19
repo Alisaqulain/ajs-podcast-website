@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ChevronDown, Mic, PlayCircle, Volume2, VolumeX } from "lucide-react";
+import { ArrowRight, ChevronDown, Mic, Volume2, VolumeX } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SITE } from "@/lib/site";
 import { HOME_HERO } from "@/lib/site-content";
@@ -93,7 +93,7 @@ export function HomeHero() {
             <iframe
               ref={setIframeEl}
               src={heroEmbedSrc(YT_ID)}
-              title="Anushtan studio video"
+              title={`${SITE.name} studio video`}
               allow="autoplay; encrypted-media; picture-in-picture"
               tabIndex={-1}
               // Wait a beat after load so YouTube's title overlay has faded before we reveal.
@@ -192,17 +192,10 @@ export function HomeHero() {
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
             <Link
-              href="/#spaces"
+              href="/spaces"
               className="inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition hover:border-sky-300/70 hover:bg-white/15"
             >
               {HOME_HERO.ctaSecondary}
-            </Link>
-            <Link
-              href="/podcast"
-              className="inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-semibold text-sky-200 transition hover:text-white"
-            >
-              <PlayCircle className="h-5 w-5" />
-              Watch episodes
             </Link>
           </motion.div>
 
@@ -237,7 +230,7 @@ export function HomeHero() {
 
       {/* scroll cue */}
       <a
-        href="#introduction"
+        href="#offer"
         aria-label="Scroll to content"
         className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-1 text-xs font-medium uppercase tracking-[0.2em] text-sky-100/70 transition hover:text-white sm:flex"
       >

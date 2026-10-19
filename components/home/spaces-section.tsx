@@ -6,6 +6,7 @@ import { ArrowRight, Check, DoorOpen, Lightbulb, Mic, Plus, Sparkles, Users } fr
 import { Container } from "@/components/ui/container";
 import { StudioBackdrop } from "@/components/ui/studio-backdrop";
 import {
+  CHARGEABLE_NOTE,
   STUDIO_ADDONS,
   STUDIO_INCLUDES,
   STUDIO_RATE_LABEL,
@@ -138,14 +139,24 @@ export function SpacesSection({ showBookLink = true }: { showBookLink?: boolean 
             </p>
             <ul className="mt-5 space-y-3">
               {STUDIO_INCLUDES.map((item) => (
-                <li key={item} className="flex items-center gap-3 text-sky-50">
+                <li key={item.text} className="flex items-center gap-3 text-sky-50">
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-400/25">
                     <Check className="h-3.5 w-3.5 text-sky-200" />
                   </span>
-                  {item}
+                  <span>
+                    {item.text}
+                    {item.chargeable ? (
+                      <span className="ml-1 text-amber-300" aria-label={CHARGEABLE_NOTE}>
+                        ★
+                      </span>
+                    ) : null}
+                  </span>
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-xs text-sky-100/70">
+              <span className="text-amber-300">★</span> {CHARGEABLE_NOTE}
+            </p>
           </motion.div>
 
           <motion.div
@@ -175,7 +186,7 @@ export function SpacesSection({ showBookLink = true }: { showBookLink?: boolean 
             className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-7 backdrop-blur-md"
           >
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-sky-300">
-              <Plus className="h-4 w-4" /> Add-ons (extra)
+              <Plus className="h-4 w-4" /> Add-ons · charged at actuals
             </p>
             <ul className="mt-5 space-y-4">
               {STUDIO_ADDONS.map((a) => (

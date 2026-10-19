@@ -140,7 +140,7 @@ export function Footer() {
         </div>
 
         <p className="mt-14 border-t border-luxury-border pt-8 text-center text-xs text-luxury-muted">
-          © {new Date().getFullYear()} {SITE.name}. {FOOTER_CONTENT.tagline}.
+          © {new Date().getFullYear()} {SITE.name} by {SITE.company}. All rights reserved.
         </p>
       </Container>
     </footer>

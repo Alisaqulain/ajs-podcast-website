@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/container";
 import { PaymentTrustBadges } from "@/components/payment/payment-trust-badges";
 import { BookingDateTimePicker } from "@/components/booking/booking-datetime-picker";
 import { BookingDetailsFields } from "@/components/booking/booking-details-fields";
+import { PackageAddons } from "@/components/booking/package-addons";
 import {
   createBookingRequest,
   formatInrPaise,
@@ -216,7 +217,7 @@ export function BookingExperience({
                     <p className="mt-3 text-sm leading-relaxed text-luxury-muted">
                       {pkg.description}
                     </p>
-                    <ul className="mt-6 flex-1 space-y-2.5 text-sm text-luxury-body">
+                    <ul className="mt-6 space-y-2.5 text-sm text-luxury-body">
                       {pkg.features?.map((f) => (
                         <li key={f} className="flex gap-2.5">
                           <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold-deep" />
@@ -224,7 +225,8 @@ export function BookingExperience({
                         </li>
                       ))}
                     </ul>
-                    <div className="mt-8 border-t border-luxury-border pt-6">
+                    <PackageAddons />
+                    <div className="mt-auto border-t border-luxury-border pt-6">
                       <div className="flex flex-wrap items-end gap-2">
                         {showStrike ? (
                           <span className="text-sm text-luxury-muted line-through">

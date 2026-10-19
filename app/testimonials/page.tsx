@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     `What hosts, guests, and brands say about recording at ${SITE.name}.`,
   openGraph: {
     title: `Testimonials | ${SITE.name}`,
-    description: "What hosts, guests, and brands say about recording at Anushtan.",
+    description: "What hosts, guests, and brands say about recording at AJ's Studio Space.",
   },
 };
 

@@ -1,10 +1,13 @@
 export const SITE = {
-  name: "Anushtan",
+  /** Studio brand shown to visitors. */
+  name: "AJ's Studio Space",
+  /** Company that owns and runs the studio. */
+  company: "Anushtan",
   /** Primary brand mark (navbar, footer, auth, payments). */
-  logoSrc: "/anushtan-logo.png",
-  tagline: "Podcast & Video Studio, Bengaluru",
+  logoSrc: "/ajs-logo.jpeg",
+  tagline: "Podcast Studio, Bengaluru",
   description:
-    "Anushtan is a podcast and video studio in Bengaluru. Record, film, and publish conversations that build your brand, with production led by creator and brand storyteller Ajay Rao.",
+    "AJ's Studio Space is a podcast studio on Castle Street, Bengaluru, by Anushtan. 2, 3 and 5-seater sets with studio lights and a wireless RODE mic, from ₹1,000 an hour.",
   url: process.env.NEXTAUTH_URL || "https://www.anushtan.com",
   /** Founder's personal creator hub — YouTube channel links live there, not on this site. */
   creatorSiteUrl: "https://ajsvlog.com",

@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { PaymentTrustBadges } from "@/components/payment/payment-trust-badges";
 import type { PackagePublic } from "@/components/booking/booking-experience";
+import { PackageAddons } from "@/components/booking/package-addons";
 import { BOOK_NOW_LABEL } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +55,7 @@ export function PricingSection() {
             </h2>
             <p className="mt-4 text-base text-luxury-body">
               Every studio set is ₹1,000 an hour, including the space, lights and a
-              wireless RODE mic. Videographer and editing are extra. Secure checkout.{" "}
+              wireless RODE mic. Videographer and editing are add-ons, charged at actuals. Secure checkout.{" "}
               <Link
                 href="/refund-policy"
                 className="font-medium text-brand-gold-deep underline underline-offset-4 hover:text-brand-gold"
@@ -85,7 +86,7 @@ export function PricingSection() {
               </li>
               <li className="flex gap-2 rounded-2xl border border-luxury-border bg-surface/90 px-4 py-3 backdrop-blur-sm">
                 <span className="text-brand-gold-deep">✦</span>
-                Videographer, editing & extra gear on request
+                Videographer ★ &amp; editing ★ on request, charged at actuals
               </li>
             </ul>
         </div>
@@ -128,7 +129,7 @@ export function PricingSection() {
                   <p className="mt-3 text-sm leading-relaxed text-luxury-muted">
                     {pkg.description}
                   </p>
-                  <ul className="mt-6 flex-1 space-y-2 text-sm text-luxury-body">
+                  <ul className="mt-6 space-y-2 text-sm text-luxury-body">
                     {pkg.features?.slice(0, 4).map((f) => (
                       <li key={f} className="flex gap-2">
                         <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold-deep" />
@@ -136,7 +137,8 @@ export function PricingSection() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-8 border-t border-luxury-border pt-6">
+                  <PackageAddons />
+                  <div className="mt-auto border-t border-luxury-border pt-6">
                     <div className="flex flex-wrap items-end gap-2">
                       {showStrike ? (
                         <span className="text-sm text-luxury-muted line-through">

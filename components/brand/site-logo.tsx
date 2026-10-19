@@ -83,7 +83,7 @@ export function SiteLogo({
             {SITE.name}
           </span>
           <span className="mt-1 truncate text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-gold-deep sm:text-[11px]">
-            Podcast Studio
+            Podcast Studio · by {SITE.company}
           </span>
         </span>
       </span>

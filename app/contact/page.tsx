@@ -16,10 +16,10 @@ import { Mail } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact Anushtan to book podcast recording, full podcast production, or brand video in Bengaluru.",
+    "Contact AJ's Studio Space to book podcast recording, full podcast production, or brand video in Bengaluru.",
   openGraph: {
     title: `Contact | ${SITE.name}`,
-    description: "Reach Anushtan via the form, phone, WhatsApp, or social channels.",
+    description: "Reach AJ's Studio Space via the form, phone, WhatsApp, or social channels.",
   },
 };
 

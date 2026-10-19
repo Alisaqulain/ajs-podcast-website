@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BOOK_NOW_LABEL } from "@/lib/cta";
+import { SITE } from "@/lib/site";
 import {
   createBookingRequest,
   startRazorpayCheckout,
@@ -154,7 +155,7 @@ export function LeadPopupForm() {
                 <X className="h-5 w-5" />
               </button>
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold-deep">
-                Anushtan
+                {SITE.name}
               </p>
               <h2
                 id="lead-modal-title"

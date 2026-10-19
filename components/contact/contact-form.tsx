@@ -108,7 +108,7 @@ export function ContactForm() {
 
       {status === "ok" ? (
         <p className="text-sm font-medium text-emerald-700">
-          Thank you—your message was received. The Anushtan team will respond
+          Thank you—your message was received. The AJ&apos;s Studio Space team will respond
           soon.
         </p>
       ) : null}

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     `Podcasting tips, production notes, and brand storytelling from ${SITE.name}.`,
   openGraph: {
     title: `Articles | ${SITE.name}`,
-    description: "Podcasting tips, production notes, and brand storytelling from Anushtan.",
+    description: "Podcasting tips, production notes, and brand storytelling from AJ's Studio Space.",
   },
 };
 

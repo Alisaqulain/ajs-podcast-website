@@ -52,7 +52,7 @@ export async function TestimonialsSection() {
           title={HOME_TESTIMONIALS.title}
           subtitle={
             items.length === 0
-              ? "What hosts, guests, and brands say about recording at Anushtan."
+              ? "What hosts, guests, and brands say about recording at AJ's Studio Space."
               : "Real words from guests and clients who turned one conversation into lasting credibility."
           }
         />

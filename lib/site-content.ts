@@ -1,27 +1,35 @@
-/** Marketing copy for Anushtan — single source for homepage & shared sections. */
+/** Marketing copy for AJ's Studio Space (by Anushtan) — single source for homepage & shared sections. */
 
 /** Studio hire rate in rupees per hour (space + lights + wireless RODE mic). */
 export const STUDIO_HOURLY_RATE = 1000;
 
 export const STUDIO_RATE_LABEL = "₹1,000 / hour";
 
-/** What every booking includes, straight from the studio's rate card. */
+/** Footnote for items marked ★ — available with any booking but billed separately. */
+export const CHARGEABLE_NOTE = "Add-on, charged at actuals";
+
+/**
+ * What every booking includes, straight from the studio's rate card.
+ * `chargeable` items are available on request and billed at actuals (shown with a ★).
+ */
 export const STUDIO_INCLUDES = [
-  "Your choice of studio space",
-  "Studio lights",
-  "Wireless RODE microphone",
-  "Access to the green room",
+  { text: "Your choice of studio space", chargeable: false },
+  { text: "Studio lights", chargeable: false },
+  { text: "Wireless RODE microphone", chargeable: false },
+  { text: "Access to the green room", chargeable: false },
+  { text: "Videographer on request", chargeable: true },
+  { text: "Editing on request", chargeable: true },
 ] as const;
 
-/** Optional extras — charged separately. */
+/** Optional extras — add-ons charged at actuals. */
 export const STUDIO_ADDONS = [
   {
     title: "Videographer",
-    description: "A camera operator to shoot your session.",
+    description: "A camera operator to shoot your session. Add-on, charged at actuals.",
   },
   {
     title: "Editing",
-    description: "Have your recording edited into a finished episode or clips.",
+    description: "Your recording edited into a finished episode or clips. Add-on, charged at actuals.",
   },
   {
     title: "Additional equipment",
@@ -76,22 +84,22 @@ export const HOME_HERO = {
 
 export const HOME_INTRO = {
   eyebrow: "The Studio",
-  title: "Welcome to Anushtan",
+  title: "Welcome to AJ's Studio Space",
   lead: "A calm, camera-ready space in central Bengaluru where founders, experts, and creators sit down and talk.",
   mission:
     "Choose a 2, 3, or 5-seater set. The lights are set and a wireless RODE mic is ready, so you can sit down and start talking.",
   attention:
-    "Need more? Add a videographer to shoot your session and an editor to turn it into a finished episode.",
+    "Need more? Add a videographer to shoot your session and an editor to turn it into a finished episode. Both are add-ons, charged at actuals.",
   podcastTrust:
-    "Anushtan is run by Ajay Rao, a creator with 400+ published videos and twenty years of brand-building in retail. He knows what it takes to hold an audience.",
+    "AJ's Studio Space is run by Anushtan and its founder Ajay Rao, a creator with 400+ published videos and twenty years of brand-building in retail. He knows what it takes to hold an audience.",
   audienceIntro: "Included with every booking",
   audiences: [
     "2, 3 & 5-seater studio sets",
     "Studio lighting",
     "Wireless RODE microphone",
     "Private green room",
-    "Videographer on request",
-    "Editing on request",
+    "Videographer on request ★",
+    "Editing on request ★",
   ],
   closing: "All from ₹1,000 an hour.",
 } as const;
@@ -121,19 +129,19 @@ export const HOME_WHY_PODCAST = {
 } as const;
 
 export const HOME_WHY_US = {
-  eyebrow: "Why Anushtan",
-  title: "Why Record at Anushtan?",
+  eyebrow: "Why AJ's Studio Space",
+  title: "Why Record With Us?",
   subtitle: "Run by a creator, not just a rental room.",
   tagline:
     "Our founder has built YouTube channels from zero, so the studio is set up the way creators actually work.",
-  focusIntro: "What you get at Anushtan:",
+  focusIntro: "What you get with every booking:",
   focusAreas: [
     "Clear sound with a wireless RODE mic",
     "Three sets: 2, 3 & 5 seaters",
     "Studio lights, ready when you arrive",
     "A green room to get camera-ready",
-    "Videographer available on request",
-    "Editing available on request",
+    "Videographer on request ★ (charged at actuals)",
+    "Editing on request ★ (charged at actuals)",
     "One simple rate: ₹1,000 an hour",
     "Sessions in English, Hindi, Kannada & Tamil",
   ],
@@ -164,7 +172,7 @@ export const HOME_SERVICES = {
       includes: [
         "Camera setup & framing",
         "Shoots your full session",
-        "Add-on, charged separately",
+        "Add-on, charged at actuals",
       ],
     },
     {
@@ -174,7 +182,7 @@ export const HOME_SERVICES = {
       includes: [
         "Full-length episode edit",
         "Short clips for reels & shorts",
-        "Add-on, charged separately",
+        "Add-on, charged at actuals",
       ],
     },
     {
@@ -259,7 +267,7 @@ export const HOME_FAQ = {
     },
     {
       question: "Can you film and edit my podcast?",
-      answer: "Yes. A videographer and editing are available as add-on services, charged separately.",
+      answer: "Yes. A videographer and editing are available on request as add-ons, charged at actuals.",
     },
     {
       question: "What if I need more equipment?",
@@ -277,7 +285,7 @@ export const HOME_FINAL_CTA = {
   title: "Ready to Hit Record?",
   body: [
     "Pick a space, bring your guests, and start talking. From ₹1,000 an hour.",
-    "Want it filmed and edited too? Add a videographer and editing when you book.",
+    "Want it filmed and edited too? Add a videographer and editing when you book (charged at actuals).",
   ],
   ctaPrimary: "Book a Studio Session",
   ctaSecondary: "Contact the studio",
@@ -286,13 +294,13 @@ export const HOME_FINAL_CTA = {
 /** Founder profile — shown on the homepage and About page. */
 export const FOUNDER = {
   name: "Ajay Rao",
-  role: "Founder, Anushtan",
+  role: "Founder, Anushtan · AJ's Studio Space",
   photo: "/founder.jpeg",
   headline: "Content Creator & Retail Marketing Professional",
   summary:
     "Ajay has spent a decade publishing video independently and twenty years building brands in retail and distribution. He started a cycling YouTube channel from scratch in 2016 and grew it to 400+ videos and nearly 20,000 subscribers, then brought the same camera-facing storytelling into his professional work, producing training and brand videos for national retail brands.",
   studioStory:
-    "Anushtan is the name of the business Ajay founded in 2003. The studio carries it forward: a space where the instincts he built as a creator (framing, pacing, keeping an audience) and as a marketer (positioning, brand story, what makes people buy) come together for every guest who walks in.",
+    "Anushtan is the name of the business Ajay founded in 2003. AJ's Studio Space carries it forward: a space where the instincts he built as a creator (framing, pacing, keeping an audience) and as a marketer (positioning, brand story, what makes people buy) come together for every guest who walks in.",
   stats: [
     { value: "10+", label: "Years publishing video" },
     { value: "400+", label: "Videos produced" },
@@ -347,7 +355,7 @@ export const FOUNDER = {
 } as const;
 
 export const FOOTER_CONTENT = {
-  tagline: "Podcast & Video Studio",
+  tagline: "Podcast Studio by Anushtan",
   quote: "Show up with your voice. Leave with content.",
   location: "#27, Castle Street, Bengaluru 560025",
   phoneDisplay: "080 41126938 · 9845826938",
@@ -358,7 +366,7 @@ export const FOOTER_CONTENT = {
     { href: "/services", label: "Services" },
     { href: "/how-it-works", label: "How It Works" },
     { href: "/founder", label: "Founder" },
-    { href: "/podcast", label: "Episodes" },
+    { href: "/creators", label: "Recorded Here" },
     { href: "/pricing", label: "Pricing" },
     { href: "/faq", label: "FAQ" },
     { href: "/testimonials", label: "Testimonials" },
