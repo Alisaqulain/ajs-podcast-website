@@ -56,7 +56,7 @@ export const SITE = {
   /** Landmark shown under the address. */
   landmark: "Opposite Brigade Towers, Central Business District",
   /** What the embedded map searches for — must be something Google can place a pin on. */
-  mapQuery: "Castle Street, opposite Brigade Towers, Ashok Nagar, Bengaluru, Karnataka 560025, India",
+  mapQuery: "27 Castle Street Bengaluru 560025",
   phones: {
     landline: "080 41126938",
     mobile: "9845826938",

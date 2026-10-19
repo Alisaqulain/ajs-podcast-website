@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/container";
 import { SITE } from "@/lib/site";
 
 const mapQuery = encodeURIComponent(SITE.mapQuery);
-const embedSrc = `https://maps.google.com/maps?q=${mapQuery}&z=16&output=embed`;
+const embedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
 
 /** "Where we are" — address, contact, and an embedded map. */

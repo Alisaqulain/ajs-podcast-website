@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Camera, Mic } from "lucide-react";
+import { ArrowUpRight, Camera } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { listTestimonials } from "@/lib/data";
@@ -67,31 +67,11 @@ export async function RecordedHereSection({
       <Container>
         <SectionHeading
           id="recorded-here-heading"
-          eyebrow="Recorded here"
-          title="Creators Who've Used Our Space"
-          subtitle={`Channels and shows that have recorded at ${SITE.name}.`}
+          eyebrow="Record here"
+          title="Be the Next Creator to Use Our Space"
         />
 
-        {creators.length === 0 ? (
-          <div className="mx-auto flex max-w-2xl flex-col items-center rounded-[1.75rem] border border-dashed border-sky-300 bg-sky-50/60 px-6 py-12 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-500 text-white shadow-[0_10px_30px_-10px_rgba(2,132,199,0.7)]">
-              <Mic className="h-6 w-6" />
-            </span>
-            <p className="mt-5 font-display text-2xl font-semibold text-luxury-heading">
-              Your channel could be first
-            </p>
-            <p className="mt-2 max-w-md text-luxury-body">
-              We&apos;re just opening our doors. Record with us and we&apos;ll feature your
-              channel right here.
-            </p>
-            <Link
-              href="/book"
-              className="mt-6 inline-flex min-h-12 items-center rounded-full bg-sky-500 px-7 text-sm font-semibold text-white transition hover:bg-sky-600"
-            >
-              Book a session
-            </Link>
-          </div>
-        ) : (
+        {creators.length > 0 ? (
           <ul className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
             {creators.map((c) => {
               const card = (
@@ -145,7 +125,7 @@ export async function RecordedHereSection({
               );
             })}
           </ul>
-        )}
+        ) : null}
 
         {showViewAll && creators.length > 0 && typeof limit === "number" && all.length > limit ? (
           <div className="mt-10 text-center">

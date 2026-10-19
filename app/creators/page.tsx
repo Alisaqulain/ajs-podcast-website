@@ -7,10 +7,10 @@ import { CtaSection } from "@/components/home/cta-section";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Recorded Here",
+  title: "Record Here",
   description: `Creators and channels who have recorded at ${SITE.name}, Bengaluru.`,
   openGraph: {
-    title: `Recorded Here | ${SITE.name}`,
+    title: `Record Here | ${SITE.name}`,
     description: `Creators and channels who have recorded at ${SITE.name}.`,
   },
 };
@@ -21,9 +21,8 @@ export default async function CreatorsPage() {
   return (
     <div>
       <PageHero
-        eyebrow="Recorded here"
-        title="Creators who've used our space"
-        subtitle="Channels and shows recorded at the studio."
+        eyebrow="Record here"
+        title="Be the next creator to use our space"
         compact
       >
         <GoldButton href="/book">Record with us</GoldButton>

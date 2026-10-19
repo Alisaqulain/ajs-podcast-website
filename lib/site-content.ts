@@ -340,7 +340,7 @@ export const FOOTER_CONTENT = {
     { href: "/services", label: "Services" },
     { href: "/how-it-works", label: "How It Works" },
     { href: "/founder", label: "Founder" },
-    { href: "/creators", label: "Recorded Here" },
+    { href: "/creators", label: "Record Here" },
     { href: "/pricing", label: "Pricing" },
     { href: "/faq", label: "FAQ" },
     { href: "/testimonials", label: "Testimonials" },
