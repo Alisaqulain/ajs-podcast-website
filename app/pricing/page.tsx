@@ -7,6 +7,13 @@ import { FaqSection } from "@/components/home/faq-section";
 import { CtaSection } from "@/components/home/cta-section";
 import { SITE } from "@/lib/site";
 
+const PRICING_POINTS = [
+  "₹1,000 for an hour – no minimum booking",
+  "Choose from our 3 spaces",
+  "Lights and wireless mic included",
+  "Videographer, camera, editing and extra equipment are optional add-ons",
+];
+
 export const metadata: Metadata = {
   title: "Pricing",
   description: `Podcast studio hire at ${SITE.name}, Bengaluru: ₹1,000 per hour including space, lights and a wireless RODE mic.`,
@@ -22,7 +29,13 @@ export default async function PricingPage() {
       <PageHero
         eyebrow="Pricing"
         title="One simple rate"
-        subtitle="₹1,000 an hour for any of our three studio sets, with lights and a wireless RODE mic included. Videographer, camera, editing and extra equipment are optional add-ons."
+        subtitle={
+          <ul className="space-y-1.5">
+            {PRICING_POINTS.map((p) => (
+              <li key={p}>{p}</li>
+            ))}
+          </ul>
+        }
       >
         <GoldButton href="/book">Book now</GoldButton>
       </PageHero>

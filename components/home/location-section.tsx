@@ -2,7 +2,7 @@ import { MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SITE } from "@/lib/site";
 
-const mapQuery = encodeURIComponent(`${SITE.address}, India`);
+const mapQuery = encodeURIComponent(SITE.mapQuery);
 const embedSrc = `https://maps.google.com/maps?q=${mapQuery}&z=16&output=embed`;
 const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
 
@@ -37,6 +37,7 @@ export function LocationSection() {
                     Address
                   </p>
                   <p className="mt-1 text-lg text-luxury-heading">{SITE.address}</p>
+                  <p className="mt-0.5 text-sm text-luxury-body">{SITE.landmark}</p>
                 </div>
               </li>
               <li className="flex gap-4">

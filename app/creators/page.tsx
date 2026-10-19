@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/hero/page-hero";
 import { GoldButton } from "@/components/ui/gold-button";
 import { RecordedHereSection } from "@/components/home/recorded-here-section";
+import { StudioSessionsGallery } from "@/components/home/studio-sessions-gallery";
 import { CtaSection } from "@/components/home/cta-section";
 import { SITE } from "@/lib/site";
 
@@ -27,6 +28,7 @@ export default async function CreatorsPage() {
       >
         <GoldButton href="/book">Record with us</GoldButton>
       </PageHero>
+      <StudioSessionsGallery />
       <RecordedHereSection showViewAll={false} />
       <CtaSection />
     </div>
